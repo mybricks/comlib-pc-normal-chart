@@ -127,7 +127,7 @@ export default {
     initEvents({ data, input, output });
   },
   '@inputConnected'({ data, input }) {
-    setDataSchema({ data, input, inputId: 'data' });
+    // setDataSchema({ data, input, inputId: 'data' });
     setStyleSchema({ data, input, inputId: 'style' });
   },
   '@resize': {

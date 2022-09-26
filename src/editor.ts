@@ -345,8 +345,20 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.config.geometryOptions[index].seriesField;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               setGeometryOptions(data, 'seriesField', value, index);
+              const dsInput = input.get(`${InputIds.DataSource}${index}`);
+              const dsInputSchema = dsInput.schema;
+              if (value) {
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
+                };
+              } else {
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
+              }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },
