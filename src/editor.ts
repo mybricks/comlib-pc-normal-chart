@@ -266,13 +266,22 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.subType;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               data.subType = value;
+              const dsInput = input.get(InputIds.DataSource);
+              const dsInputSchema = dsInput.schema;
               if (value === 'stack') {
                 data.config.seriesField = data.config.seriesField || 'type';
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
+                };
               } else {
                 data.config.seriesField = '';
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },
