@@ -121,7 +121,7 @@ export default {
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.yField = value;
-                setDataSchema(data, input, 'data');
+                // setDataSchema(data, input, 'data');
               }
             }
           },
@@ -182,7 +182,7 @@ export default {
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.xField = value;
-                setDataSchema(data, input, 'data');
+                // setDataSchema(data, input, 'data');
               }
             }
           },

@@ -14,11 +14,23 @@
       "id": "data",
       "title": "输入数据",
       "schema": {
+        "title": "输入数据",
         "type": "array",
         "items": {
-          "type": "any",
-          "items": {
-            "type": "any"
+          "type": "object",
+          "properties": {
+            "xField": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "yField0": {
+              "title": "y轴字段名(左)",
+              "type": "number"
+            },
+            "yField1": {
+              "title": "y轴字段名(右)",
+              "type": "number"
+            }
           }
         }
       }

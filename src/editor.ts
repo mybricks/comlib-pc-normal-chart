@@ -1,4 +1,4 @@
-import { AnnotationItem, ChartType, Data } from './const';
+import { AnnotationItem, ChartType, Data, InputIds } from './const';
 import { set } from 'lodash-es';
 
 const reRender = (data) => (data.config = { ...data.config });
@@ -41,19 +41,27 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.subType;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               data.subType = value;
+              const dsInput = input.get(InputIds.DataSource);
+              const dsInputSchema = dsInput.schema;
               if (value === 'step') {
                 data.config = {
                   ...data.config,
                   stepType: 'vh',
                   seriesField: '',
                 };
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               } else if (value === 'more') {
                 data.config = {
                   ...data.config,
                   stepType: '',
                   seriesField: data.config.seriesField || 'category',
+                };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
                 };
               } else {
                 data.config = {
@@ -61,7 +69,10 @@ export const normalEditor = (data) => {
                   stepType: '',
                   seriesField: '',
                 };
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },
@@ -96,14 +107,20 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.subType;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               data.subType = value;
+              const dsInput = input.get(InputIds.DataSource);
+              const dsInputSchema = dsInput.schema;
               if (value === 'stack') {
                 data.config = {
                   ...data.config,
                   isStack: true,
                   isGroup: false,
                   seriesField: data.config.seriesField || 'type',
+                };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
                 };
               } else if (value === 'group') {
                 data.config = {
@@ -112,6 +129,10 @@ export const normalEditor = (data) => {
                   isGroup: true,
                   seriesField: data.config.seriesField || 'type',
                 };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
+                };
               } else {
                 data.config = {
                   ...data.config,
@@ -119,7 +140,10 @@ export const normalEditor = (data) => {
                   isGroup: false,
                   seriesField: '',
                 };
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },
@@ -139,14 +163,21 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.subType;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               data.subType = value;
               data.config.seriesField = '';
+              const dsInput = input.get(InputIds.DataSource);
+              const dsInputSchema = dsInput.schema;
+
               if (value === 'stack') {
                 data.config = {
                   ...data.config,
                   isStack: true,
                   seriesField: data.config.seriesField || 'type',
+                };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
                 };
               } else if (value === 'group') {
                 data.config = {
@@ -155,6 +186,10 @@ export const normalEditor = (data) => {
                   isGroup: true,
                   seriesField: data.config.seriesField || 'name',
                 };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
+                };
               } else {
                 data.config = {
                   ...data.config,
@@ -162,7 +197,10 @@ export const normalEditor = (data) => {
                   isGroup: false,
                   seriesField: '',
                 };
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },
@@ -228,13 +266,22 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.subType;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               data.subType = value;
+              const dsInput = input.get(InputIds.DataSource);
+              const dsInputSchema = dsInput.schema;
               if (value === 'stack') {
                 data.config.seriesField = data.config.seriesField || 'type';
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
+                };
               } else {
                 data.config.seriesField = '';
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },
@@ -298,8 +345,20 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.config.geometryOptions[index].seriesField;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               setGeometryOptions(data, 'seriesField', value, index);
+              const dsInput = input.get(`${InputIds.DataSource}${index}`);
+              const dsInputSchema = dsInput.schema;
+              if (value) {
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
+                };
+              } else {
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
+              }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },

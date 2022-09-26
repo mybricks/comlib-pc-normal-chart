@@ -11,14 +11,41 @@
   "editors": "../components/editors.tsx",
   "inputs": [
     {
-      "id": "data",
-      "title": "输入数据",
+      "id": "data0",
+      "title": "左轴输入数据",
       "schema": {
         "type": "array",
         "items": {
-          "type": "any",
-          "items": {
-            "type": "any"
+          "type": "object",
+          "properties": {
+            "xField": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "yField": {
+              "title": "y轴字段名",
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "data1",
+      "title": "右轴输入数据",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "xField": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "yField": {
+              "title": "y轴字段名",
+              "type": "number"
+            }
           }
         }
       }

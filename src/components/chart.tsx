@@ -48,6 +48,8 @@ export default function BasicChart({
     [data.type, data.subType]
   );
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
+  const [leftDataSourceInRuntime, setRuntimeLeftDataSource] = useState([]);
+  const [rightDataSourceInRuntime, setRuntimeRightDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
 
@@ -64,6 +66,14 @@ export default function BasicChart({
         } else {
           setRuntimeDataSource(ds);
         }
+        setLoading(false);
+      });
+      inputs.data0((ds: any) => {
+        setRuntimeLeftDataSource(ds);
+        setLoading(false);
+      });
+      inputs.data1((ds: any) => {
+        setRuntimeRightDataSource(ds);
         setLoading(false);
       });
     }
@@ -100,19 +110,30 @@ export default function BasicChart({
     return updateAnnotations(data, dataSourceInRuntime);
   }, [dataSourceInRuntime, data.config]);
 
+  const dualAxesDataSourceInRuntime = useMemo(() => {
+    return [leftDataSourceInRuntime, rightDataSourceInRuntime];
+  }, [leftDataSourceInRuntime, rightDataSourceInRuntime]);
+
   const onReady = useCallback((graph: any) => {
     graph.on('node:click', ({ item }) => {
       const { id, value } = item['_cfg'].model;
-      outputs['nodeClick']?.({ id, value});
+      outputs['nodeClick']?.({ id, value });
     });
   }, [])
 
   return <Spin spinning={loading} tip={tip}>
     {
-      isEmpty(dataSourceInRuntime) ?  (
+      isEmpty(dataSourceInRuntime) && isEmpty(dualAxesDataSourceInRuntime) ? (
         <div style={{ display: 'flex', justifyContent: 'center' }}>暂无数据</div>
       ) : (
-        <Chart {...style} {...data.config} onReady={onReady} data={dataSourceInRuntime}/>
+        <Chart
+          {...style}
+          {...data.config}
+          onReady={onReady}
+          data={data.type === ChartType.DualAxes
+            ? dualAxesDataSourceInRuntime
+            : dataSourceInRuntime}
+        />
       )
     }
   </Spin>

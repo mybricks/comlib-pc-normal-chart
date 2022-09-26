@@ -12,7 +12,7 @@
   "inputs": [
     {
       "id": "percent",
-      "title": "输入数据",
+      "title": "百分比数据",
       "schema": {
         "type": "number",
         "minimum": 0,

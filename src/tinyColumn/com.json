@@ -16,10 +16,7 @@
       "schema": {
         "type": "array",
         "items": {
-          "type": "any",
-          "items": {
-            "type": "any"
-          }
+          "type": "number"
         }
       }
     }

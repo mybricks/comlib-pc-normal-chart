@@ -17,13 +17,28 @@
         "type": "object",
         "properties": {
           "dataSource": {
+            "title": "源数据",
             "type": "array",
             "items": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "xField": {
+                  "title": "x轴字段名",
+                  "type": "number"
+                },
+                "yField": {
+                  "title": "y轴字段名",
+                  "type": "number"
+                },
+                "density": {
+                  "title": "颜色字段名",
+                  "type": "number"
+                }
+              }
             }
           },
           "xAxis": {
+            "title": "x轴配置",
             "type": "object",
             "properties": {
               "min": {
@@ -35,6 +50,7 @@
             }
           },
           "yAxis": {
+            "title": "y轴配置",
             "type": "object",
             "properties": {
               "min": {
