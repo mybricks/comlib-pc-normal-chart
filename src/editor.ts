@@ -150,14 +150,21 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.subType;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               data.subType = value;
               data.config.seriesField = '';
+              const dsInput = input.get(InputIds.DataSource);
+              const dsInputSchema = dsInput.schema;
+
               if (value === 'stack') {
                 data.config = {
                   ...data.config,
                   isStack: true,
                   seriesField: data.config.seriesField || 'type',
+                };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
                 };
               } else if (value === 'group') {
                 data.config = {
@@ -166,6 +173,10 @@ export const normalEditor = (data) => {
                   isGroup: true,
                   seriesField: data.config.seriesField || 'name',
                 };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
+                };
               } else {
                 data.config = {
                   ...data.config,
@@ -173,7 +184,10 @@ export const normalEditor = (data) => {
                   isGroup: false,
                   seriesField: '',
                 };
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },
