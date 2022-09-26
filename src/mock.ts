@@ -7179,6 +7179,7 @@ export const tinyArea: any = {
   ]
 }
 
+// 双轴图
 export const dualAxes: any = {
   default: [[
     {
