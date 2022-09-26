@@ -1,4 +1,4 @@
-import { AnnotationItem, ChartType, Data } from './const';
+import { AnnotationItem, ChartType, Data, InputIds } from './const';
 import { set } from 'lodash-es';
 
 const reRender = (data) => (data.config = { ...data.config });
@@ -41,19 +41,27 @@ export const normalEditor = (data) => {
             get({ data }: EditorResult<Data>) {
               return data.subType;
             },
-            set({ data }: EditorResult<Data>, value: string) {
+            set({ data, input }: EditorResult<Data>, value: string) {
               data.subType = value;
+              const dsInput = input.get(InputIds.DataSource);
+              const dsInputSchema = dsInput.schema;
               if (value === 'step') {
                 data.config = {
                   ...data.config,
                   stepType: 'vh',
                   seriesField: '',
                 };
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               } else if (value === 'more') {
                 data.config = {
                   ...data.config,
                   stepType: '',
                   seriesField: data.config.seriesField || 'category',
+                };
+                dsInputSchema.items.properties['seriesField'] = {
+                  title: '分组轴字段名',
+                  type: 'string'
                 };
               } else {
                 data.config = {
@@ -61,7 +69,10 @@ export const normalEditor = (data) => {
                   stepType: '',
                   seriesField: '',
                 };
+                dsInputSchema?.items?.properties?.seriesField
+                  && delete dsInputSchema.items.properties.seriesField;
               }
+              dsInput?.setSchema(dsInputSchema);
             },
           },
         },

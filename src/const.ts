@@ -48,6 +48,8 @@ export enum ChartType {
   'BidirectionalBar' = 'BidirectionalBar',
   'Heatmap' = 'Heatmap',
   'TinyColumn' = 'TinyColumn',
+  'TinyArea' = 'TinyArea',
+  'RingProgress' = 'RingProgress',
   'DualAxes' = 'DualAxes',
   'OrganizationGraph' = 'OrganizationGraph'
 }
@@ -71,6 +73,9 @@ export declare type AnnotationItem = {
   autoRotate?: boolean;
 } & Annotation;
 
+export const InputIds = {
+  DataSource: 'data',
+}
 export interface Data {
   [key: string]: any;
 }
