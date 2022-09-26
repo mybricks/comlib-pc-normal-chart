@@ -1,0 +1,15 @@
+{
+  "height": 400,
+  "type": "Line",
+  "config": {
+    "xField": "year",
+    "yField": "value",
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
+    },
+    "seriesField": ""
+  },
+  "subType": "default"
+}

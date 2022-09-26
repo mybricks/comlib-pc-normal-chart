@@ -1,0 +1,15 @@
+{
+  "height": 400,
+  "type": "Liquid",
+  "config": {
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
+    },
+    "liquidStyle": {},
+    "outline": {},
+    "percent": 0.25
+  },
+  "subType": "default"
+}

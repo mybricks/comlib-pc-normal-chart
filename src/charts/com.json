@@ -1,0 +1,38 @@
+{
+  "title": "综合图表",
+  "namespace": "mybricks.normal-pc-chart.big-charts",
+  "version": "1.0.0",
+  "description": "综合性图表，可以根据此图表自由DIY出自己想要的图表",
+  "author": "MyBricks",
+  "author_name": "MyBricks",
+  "icon": "./icon.svg",
+  "data": "./data.json",
+  "runtime": "./Charts.tsx",
+  "editors": "./editor.tsx",
+  "inputs": [
+    {
+      "id": "data",
+      "title": "输入数据",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "value": { "type": "number" },
+            "label": { "type": "string" },
+            "type": { "type": "string" }
+          }
+        }
+      }
+    },
+    {
+      "id": "config",
+      "title": "全量配置",
+      "schema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ],
+  "outputs": []
+}

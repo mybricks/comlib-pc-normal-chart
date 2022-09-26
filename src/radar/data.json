@@ -1,0 +1,16 @@
+{
+  "height": 400,
+  "type": "Radar",
+  "config": {
+    "xField": "year",
+    "yField": "value",
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
+    },
+    "area": {},
+    "seriesField": ""
+  },
+  "subType": "default"
+}

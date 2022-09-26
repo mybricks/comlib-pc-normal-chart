@@ -1,0 +1,15 @@
+{
+  "height": 400,
+  "type": "Pie",
+  "config": {
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
+    },
+    "angleField": "value",
+    "colorField": "type",
+    "radius": 1
+  },
+  "subType": "default"
+}

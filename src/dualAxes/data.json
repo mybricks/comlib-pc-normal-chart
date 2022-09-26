@@ -1,0 +1,17 @@
+{
+  "height": 400,
+  "type": "DualAxes",
+  "config": {
+    "xField": "year",
+    "yField": [
+      "value",
+      "count"
+    ],
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
+    }
+  },
+  "subType": "default"
+}

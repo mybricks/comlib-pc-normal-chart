@@ -1,0 +1,15 @@
+{
+  "height": 400,
+  "type": "Funnel",
+  "config": {
+    "xField": "stage",
+    "yField": "number",
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
+    },
+    "seriesField": ""
+  },
+  "subType": "default"
+}

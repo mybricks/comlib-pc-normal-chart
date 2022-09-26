@@ -1,0 +1,72 @@
+{
+  "debugger": "pc-spa",
+  "componentType": "PC",
+  "comAry": {
+    "test": [
+      {
+        "title": "基础",
+        "comAry": [
+          "./src/column/com.json",
+          "./src/line/com.json",
+          "./src/pie/com.json",
+          "./src/area/com.json",
+          "./src/radar/com.json",
+          "./src/liquid/com.json",
+          "./src/bar/com.json",
+          "./src/bidirectionalBar/com.json",
+          "./src/funnel/com.json",
+          "./src/Heatmap/com.json"
+        ]
+      },
+      {
+        "title": "迷你图",
+        "comAry": [
+          "./src/tinyColumn/com.json",
+          "./src/tinyArea/com.json",
+          "./src/ringProgress/com.json"
+        ]
+      },
+      {
+        "title": "高级",
+        "comAry": [
+          "./src/dualAxes/com.json",
+          "./src/charts/com.json",
+          "./src/organization/com.json"
+        ]
+      }
+    ],
+    "publish": [
+      {
+        "title": "基础",
+        "comAry": [
+          "./src/column/com.json",
+          "./src/line/com.json",
+          "./src/pie/com.json",
+          "./src/area/com.json",
+          "./src/radar/com.json",
+          "./src/liquid/com.json",
+          "./src/bar/com.json",
+          "./src/bidirectionalBar/com.json",
+          "./src/funnel/com.json",
+          "./src/Heatmap/com.json"
+        ]
+      },
+      {
+        "title": "迷你图",
+        "comAry": [
+          "./src/tinyColumn/com.json",
+          "./src/tinyArea/com.json",
+          "./src/ringProgress/com.json"
+        ]
+      },
+      {
+        "title": "高级",
+        "comAry": [
+          "./src/dualAxes/com.json",
+          "./src/charts/com.json",
+          "./src/organization/com.json"
+        ]
+      }
+    ]
+  }
+}

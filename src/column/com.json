@@ -1,0 +1,28 @@
+{
+  "title": "柱状图",
+  "namespace": "mybricks.normal-pc-chart.column",
+  "version": "1.0.0",
+  "description": "柱状图",
+  "author": "MyBricks",
+  "author_name": "MyBricks",
+  "icon": "./icon.svg",
+  "data": "./data.json",
+  "runtime": "./runtime.tsx",
+  "editors": "../components/editors.tsx",
+  "inputs": [
+    {
+      "id": "data",
+      "title": "输入数据",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "any",
+          "items": {
+            "type": "any"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": []
+}

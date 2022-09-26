@@ -1,0 +1,205 @@
+{
+  "title": "热力图",
+  "namespace": "mybricks.normal-pc-chart.heat-map",
+  "version": "1.0.0",
+  "description": "热力图",
+  "author": "MyBricks",
+  "author_name": "MyBricks",
+  "icon": "./icon.svg",
+  "data": "./data.json",
+  "runtime": "./runtime.tsx",
+  "editors": "./editors.tsx",
+  "inputs": [
+    {
+      "id": "data",
+      "title": "输入数据",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "dataSource": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "xAxis": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              }
+            }
+          },
+          "yAxis": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "setMainConfig",
+      "title": "配置主图",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "xField": {
+            "type": "string"
+          },
+          "yField": {
+            "type": "string"
+          },
+          "colrField": {
+            "type": "string"
+          },
+          "colors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "label": {
+            "type": "object",
+            "properties": {
+              "style": {
+                "type": "object",
+                "properties": {
+                  "fontSize": {
+                    "type": "number"
+                  },
+                  "fill": {
+                    "type": "string"
+                  }
+                }
+              },
+              "displayFields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "xAxis": {
+          "type": "object",
+          "properties": {
+            "fontSize": {
+              "type": "number"
+            },
+            "fill": {
+              "type": "string"
+            }
+          }
+        },
+        "yAxis": {
+          "type": "object",
+          "properties": {
+            "fontSize": {
+              "type": "number"
+            },
+            "fill": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "setBgImg",
+      "title": "设置背景图",
+      "schema": {
+        "type": "string"
+      }
+    },
+    {
+      "id": "downLoadImg",
+      "title": "下载图片",
+      "schema": {
+        "type": "any"
+      }
+    },
+    {
+      "id": "relToFile",
+      "title": "获取图表数据",
+      "rels": [
+        "relToFile"
+      ],
+      "schema": {
+        "type": "any"
+      }
+    },
+    {
+      "id": "extraData0",
+      "title": "辅图数据",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "dataSource": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "xAxis": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              }
+            }
+          },
+          "yAxis": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "setSubConfig",
+      "title": "配置辅图",
+      "schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "id": "loading",
+      "title": "设置加载态",
+      "schema": {
+        "type": "boolean"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "relToFile",
+      "title": "图表数据",
+      "schema": {
+        "type": "any"
+      }
+    }
+  ]
+}

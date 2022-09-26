@@ -1,0 +1,10 @@
+{
+  "smooth": false,
+  "line": {
+    "color": "#d6e3fd"
+  },
+  "areaStyle": {
+    "fill": "#d6e3fd",
+    "fillOpacity": 1
+  }
+}
