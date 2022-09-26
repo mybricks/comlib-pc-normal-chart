@@ -16,9 +16,16 @@
       "schema": {
         "type": "array",
         "items": {
-          "type": "any",
-          "items": {
-            "type": "any"
+          "type": "object",
+          "properties": {
+            "xField": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "yField": {
+              "title": "y轴字段名",
+              "type": "number"
+            }
           }
         }
       }
