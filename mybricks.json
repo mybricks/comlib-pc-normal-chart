@@ -8,8 +8,9 @@
         "comAry": [
           "./src/column/com.json",
           "./src/line/com.json",
-          "./src/pie/com.json",
           "./src/area/com.json",
+          "./src/dualAxes/com.json",
+          "./src/pie/com.json",
           "./src/radar/com.json",
           "./src/liquid/com.json",
           "./src/bar/com.json",
@@ -24,14 +25,6 @@
           "./src/tinyColumn/com.json",
           "./src/tinyArea/com.json",
           "./src/ringProgress/com.json"
-        ]
-      },
-      {
-        "title": "高级",
-        "comAry": [
-          "./src/dualAxes/com.json",
-          "./src/charts/com.json",
-          "./src/organization/com.json"
         ]
       }
     ],
@@ -41,8 +34,9 @@
         "comAry": [
           "./src/column/com.json",
           "./src/line/com.json",
-          "./src/pie/com.json",
           "./src/area/com.json",
+          "./src/dualAxes/com.json",
+          "./src/pie/com.json",
           "./src/radar/com.json",
           "./src/liquid/com.json",
           "./src/bar/com.json",
@@ -57,14 +51,6 @@
           "./src/tinyColumn/com.json",
           "./src/tinyArea/com.json",
           "./src/ringProgress/com.json"
-        ]
-      },
-      {
-        "title": "高级",
-        "comAry": [
-          "./src/dualAxes/com.json",
-          "./src/charts/com.json",
-          "./src/organization/com.json"
         ]
       }
     ]
