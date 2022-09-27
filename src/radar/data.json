@@ -1,16 +1,15 @@
 {
-  "height": 400,
-  "type": "Radar",
   "config": {
-    "xField": "year",
-    "yField": "value",
-    "xAxis": {},
-    "yAxis": {},
+    "xField": "xField",
+    "yField": "yField",
+    "seriesField": "",
     "legend": {
-      "position": "top-left"
+      "position": "top",
+      "offsetX": 0,
+      "offsetY": 0
     },
     "area": {},
-    "seriesField": ""
+    "padding": "auto"
   },
   "subType": "default"
 }
