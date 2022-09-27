@@ -1,9 +1,0 @@
-{
-  "height": 400,
-  "type": "OrganizationGraph",
-  "config": {
-    "width": null,
-    "behaviors": ["drag-canvas", "zoom-canvas"]
-  },
-  "subType": "default"
-}
