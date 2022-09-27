@@ -8,7 +8,7 @@
   "icon": "./icon.svg",
   "data": "./data.json",
   "runtime": "./runtime.tsx",
-  "editors": "../components/editors.tsx",
+  "editors": "./editor/index.ts",
   "inputs": [
     {
       "id": "data0",

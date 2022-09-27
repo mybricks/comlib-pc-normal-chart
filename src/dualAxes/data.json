@@ -1,17 +1,51 @@
 {
-  "height": 400,
-  "type": "DualAxes",
   "config": {
-    "xField": "year",
+    "xField": "xField",
     "yField": [
-      "value",
-      "count"
+      "yField0",
+      "yField1"
     ],
-    "xAxis": {},
-    "yAxis": {},
+    "xAxis": {
+      "title": {
+        "text": "x轴标题",
+        "position": "center"
+      }
+    },
+    "yAxis": {
+      "yField0": {
+        "title": {
+          "text": "y轴标题(左)",
+          "position": "center"
+        }
+      },
+      "yField1": {
+        "title": {
+          "text": "y轴标题(右)",
+          "position": "center"
+        }
+      }
+    },
+    "geometryOptions": [
+      {
+        "geometry": "column",
+        "seriesField": "",
+        "smooth": false
+      },
+      {
+        "geometry": "line",
+        "seriesField": "",
+        "smooth": false
+      }
+    ],
     "legend": {
-      "position": "top-left"
-    }
+      "position": "top",
+      "offsetX": 0,
+      "offsetY": 0
+    },
+    "padding": "auto"
   },
-  "subType": "default"
+  "seriesField": [
+    false,
+    false
+  ]
 }
