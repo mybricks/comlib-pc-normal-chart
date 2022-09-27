@@ -8,7 +8,7 @@
   "icon": "./icon.svg",
   "data": "./data.json",
   "runtime": "./runtime.tsx",
-  "editors": "./editors.tsx",
+  "editors": "./editor/index.ts",
   "inputs": [
     {
       "id": "data",
@@ -18,59 +18,6 @@
         "items": {
           "type": "number"
         }
-      }
-    },
-    {
-      "id": "style",
-      "title": "设置图形样式",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "line": {
-            "title": "折线样式",
-            "type": "object",
-            "properties": {
-              "color": {
-                "title": "填充颜色",
-                "type": "string"
-              }
-            }
-          },
-          "areaStyle": {
-            "title": "填充区域样式",
-            "type": "object",
-            "properties": {
-              "fill": {
-                "title": "填充颜色",
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "id": "xAxis",
-      "title": "设置x轴",
-      "schema": {
-        "type": "object",
-        "properties": {}
-      }
-    },
-    {
-      "id": "yAxis",
-      "title": "设置y轴",
-      "schema": {
-        "type": "object",
-        "properties": {}
-      }
-    },
-    {
-      "id": "tooltip",
-      "title": "设置提示信息",
-      "schema": {
-        "type": "object",
-        "properties": {}
       }
     }
   ],
