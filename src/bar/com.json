@@ -8,7 +8,7 @@
   "icon": "./icon.svg",
   "data": "./data.json",
   "runtime": "./runtime.tsx",
-  "editors": "../components/editors.tsx",
+  "editors": "./editor/index.ts",
   "inputs": [
     {
       "id": "data",
@@ -18,7 +18,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "properties": {
+          "properties":{
             "xField": {
               "title": "x轴字段名",
               "type": "string"
@@ -26,6 +26,10 @@
             "yField": {
               "title": "y轴字段名",
               "type": "number"
+            },
+            "seriesField": {
+              "title": "分组字段名",
+              "type": "string"
             }
           }
         }
