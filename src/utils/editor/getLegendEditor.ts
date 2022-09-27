@@ -16,7 +16,7 @@ export default () => {
             if (!value) {
               data.config.legend = false;
             } else {
-              data.config.legend = { position: LegendPositionEnum.Top };
+              data.config.legend = { position: LegendPositionEnum.Top, offsetX: 0, offsetY: 0 };
             }
           }
         }
@@ -40,9 +40,9 @@ export default () => {
         value: {
           get({ data }: EditorResult<Data>) {
             if (typeof data.config.legend === 'boolean') {
-              return false;
+              return LegendPositionEnum.Top;
             }
-            return data.config.legend?.position;
+            return data.config.legend?.position || LegendPositionEnum.Top;
           },
           set({ data }: EditorResult<Data>, value: LegendPositionEnum) {
             if (typeof data.config.legend !== 'boolean') {
