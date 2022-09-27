@@ -1,15 +1,12 @@
 {
-  "height": 400,
-  "type": "Funnel",
   "config": {
-    "xField": "stage",
-    "yField": "number",
-    "xAxis": {},
-    "yAxis": {},
+    "xField": "xField",
+    "yField": "yField",
     "legend": {
-      "position": "top-left"
+      "position": "top",
+      "offsetX": 0,
+      "offsetY": 0
     },
-    "seriesField": ""
-  },
-  "subType": "default"
+    "padding": "auto"
+  }
 }
