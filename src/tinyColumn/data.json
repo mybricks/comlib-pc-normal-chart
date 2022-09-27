@@ -1,14 +1,6 @@
 {
-  "height": 400,
-  "type": "TinyColumn",
   "config": {
-    "xAxis": {},
-    "yAxis": {},
-    "legend": {
-      "position": "top-left"
-    },
-    "pattern": {},
-    "color": "#5588FF"
-  },
-  "subType": "default"
+    "color": "#5588FF",
+    "padding": "auto"
+  }
 }
