@@ -24,7 +24,7 @@ const BaseEditor = [
     items: [
       {
         title: '有效区域颜色',
-        type: 'colorPicker',
+        type: 'ColorPicker',
         value: {
           get({ data }: EditorResult<Data>) {
             return data.config.color[0];
@@ -36,7 +36,7 @@ const BaseEditor = [
       },
       {
         title: '无效区域颜色',
-        type: 'colorPicker',
+        type: 'ColorPicker',
         value: {
           get({ data }: EditorResult<Data>) {
             return data.config.color[1];

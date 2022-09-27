@@ -21,6 +21,7 @@
         "comAry": [
           "./src/tinyColumn/com.json",
           "./src/tinyArea/com.json",
+          "./src/tinyProgress/com.json",
           "./src/ringProgress/com.json"
         ]
       }
@@ -44,6 +45,7 @@
         "comAry": [
           "./src/tinyColumn/com.json",
           "./src/tinyArea/com.json",
+          "./src/tinyProgress/com.json",
           "./src/ringProgress/com.json"
         ]
       }
