@@ -22,9 +22,7 @@
   },
   "homepage": "https://github.com/mybricks/comlib-pc-normal-chart#readme",
   "dependencies": {
-    "@ant-design/charts": "^1.2.14",
-    "@ant-design/graphs": "^1.2.8",
-    "lodash-es": "^4.17.21"
+    "@ant-design/charts": "^1.2.14"
   },
   "devDependencies": {
     "@types/react": "^17.0.8",
