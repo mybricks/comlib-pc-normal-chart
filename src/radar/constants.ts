@@ -1,10 +1,10 @@
-import { ChartConfigProps } from '../utils/constants';
+import { ChartConfigProps, ChartProps } from '../utils/constants';
 
 export enum SubTypeEnum {
   Default = 'default',
   Group = 'group'
 }
-export interface Data {
+export interface Data extends ChartProps {
   config: ChartConfigProps & {
     area?: boolean;
     seriesField?: string;

@@ -1,3 +1,4 @@
+import { getEmptyEditor } from '../../utils/editor';
 import { Data } from '../constants';
 import BaseEditor from './baseEditor';
 
@@ -11,7 +12,7 @@ export default {
   },
   ':root': ({}: EditorResult<Data>, cate0: any) => {
     cate0.title = '常规';
-    cate0.items = [...BaseEditor];
+    cate0.items = [...BaseEditor, ...getEmptyEditor()];
 
     return { title: '迷你面积图' };
   }

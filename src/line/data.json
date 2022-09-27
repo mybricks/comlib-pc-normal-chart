@@ -23,5 +23,7 @@
     "padding": "auto",
     "smooth": false
   },
-  "subType": "default"
+  "subType": "default",
+  "useEmpty": true,
+  "emptyText": "暂无数据"
 }

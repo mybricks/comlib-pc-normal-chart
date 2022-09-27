@@ -1,8 +1,6 @@
-import { ChartConfigProps } from '../utils/constants';
+import { ChartProps } from '../utils/constants';
 
-export interface Data {
-  config: ChartConfigProps;
-}
+export interface Data extends ChartProps {}
 
 export const InputIds = {
   SetData: 'data'

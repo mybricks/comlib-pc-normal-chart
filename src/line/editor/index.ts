@@ -1,6 +1,11 @@
 import { Data, SubTypeEnum } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor, getPaddingEditor, getAxisEditor } from '../../utils/editor';
+import {
+  getLegendEditor,
+  getPaddingEditor,
+  getAxisEditor,
+  getEmptyEditor
+} from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -20,10 +25,11 @@ export default {
         ifVisible: ({ data }: EditorResult<Data>) => {
           return data.subType === SubTypeEnum.More;
         }
-      }
+      },
+      ...getPaddingEditor(),
+      ...getEmptyEditor()
     ];
 
-    cate1.title = '样式';
-    cate1.items = [...getPaddingEditor()];
+    return { title: '折线图' };
   }
 };

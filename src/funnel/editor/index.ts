@@ -1,5 +1,5 @@
 import { Data } from '../constants';
-import { getLegendEditor, getPaddingEditor } from '../../utils/editor';
+import { getEmptyEditor, getLegendEditor, getPaddingEditor } from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -15,7 +15,8 @@ export default {
       {
         ...getLegendEditor()
       },
-      ...getPaddingEditor()
+      ...getPaddingEditor(),
+      ...getEmptyEditor()
     ];
 
     return { title: '漏斗图' };

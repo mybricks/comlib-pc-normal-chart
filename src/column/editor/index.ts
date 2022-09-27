@@ -1,6 +1,11 @@
 import { Data, SubTypeEnum } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor, getAxisEditor, getPaddingEditor } from '../../utils/editor';
+import {
+  getLegendEditor,
+  getAxisEditor,
+  getPaddingEditor,
+  getEmptyEditor
+} from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -21,7 +26,8 @@ export default {
           return data.subType !== SubTypeEnum.Default;
         }
       },
-      ...getPaddingEditor()
+      ...getPaddingEditor(),
+      ...getEmptyEditor()
     ];
 
     return { title: '柱状图' };

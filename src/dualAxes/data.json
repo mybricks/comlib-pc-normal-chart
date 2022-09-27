@@ -47,5 +47,7 @@
   "seriesField": [
     false,
     false
-  ]
+  ],
+  "useEmpty": true,
+  "emptyText": "暂无数据"
 }

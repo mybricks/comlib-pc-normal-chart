@@ -37,4 +37,6 @@ export interface ChartConfigProps {
 }
 export interface ChartProps {
   config: ChartConfigProps;
+  useEmpty?: boolean;
+  emptyText?: string;
 }

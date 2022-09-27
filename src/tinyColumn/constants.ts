@@ -1,6 +1,6 @@
-import { ChartConfigProps } from '../utils/constants';
+import { ChartConfigProps, ChartProps } from '../utils/constants';
 
-export interface Data {
+export interface Data extends ChartProps {
   config: ChartConfigProps & {
     color?: string;
   };

@@ -8,5 +8,7 @@
       "offsetY": 0
     },
     "padding": "auto"
-  }
+  },
+  "useEmpty": true,
+  "emptyText": "暂无数据"
 }

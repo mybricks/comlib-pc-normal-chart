@@ -1,6 +1,11 @@
 import { Data } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor, getPaddingEditor, getAxisEditor } from '../../utils/editor';
+import {
+  getLegendEditor,
+  getPaddingEditor,
+  getAxisEditor,
+  getEmptyEditor
+} from '../../utils/editor';
 import { AxisPositionEnum } from '../../utils/constants';
 
 const getYAxisEditor = (index: number) => {
@@ -26,9 +31,9 @@ const getYAxisEditor = (index: number) => {
         title: '标题位置',
         type: 'Select',
         options: [
-          { label: '左侧', value: AxisPositionEnum.Start },
+          { label: '上侧', value: AxisPositionEnum.Start },
           { label: '中间', value: AxisPositionEnum.Center },
-          { label: '右侧', value: AxisPositionEnum.End }
+          { label: '下侧', value: AxisPositionEnum.End }
         ],
         value: {
           get({ data }: EditorResult<Data>) {
@@ -51,30 +56,27 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({ }: EditorResult<Data>, cate0: any, cate1: any) => {
+  ':root': ({}: EditorResult<Data>, cate0: any) => {
     cate0.title = '常规';
     cate0.items = [
       {
         title: '左轴图形样式',
-        items: [
-          ...BaseEditor(0),
-        ]
+        items: [...BaseEditor(0)]
       },
       {
         title: '右轴图形样式',
-        items: [
-          ...BaseEditor(1),
-        ]
+        items: [...BaseEditor(1)]
       },
       getAxisEditor()[0],
       getYAxisEditor(0),
       getYAxisEditor(1),
       {
-        ...getLegendEditor(),
-      }
+        ...getLegendEditor()
+      },
+      ...getPaddingEditor(),
+      ...getEmptyEditor()
     ];
 
-    cate1.title = '样式';
-    cate1.items = [...getPaddingEditor()];
+    return { title: '双轴图' };
   }
 };

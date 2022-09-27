@@ -5,9 +5,9 @@ const BaseEditor = [
     title: '类型',
     type: 'Select',
     options: [
-      { label: '基础折线图', value: 'default' },
-      { label: '多折线图', value: 'more' },
-      { label: '阶梯折线图', value: 'step' },
+      { label: '基础折线图', value: SubTypeEnum.Default },
+      { label: '多折线图', value: SubTypeEnum.More },
+      { label: '阶梯折线图', value: SubTypeEnum.Step }
     ],
     value: {
       get({ data }: EditorResult<Data>) {
@@ -32,8 +32,8 @@ const BaseEditor = [
             data.config.seriesField = '';
             dsInput.setSchema(Schemas.DefaultDataSource);
         }
-      },
-    },
+      }
+    }
   },
   {
     title: '平滑曲线',
@@ -47,8 +47,8 @@ const BaseEditor = [
       },
       set({ data }: EditorResult<Data>, value: boolean) {
         data.config.smooth = value;
-      },
-    },
-  },
+      }
+    }
+  }
 ];
 export default BaseEditor;

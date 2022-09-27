@@ -1,6 +1,11 @@
 import { Data } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor, getAxisEditor, getPaddingEditor } from '../../utils/editor';
+import {
+  getLegendEditor,
+  getAxisEditor,
+  getPaddingEditor,
+  getEmptyEditor
+} from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -18,7 +23,8 @@ export default {
       {
         ...getLegendEditor()
       },
-      ...getPaddingEditor()
+      ...getPaddingEditor(),
+      ...getEmptyEditor()
     ];
 
     return { title: '条形图' };

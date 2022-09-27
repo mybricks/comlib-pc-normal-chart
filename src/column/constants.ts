@@ -1,11 +1,11 @@
-import { ChartConfigProps } from '../utils/constants';
+import { ChartConfigProps, ChartProps } from '../utils/constants';
 
 export enum SubTypeEnum {
   Default = 'default',
   Stack = 'stack',
   Group = 'group'
 }
-export interface Data {
+export interface Data extends ChartProps {
   config: ChartConfigProps & {
     isStack?: boolean;
     isGroup?: boolean;

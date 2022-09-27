@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bar } from '@ant-design/charts';
 import { Data, InputIds, MockData } from './constants';
+import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
@@ -8,17 +9,24 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   useEffect(() => {
     if (env.runtime) {
       inputs[InputIds.SetData]((val) => {
-        setRuntimeDataSource(val);
+        if (Array.isArray(val)) {
+          setRuntimeDataSource(val);
+        }
       });
     }
   }, []);
 
   return (
-    <Bar
-      {...style}
-      {...data.config}
-      data={env.edit ? MockData : dataSourceInRuntime}
-      key={env.edit ? JSON.stringify(data.config) : undefined}
-    />
+    <EmptyWrap
+      isEmpty={data.useEmpty && env.runtime && dataSourceInRuntime.length === 0}
+      emptyText={data.emptyText}
+    >
+      <Bar
+        {...style}
+        {...data.config}
+        data={env.edit ? MockData : dataSourceInRuntime}
+        key={env.edit ? JSON.stringify(data.config) : undefined}
+      />
+    </EmptyWrap>
   );
 }

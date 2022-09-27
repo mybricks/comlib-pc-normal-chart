@@ -9,5 +9,7 @@
       "fillOpacity": 1
     },
     "padding": "auto"
-  }
+  },
+  "useEmpty": true,
+  "emptyText": "暂无数据"
 }
