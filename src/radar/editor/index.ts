@@ -1,6 +1,6 @@
 import { Data, SubTypeEnum } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor } from '../../utils/editor';
+import { getLegendEditor, getPaddingEditor } from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -19,7 +19,8 @@ export default {
         ifVisible: ({ data }: EditorResult<Data>) => {
           return data.subType !== SubTypeEnum.Default;
         }
-      }
+      },
+      ...getPaddingEditor()
     ];
 
     return { title: '雷达图' };

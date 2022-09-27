@@ -15,6 +15,8 @@
       }
     },
     "seriesField": "",
+    "isStack": false,
+    "isGroup": false,
     "legend": {
       "position": "top",
       "offsetX": 0,

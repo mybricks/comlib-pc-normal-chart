@@ -1,6 +1,6 @@
 import { Data, SubTypeEnum } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor, getAxisEditor } from '../../utils/editor';
+import { getLegendEditor, getAxisEditor, getPaddingEditor } from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -10,7 +10,7 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({}: EditorResult<Data>, cate0: any, cate1: any) => {
+  ':root': ({}: EditorResult<Data>, cate0: any) => {
     cate0.title = '常规';
     cate0.items = [
       ...BaseEditor,
@@ -20,7 +20,8 @@ export default {
         ifVisible: ({ data }: EditorResult<Data>) => {
           return data.subType !== SubTypeEnum.Default;
         }
-      }
+      },
+      ...getPaddingEditor()
     ];
 
     return { title: '柱状图' };

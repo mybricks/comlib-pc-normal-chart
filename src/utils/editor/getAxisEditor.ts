@@ -29,6 +29,9 @@ export default () => {
             { label: '中间', value: AxisPositionEnum.Center },
             { label: '右侧', value: AxisPositionEnum.End }
           ],
+          ifVisible({ data }: EditorResult<Data>) {
+            return !!data.config.xAxis.title?.text;
+          },
           value: {
             get({ data }: EditorResult<Data>) {
               return data.config.xAxis.title?.position || AxisPositionEnum.Center;
@@ -66,6 +69,9 @@ export default () => {
             { label: '中间', value: AxisPositionEnum.Center },
             { label: '右侧', value: AxisPositionEnum.End }
           ],
+          ifVisible({ data }: EditorResult<Data>) {
+            return !!data.config.yAxis.title?.text;
+          },
           value: {
             get({ data }: EditorResult<Data>) {
               return data.config.yAxis.title?.position || AxisPositionEnum.Center;

@@ -1,6 +1,6 @@
 import { Data } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor } from '../../utils/editor';
+import { getLegendEditor, getPaddingEditor } from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -16,7 +16,8 @@ export default {
       ...BaseEditor,
       {
         ...getLegendEditor()
-      }
+      },
+      ...getPaddingEditor()
     ];
 
     return { title: '饼图' };
