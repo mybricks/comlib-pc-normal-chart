@@ -1,6 +1,6 @@
 import { Data, SubTypeEnum } from '../constants';
 import BaseEditor from './baseEditor';
-import { getLegendEditor, getPaddingEditor, getAxisEditor } from '../../utils/editor';
+import { getLegendEditor, getAxisEditor } from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
@@ -23,7 +23,6 @@ export default {
       }
     ];
 
-    cate1.title = '样式';
-    cate1.items = [...getPaddingEditor()];
+    return { title: '柱状图' };
   }
 };
