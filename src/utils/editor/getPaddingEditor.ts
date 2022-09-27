@@ -8,7 +8,7 @@ enum UnitType {
 export default () => {
   return [
     {
-      tile: '内间距',
+      title: '内间距',
       items: [
         {
           title: '自定义内间距',
