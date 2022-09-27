@@ -1,41 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { RingProgress } from '@ant-design/charts';
-import { Data } from './constant';
+import { Data, InputIds, MockData } from './constants';
 
-export default function ({ data, inputs, env, title }) {
-
-  const [config, setConfig] = useState<Data>(data);
+export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
     if (env.runtime) {
-      inputs.style((ds: any) => {
-        setConfig({ ...config, ...ds });
-      });
-
-      inputs.percent((ds: number) => {
-        const dsNum = Number(ds);
-        if (isNaN(dsNum)) {
-          console.error(`${title}输入数据不合法！`);
-        } else {
-          setConfig({ ...config, percent: dsNum });
+      inputs[InputIds.SetData]((val) => {
+        if (typeof val === 'number') {
+          setPercent(val);
         }
       });
-
-      const ids = ['statistic', 'tooltip'];
-      ids.forEach(id => {
-        inputs[id]((ds: Object) => {
-          setConfig({ ...config, [id]: { ...ds } });
-        });
-      })
     }
   }, []);
-  return <>
-    {
-      typeof config.percent === 'number' ? (
-        <RingProgress {...config} />
-      ) : (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>暂无数据</div>
-      )
-    }
-  </>
+
+  return (
+    <RingProgress
+      {...style}
+      {...data.config}
+      percent={env.edit ? MockData : percent}
+      key={env.edit ? JSON.stringify(data.config) : undefined}
+    />
+  );
 }

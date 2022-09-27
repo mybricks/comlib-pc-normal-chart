@@ -1,15 +1,16 @@
 {
-  "percent": 0.6,
-  "color": [
-    "#58f",
-    "#ddd"
-  ],
-  "innerRadius": 0.8,
-  "radius": 1,
-  "statistic": {
-    "title": {
-      "content": ""
+  "config": {
+    "percent": 0.4,
+    "color": [
+      "#58f",
+      "#ddd"
+    ],
+    "innerRadius": 0.8,
+    "radius": 1,
+    "statistic": {
+      "title": false,
+      "content": false
     },
-    "content": false
+    "padding": "auto"
   }
 }

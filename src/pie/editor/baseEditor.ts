@@ -29,7 +29,8 @@ const BaseEditor = [
     options: {
       type: 'Number',
       max: 1,
-      min: 0
+      min: 0,
+      step: 0.1
     },
     ifVisible({ data }: EditorResult<Data>) {
       return data.subType === SubTypeEnum.Circel;
