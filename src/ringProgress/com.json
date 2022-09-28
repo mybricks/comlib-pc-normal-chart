@@ -12,7 +12,7 @@
   "inputs": [
     {
       "id": "data",
-      "title": "设置数据",
+      "title": "输入数据",
       "schema": {
         "type": "number"
       }
