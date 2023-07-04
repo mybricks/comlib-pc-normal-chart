@@ -8,21 +8,22 @@
   "icon": "./icon.svg",
   "data": "./data.json",
   "runtime": "./runtime.tsx",
-  "editors": "./editor/index.ts",
+  "editors": "./editor.tsx",
   "inputs": [
     {
       "id": "data0",
       "title": "左轴输入数据",
       "schema": {
+        "title": "左轴输入数据",
         "type": "array",
         "items": {
           "type": "object",
           "properties": {
-            "xField": {
+            "year": {
               "title": "x轴字段名",
               "type": "string"
             },
-            "yField": {
+            "value": {
               "title": "y轴字段名",
               "type": "number"
             }
@@ -34,15 +35,16 @@
       "id": "data1",
       "title": "右轴输入数据",
       "schema": {
+        "title": "右轴输入数据",
         "type": "array",
         "items": {
           "type": "object",
           "properties": {
-            "xField": {
+            "year": {
               "title": "x轴字段名",
               "type": "string"
             },
-            "yField": {
+            "count": {
               "title": "y轴字段名",
               "type": "number"
             }

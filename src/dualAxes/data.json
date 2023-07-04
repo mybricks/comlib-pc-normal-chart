@@ -1,53 +1,29 @@
 {
+  "height": 400,
   "config": {
-    "xField": "xField",
+    "xField": "year",
     "yField": [
-      "yField0",
-      "yField1"
+      "value",
+      "count"
     ],
-    "xAxis": {
-      "title": {
-        "text": "x轴标题",
-        "position": "center"
-      }
-    },
-    "yAxis": {
-      "yField0": {
-        "title": {
-          "text": "y轴标题(左)",
-          "position": "center"
-        }
-      },
-      "yField1": {
-        "title": {
-          "text": "y轴标题(右)",
-          "position": "center"
-        }
-      }
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
     },
     "geometryOptions": [
       {
-        "geometry": "column",
-        "seriesField": "",
-        "smooth": false
+        "geometry": "line",
+        "color": "#5AD8A6"
       },
       {
         "geometry": "line",
-        "seriesField": "",
-        "smooth": false
+        "color": "#5B8FF9"
       }
     ],
-    "legend": {
-      "position": "top",
-      "offsetX": 0,
-      "offsetY": 0
-    },
     "padding": "auto"
   },
-  "seriesField": [
-    false,
-    false
-  ],
+  "subType": "default",
   "useEmpty": true,
   "emptyText": "暂无数据"
 }

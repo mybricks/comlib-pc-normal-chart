@@ -23,104 +23,105 @@ export const InputIds = {
   SetRightData: 'data1'
 };
 
-export const MockData = {
-  default: [
-    [
-      {
-        xField: '2019-03',
-        yField0: 220
-      },
-      {
-        xField: '2019-04',
-        yField0: 300
-      },
-      {
-        xField: '2019-05',
-        yField0: 250
-      }
-    ],
-    [
-      {
-        xField: '2019-03',
-        yField1: 900
-      },
-      {
-        xField: '2019-04',
-        yField1: 600
-      },
-      {
-        xField: '2019-05',
-        yField1: 450
-      }
-    ]
-  ],
-  more: [
-    [
-      {
-        xField: '2019-03',
-        yField0: 350,
-        seriesField: 'uv'
-      },
-      {
-        xField: '2019-04',
-        yField0: 900,
-        seriesField: 'uv'
-      },
-      {
-        xField: '2019-05',
-        yField0: 300,
-        seriesField: 'uv'
-      },
-      {
-        xField: '2019-03',
-        yField0: 220,
-        seriesField: 'bill'
-      },
-      {
-        xField: '2019-04',
-        yField0: 300,
-        seriesField: 'bill'
-      },
-      {
-        xField: '2019-05',
-        yField0: 250,
-        seriesField: 'bill'
-      }
-    ],
-    [
-      {
-        xField: '2019-03',
-        yField1: 800,
-        seriesField: 'a'
-      },
-      {
-        xField: '2019-04',
-        yField1: 600,
-        seriesField: 'a'
-      },
-      {
-        xField: '2019-05',
-        yField1: 400,
-        seriesField: 'a'
-      },
-      {
-        xField: '2019-03',
-        yField1: 750,
-        seriesField: 'b'
-      },
-      {
-        xField: '2019-04',
-        yField1: 650,
-        seriesField: 'b'
-      },
-      {
-        xField: '2019-05',
-        yField1: 450,
-        seriesField: 'b'
-      }
-    ]
+export const MockData: any = [
+  [
+    {
+      year: '1991',
+      value: 3,
+      count: 10,
+    },
+    {
+      year: '1992',
+      value: 4,
+      count: 4,
+      flag: true,
+    },
+    {
+      year: '1993',
+      value: 3.5,
+      count: 5,
+    },
+    {
+      year: '1994',
+      value: 5,
+      count: 5,
+    },
+    {
+      year: '1995',
+      value: 4.9,
+      count: 4.9,
+    },
+    {
+      year: '1996',
+      value: 6,
+      count: 35,
+    },
+    {
+      year: '1997',
+      value: 7,
+      count: 7,
+      flag: true,
+    },
+    {
+      year: '1998',
+      value: 9,
+      count: 1,
+    },
+    {
+      year: '1999',
+      value: 13,
+      count: 20,
+    },
+  ], [
+    {
+      year: '1991',
+      value: 3,
+      count: 10,
+    },
+    {
+      year: '1992',
+      value: 4,
+      count: 4,
+      flag: true,
+    },
+    {
+      year: '1993',
+      value: 3.5,
+      count: 5,
+    },
+    {
+      year: '1994',
+      value: 5,
+      count: 5,
+    },
+    {
+      year: '1995',
+      value: 4.9,
+      count: 4.9,
+    },
+    {
+      year: '1996',
+      value: 6,
+      count: 35,
+    },
+    {
+      year: '1997',
+      value: 7,
+      count: 7,
+      flag: true,
+    },
+    {
+      year: '1998',
+      value: 9,
+      count: 1,
+    },
+    {
+      year: '1999',
+      value: 13,
+      count: 20,
+    },
   ]
-};
+]
 
 export const Schemas = {
   DefaultDataSource: {

@@ -25,14 +25,6 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   const dataSourceInRuntime = useMemo(() => {
     return [leftDataSourceInRuntime, rightDataSourceInRuntime];
   }, [leftDataSourceInRuntime, rightDataSourceInRuntime]);
-  const mockData = useMemo(() => {
-    const leftSeriesField = data.seriesField[0];
-    const rightSeriesField = data.seriesField[1];
-    return [
-      leftSeriesField ? MockData['more'][0] : MockData['default'][0],
-      rightSeriesField ? MockData['more'][1] : MockData['default'][1]
-    ];
-  }, [data.seriesField[0], data.seriesField[1]]);
 
   return (
     <EmptyWrap
@@ -47,7 +39,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       <DualAxes
         {...style}
         {...data.config}
-        data={env.edit ? mockData : dataSourceInRuntime}
+        data={env.edit ? MockData : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>
