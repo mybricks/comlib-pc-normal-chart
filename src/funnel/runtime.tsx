@@ -24,7 +24,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       <Funnel
         {...style}
         {...data.config}
-        data={env.edit ? MockData : dataSourceInRuntime}
+        data={env.edit ? MockData['default'] : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>
