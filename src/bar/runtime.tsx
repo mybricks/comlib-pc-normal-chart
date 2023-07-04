@@ -24,7 +24,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       <Bar
         {...style}
         {...data.config}
-        data={env.edit ? MockData : dataSourceInRuntime}
+        data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>
