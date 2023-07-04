@@ -16,81 +16,37 @@ export const InputIds = {
   SetData: 'data'
 };
 
-export const MockData = {
+export const MockData: any = {
   default: [
     {
-      xField: 'G2',
-      yField: 1
+      year: 'G2',
+      value: 10371,
     },
     {
-      xField: 'G6',
-      yField: 2
+      year: 'G6',
+      value: 7380,
     },
     {
-      xField: 'F2',
-      yField: 3
+      year: 'F2',
+      value: 7414,
     },
     {
-      xField: 'L7',
-      yField: 4
+      year: 'L7',
+      value: 2140,
     },
     {
-      xField: 'X6',
-      yField: 5
-    }
+      year: 'X6',
+      value: 660,
+    },
+    {
+      year: 'AVA',
+      value: 885,
+    },
+    {
+      year: 'G2Plot',
+      value: 1626,
+    },
   ],
-  group: [
-    {
-      xField: 'G2',
-      yField: 1,
-      seriesField: '类型1'
-    },
-    {
-      xField: 'G6',
-      yField: 2,
-      seriesField: '类型1'
-    },
-    {
-      xField: 'F2',
-      yField: 3,
-      seriesField: '类型1'
-    },
-    {
-      xField: 'L7',
-      yField: 4,
-      seriesField: '类型1'
-    },
-    {
-      xField: 'X6',
-      yField: 5,
-      seriesField: '类型1'
-    },
-    {
-      xField: 'G2',
-      yField: 5,
-      seriesField: '类型2'
-    },
-    {
-      xField: 'G6',
-      yField: 4,
-      seriesField: '类型2'
-    },
-    {
-      xField: 'F2',
-      yField: 3,
-      seriesField: '类型2'
-    },
-    {
-      xField: 'L7',
-      yField: 2,
-      seriesField: '类型2'
-    },
-    {
-      xField: 'X6',
-      yField: 1,
-      seriesField: '类型2'
-    }
-  ]
 };
 
 export const Schemas = {
