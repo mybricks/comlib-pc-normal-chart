@@ -1,15 +1,15 @@
 {
+  "height": 400,
   "config": {
+    "xAxis": {},
+    "yAxis": {},
     "legend": {
-      "position": "top",
-      "offsetX": 0,
-      "offsetY": 0
+      "position": "top-left"
     },
-    "padding": "auto",
     "angleField": "value",
-    "colorField": "seriesField",
+    "colorField": "type",
     "radius": 1,
-    "innerRadius": 0
+    "padding": "auto"
   },
   "subType": "default",
   "useEmpty": true,
