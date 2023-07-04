@@ -1,5 +1,6 @@
 import { initInput, initEvents, reRender, setSchema, setDataSchema } from '../utils/constants';
 import { Data, AnnotationItem } from '../utils/const';
+
 import { set } from 'lodash-es';
 
 let addAnnotation, delAnnotation;
@@ -34,15 +35,15 @@ export default {
         input.add(id, title, schema);
       }
     });
-
     cate0.title = '常规';
     (cate0.items = [
       {
         title: '类型',
         type: 'Select',
         options: [
-          { label: '基础面积图', value: 'default' },
-          { label: '堆叠面积图', value: 'stack' }
+          { label: '基础柱状图', value: 'default' },
+          { label: '堆叠柱状图', value: 'stack' },
+          { label: '分组柱状图', value: 'group' }
         ],
         value: {
           get({ data }: EditorResult<Data>) {
@@ -51,9 +52,25 @@ export default {
           set({ data, input }: EditorResult<Data>, value: string) {
             data.subType = value;
             if (value === 'stack') {
-              data.config.seriesField = data.config.seriesField || 'type';
+              data.config = {
+                ...data.config,
+                isStack: true,
+                seriesField: data.config.seriesField || 'type'
+              };
+            } else if (value === 'group') {
+              data.config = {
+                ...data.config,
+                isStack: false,
+                isGroup: true,
+                seriesField: data.config.seriesField || 'name'
+              };
             } else {
-              data.config.seriesField = '';
+              data.config = {
+                ...data.config,
+                isStack: false,
+                isGroup: false,
+                seriesField: ''
+              };
             }
             setSchema(data, input);
           }

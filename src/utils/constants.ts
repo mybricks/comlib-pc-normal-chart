@@ -109,3 +109,48 @@ export const inputIdMap = {
   LABEL: 'label', // 数据标签
   TOOLTIP: 'tooltip' // 悬浮提示
 }
+
+export const setSchema = (data: Data, input: any) => {
+  input.get('data').setSchema(schemaDiff(data));
+};
+
+export const setDataSchema = (data: Data, input: any) => {
+  const dataInputPin = input.get(inputIdMap.DATA);
+  if (Array.isArray(data.config.yField)) {
+    dataInputPin?.setSchema({
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          [data.config.xField]: {
+            type: 'number'
+          },
+          [data.config.yField[0]]: {
+            type: 'string'
+          },
+          [data.config.yField[1]]: {
+            type: 'string'
+          }
+        }
+      }
+    });
+  } else {
+    dataInputPin?.setSchema({
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          [data.config.xField]: {
+            type: 'number'
+          },
+          [data.config.yField]: {
+            type: 'string'
+          },
+          [data.config.seriesField]: {
+            type: 'string'
+          }
+        }
+      }
+    });
+  }
+};

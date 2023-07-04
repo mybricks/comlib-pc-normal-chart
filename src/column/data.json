@@ -1,29 +1,17 @@
 {
+  "height": 400,
+  "type": "Column",
   "config": {
-    "xField": "xField",
-    "yField": "yField",
-    "xAxis": {
-      "title": {
-        "text": "x轴标题",
-        "position": "center"
-      }
-    },
-    "yAxis": {
-      "title": {
-        "text": "y轴标题",
-        "position": "center"
-      }
-    },
-    "seriesField": "",
-    "isStack": false,
-    "isGroup": false,
+    "xField": "year",
+    "yField": "value",
+    "xAxis": {},
+    "yAxis": {},
     "legend": {
-      "position": "top",
-      "offsetX": 0,
-      "offsetY": 0
+      "position": "top-left"
     },
     "padding": "auto"
   },
+  "seriesField": "type",
   "subType": "default",
   "useEmpty": true,
   "emptyText": "暂无数据"
