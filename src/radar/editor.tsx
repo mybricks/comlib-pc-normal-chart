@@ -111,6 +111,9 @@ export default {
           {
             title: '位置',
             type: 'Select',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.legend;
+            },
             options: [
               { label: '左上', value: 'top-left' },
               { label: '顶部', value: 'top' },
@@ -121,9 +124,6 @@ export default {
               { label: '右下', value: 'bottom-right' },
               { label: '右侧', value: 'right' }
             ],
-            ifVisible({ data }: EditorResult<Data>) {
-              return !!data.config.legend;
-            },
             value: {
               get({ data }: EditorResult<Data>) {
                 if (typeof data.config.legend === 'boolean') {

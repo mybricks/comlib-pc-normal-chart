@@ -8,7 +8,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
 
   useEffect(() => {
     if (env.runtime) {
-      inputs[InputIds.SetData]((val) => {
+      inputs[InputIds.SetData]((val: React.SetStateAction<any[]>) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
         }

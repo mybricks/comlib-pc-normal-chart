@@ -8,7 +8,7 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root'({ data }, cate0) {
+  ':root'({}, cate0: any) {
     cate0.title = '迷你面积图';
     cate0.items = [
       {

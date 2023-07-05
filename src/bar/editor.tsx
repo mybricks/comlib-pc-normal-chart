@@ -2,7 +2,7 @@ import { initInput, initEvents, reRender, setSchema, setDataSchema } from '../ut
 import { Data, AnnotationItem } from '../utils/const';
 import { set } from 'lodash-es';
 
-let addAnnotation, delAnnotation;
+let addAnnotation: (option: AnnotationItem) => void, delAnnotation: (index: number) => void;
 
 const initParams = (data: Data) => {
   if (!data.tempAnnotations) data.tempAnnotations = [];
@@ -87,7 +87,7 @@ export default {
           {
             title: 'x横轴字段名',
             type: 'Text',
-            description: '纵轴映射对应的数据字段名',
+            description: '横轴映射对应的数据字段名',
             value: {
               get({ data }: EditorResult<Data>) {
                 return data.config.xField;
@@ -101,7 +101,7 @@ export default {
           {
             title: 'y纵轴字段名',
             type: 'Text',
-            description: '横轴映射对应的数据字段名',
+            description: '纵轴映射对应的数据字段名',
             value: {
               get({ data }: EditorResult<Data>) {
                 return data.config.yField;
@@ -172,6 +172,9 @@ export default {
           {
             title: '位置',
             type: 'Select',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.legend;
+            },
             options: [
               { label: '左上', value: 'top-left' },
               { label: '顶部', value: 'top' },
@@ -182,9 +185,6 @@ export default {
               { label: '右下', value: 'bottom-right' },
               { label: '右侧', value: 'right' }
             ],
-            ifVisible({ data }: EditorResult<Data>) {
-              return !!data.config.legend;
-            },
             value: {
               get({ data }: EditorResult<Data>) {
                 if (typeof data.config.legend === 'boolean') {
@@ -366,7 +366,6 @@ export default {
                     start: ['min', 'min'],
                     end: ['max', 'max'],
                     content: `标注${data.tempAnnotations.length}`,
-                    // line: null,
                     yFieldIndex: 0,
                     positionField: '',
                     textColor: 'blue',
@@ -397,7 +396,7 @@ export default {
                   {
                     title: '区域颜色',
                     type: 'colorPicker',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['region'].includes(datum.type);
                     },
                     value: 'mainColor'
@@ -405,7 +404,7 @@ export default {
                   {
                     title: '数据点颜色',
                     type: 'colorPicker',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['dataMarker'].includes(datum.type);
                     },
                     value: 'mainColor'
@@ -413,7 +412,7 @@ export default {
                   {
                     title: '虚线',
                     type: 'switch',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['line'].includes(datum.type);
                     },
                     value: 'useDash'
@@ -421,7 +420,7 @@ export default {
                   {
                     title: '线段颜色',
                     type: 'colorPicker',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['line'].includes(datum.type);
                     },
                     value: 'mainColor'
@@ -429,7 +428,7 @@ export default {
                   {
                     title: '坐标',
                     type: 'text',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['text', 'dataMarker'].includes(datum.type);
                     },
                     value: 'position'
@@ -437,7 +436,7 @@ export default {
                   {
                     title: '动态坐标字段',
                     type: 'text',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['text', 'dataMarker'].includes(datum.type);
                     },
                     value: 'positionField'
@@ -445,7 +444,7 @@ export default {
                   {
                     title: '起始坐标',
                     type: 'text',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['line', 'region'].includes(datum.type);
                     },
                     value: 'start'
@@ -453,7 +452,7 @@ export default {
                   {
                     title: '结束坐标',
                     type: 'text',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['line', 'region'].includes(datum.type);
                     },
                     value: 'end'
@@ -461,7 +460,7 @@ export default {
                   {
                     title: '文本内容',
                     type: 'textarea',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['text', 'line', 'dataMarker'].includes(datum.type);
                     },
                     value: 'content'
@@ -469,7 +468,7 @@ export default {
                   {
                     title: '文本与线段平行',
                     type: 'switch',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['line'].includes(datum.type);
                     },
                     value: 'autoRotate'
@@ -477,7 +476,7 @@ export default {
                   {
                     title: '文本颜色',
                     type: 'colorPicker',
-                    ifVisible(datum, index) {
+                    ifVisible(datum: { type: string }) {
                       return ['text', 'line', 'dataMarker'].includes(datum.type);
                     },
                     value: 'textColor'
@@ -492,7 +491,7 @@ export default {
                 set({ data }: EditorResult<Data>, value: AnnotationItem[]) {
                   data.tempAnnotations = value;
 
-                  let annotations;
+                  let annotations: any[];
                   value.forEach((item: any) => {
                     const copyItem: any = { ...item };
                     const {

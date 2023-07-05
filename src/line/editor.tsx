@@ -95,7 +95,7 @@ export default {
           {
             title: 'x横轴字段名',
             type: 'Text',
-            description: '纵轴映射对应的数据字段名',
+            description: '横轴映射对应的数据字段名',
             value: {
               get({ data }: EditorResult<Data>) {
                 return data.config.xField;
@@ -109,7 +109,7 @@ export default {
           {
             title: 'y纵轴字段名',
             type: 'Text',
-            description: '横轴映射对应的数据字段名',
+            description: '纵轴映射对应的数据字段名',
             value: {
               get({ data }: EditorResult<Data>) {
                 return data.config.yField;
@@ -180,6 +180,9 @@ export default {
           {
             title: '位置',
             type: 'Select',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.legend;
+            },
             options: [
               { label: '左上', value: 'top-left' },
               { label: '顶部', value: 'top' },
@@ -190,9 +193,6 @@ export default {
               { label: '右下', value: 'bottom-right' },
               { label: '右侧', value: 'right' }
             ],
-            ifVisible({ data }: EditorResult<Data>) {
-              return !!data.config.legend;
-            },
             value: {
               get({ data }: EditorResult<Data>) {
                 if (typeof data.config.legend === 'boolean') {

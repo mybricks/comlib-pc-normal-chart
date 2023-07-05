@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RingProgress } from '@ant-design/charts';
 import { Data } from './constants';
+import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, inputs, env, title }) {
   const [config, setConfig] = useState<Data>(data);
@@ -28,13 +29,14 @@ export default function ({ data, inputs, env, title }) {
       });
     }
   }, []);
+
   return (
-    <>
-      {typeof config.percent === 'number' ? (
-        <RingProgress {...config} />
-      ) : (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>暂无数据</div>
-      )}
-    </>
+    <EmptyWrap
+      isEmpty={data.useEmpty && env.runtime && typeof config.percent !== 'number'}
+      emptyText={data.emptyText}
+      small
+    >
+      <RingProgress {...config} />
+    </EmptyWrap>
   );
 }
