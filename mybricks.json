@@ -13,6 +13,7 @@
           "./src/radar/com.json",
           "./src/pie/com.json",
           "./src/bar/com.json",
+          "./src/bidirectionalBar/com.json",
           "./src/funnel/com.json"
         ]
       },
@@ -37,6 +38,7 @@
           "./src/radar/com.json",
           "./src/pie/com.json",
           "./src/bar/com.json",
+          "./src/bidirectionalBar/com.json",
           "./src/funnel/com.json"
         ]
       },
