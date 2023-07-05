@@ -2,9 +2,9 @@ import { initInput, reRender } from '../utils/constants';
 import { Data } from '../utils/const';
 
 export default {
-  '@init'({ style, input, output, data }) {
-    style.height = 400;
-    style.width = '100%';
+  '@init'({ style, input, data }) {
+    style.height = 200;
+    style.width = 300;
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
       if (!input.get(id)) {
         input.add(id, title, schema);

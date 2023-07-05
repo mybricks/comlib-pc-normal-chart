@@ -7,7 +7,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
 
   useEffect(() => {
     if (env.runtime) {
-      inputs[InputIds.SetData]((val) => {
+      inputs[InputIds.SetData]((val: React.SetStateAction<number>) => {
         if (typeof val === 'number') {
           setPercent(val);
         }
