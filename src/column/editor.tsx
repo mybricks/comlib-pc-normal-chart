@@ -40,14 +40,14 @@ export default {
               data.config = {
                 ...data.config,
                 isStack: true,
-                seriesField: data.config.seriesField || 'type'
+                seriesField: 'type'
               };
             } else if (value === 'group') {
               data.config = {
                 ...data.config,
                 isStack: false,
                 isGroup: true,
-                seriesField: data.config.seriesField || 'name'
+                seriesField: 'name'
               };
             } else {
               data.config = {

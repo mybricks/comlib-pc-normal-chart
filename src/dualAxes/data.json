@@ -21,7 +21,8 @@
         "color": "#5B8FF9"
       }
     ],
-    "padding": "auto"
+    "padding": "auto",
+    "smooth": false
   },
   "subType": "default",
   "useEmpty": true,
