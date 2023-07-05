@@ -5,13 +5,26 @@ import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
+  const [config, setConfig] = useState(data);
 
   useEffect(() => {
     if (env.runtime) {
-      inputs[InputIds.SetData]((val) => {
-        if (Array.isArray(val)) {
-          setRuntimeDataSource(val);
+      inputs.data((ds: any) => {
+        if (Array.isArray(ds)) {
+          setRuntimeDataSource(ds);
+        } else {
+          setRuntimeDataSource([]);
+          console.error('迷你面积图输入数据必须是数字数组');
         }
+      });
+      inputs.style((ds: any) => {
+        setConfig({ ...config, ...ds });
+      });
+      const ids = ['xAxis', 'yAxis', 'tooltip'];
+      ids.forEach((id) => {
+        inputs[id]((ds: Object) => {
+          setConfig({ ...config, [id]: { ...ds } });
+        });
       });
     }
   }, []);
@@ -24,8 +37,8 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
     >
       <TinyArea
         {...style}
-        {...data.config}
-        data={env.edit ? MockData : dataSourceInRuntime}
+        {...config}
+        data={env.edit ? MockData['default'] : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>
