@@ -1,5 +1,4 @@
-import { initInput, initEvents, setSchema } from '../utils/constants';
-import { Data } from '../utils/const';
+import { initInput, schemaPie, Data } from '../utils';
 
 export default {
   '@init'({ style, input, output, data }) {
@@ -10,7 +9,6 @@ export default {
         input.add(id, title, schema);
       }
     });
-    initEvents({ data, input, output });
   },
   '@resize': {
     options: ['height', 'width']
@@ -252,4 +250,8 @@ export default {
       }
     ];
   }
+};
+
+const setSchema = (data: Data, input: any) => {
+  input.get('data').setSchema(schemaPie(data));
 };

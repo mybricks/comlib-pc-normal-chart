@@ -1,9 +1,17 @@
-import { initInput, initEvents, reRender, setDataSchema } from '../utils/constants';
-import { Data, AnnotationItem, DefaultDualGeometryOptions, InputIds } from '../utils/const';
+import {
+  initInput,
+  reRender,
+  schemaLeft,
+  schemaRight,
+  Data,
+  AnnotationItem,
+  DefaultDualGeometryOptions,
+  InputIds
+} from '../utils';
 import { set } from 'lodash-es';
 
 export default {
-  '@init'({ style, input, output, data }) {
+  '@init'({ style, input, data }) {
     style.height = 400;
     style.width = '100%';
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
@@ -11,7 +19,6 @@ export default {
         input.add(id, title, schema);
       }
     });
-    initEvents({ data, input, output });
   },
   '@resize': {
     options: ['height', 'width']
@@ -46,7 +53,7 @@ export default {
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.config.xField = value;
-                setDataSchema(data, input);
+                setSchema(data, input);
               }
             }
           },
@@ -598,46 +605,6 @@ let addAnnotation: (option: AnnotationItem) => void, delAnnotation: (index: numb
 const setSchema = (data: Data, input: any) => {
   input.get('data0').setSchema(schemaLeft(data));
   input.get('data1').setSchema(schemaRight(data));
-};
-
-const schemaLeft = (data: Data) => {
-  return {
-    title: '左轴输入数据',
-    type: 'array',
-    items: {
-      type: 'object',
-      properties: {
-        [data.config.xField]: {
-          title: 'x轴字段名',
-          type: 'string'
-        },
-        [data.config.yField[0]]: {
-          title: 'y轴字段名',
-          type: 'number'
-        }
-      }
-    }
-  };
-};
-
-const schemaRight = (data: Data) => {
-  return {
-    title: '右轴输入数据',
-    type: 'array',
-    items: {
-      type: 'object',
-      properties: {
-        [data.config.xField]: {
-          title: 'x轴字段名',
-          type: 'string'
-        },
-        [data.config.yField[1]]: {
-          title: 'y轴字段名',
-          type: 'number'
-        }
-      }
-    }
-  };
 };
 
 const initParams = (data: Data) => {

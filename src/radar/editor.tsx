@@ -1,18 +1,5 @@
-import { initInput, initEvents, reRender, setSchema, setDataSchema } from '../utils/constants';
-import { Data, AnnotationItem } from '../utils/const';
+import { initInput, reRender, schemaDefault, Data, AnnotationItem } from '../utils';
 import { set } from 'lodash-es';
-
-let addAnnotation, delAnnotation;
-
-const initParams = (data: Data) => {
-  if (!data.tempAnnotations) data.tempAnnotations = [];
-  addAnnotation = (option: AnnotationItem) => {
-    data.tempAnnotations.push(option);
-  };
-  delAnnotation = (index: number) => {
-    data.tempAnnotations.splice(index, 1);
-  };
-};
 
 export default {
   '@init'({ style, input, output, data }) {
@@ -23,7 +10,6 @@ export default {
         input.add(id, title, schema);
       }
     });
-    initEvents({ data, input, output });
   },
   '@resize': {
     options: ['height', 'width']
@@ -50,7 +36,7 @@ export default {
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.config.xField = value;
-                setDataSchema(data, input);
+                setSchema(data, input);
               }
             }
           },
@@ -64,7 +50,7 @@ export default {
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.config.yField = value;
-                setDataSchema(data, input);
+                setSchema(data, input);
               }
             }
           }
@@ -490,4 +476,20 @@ export default {
         }
       ]);
   }
+};
+
+let addAnnotation, delAnnotation;
+
+const initParams = (data: Data) => {
+  if (!data.tempAnnotations) data.tempAnnotations = [];
+  addAnnotation = (option: AnnotationItem) => {
+    data.tempAnnotations.push(option);
+  };
+  delAnnotation = (index: number) => {
+    data.tempAnnotations.splice(index, 1);
+  };
+};
+
+const setSchema = (data: Data, input: any) => {
+  input.get('data').setSchema(schemaDefault(data));
 };

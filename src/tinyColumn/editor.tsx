@@ -1,4 +1,4 @@
-import { initInput, initEvents, reRender } from '../utils/constants';
+import { initInput, reRender } from '../utils/constants';
 import { Data } from '../utils/const';
 
 export default {
@@ -10,7 +10,6 @@ export default {
         input.add(id, title, schema);
       }
     });
-    initEvents({ data, input, output });
   },
   '@resize': {
     options: ['height', 'width']

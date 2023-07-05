@@ -1,8 +1,7 @@
-import { initInput, initEvents, setDataSchema } from '../utils/constants';
-import { Data } from '../utils/const';
+import { initInput, schemaDefault, schemaDiff, Data } from '../utils';
 
 export default {
-  '@init'({ style, input, output, data }) {
+  '@init'({ style, input, data }) {
     style.height = 400;
     style.width = '100%';
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
@@ -10,7 +9,6 @@ export default {
         input.add(id, title, schema);
       }
     });
-    initEvents({ data, input, output });
   },
   '@resize': {
     options: ['height', 'width']
@@ -37,7 +35,7 @@ export default {
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.config.xField = value;
-                setDataSchema(data, input);
+                setSchema(data, input);
               }
             }
           },
@@ -51,7 +49,7 @@ export default {
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.config.yField = value;
-                setDataSchema(data, input);
+                setSchema(data, input);
               }
             }
           }
@@ -197,5 +195,13 @@ export default {
         }
       }
     ];
+  }
+};
+
+const setSchema = (data: Data, input: any) => {
+  if (data.subType === 'more') {
+    input.get('data').setSchema(schemaDiff(data));
+  } else {
+    input.get('data').setSchema(schemaDefault(data));
   }
 };
