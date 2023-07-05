@@ -1,0 +1,18 @@
+{
+  "height": 400,
+  "config": {
+    "xAxis": {},
+    "yAxis": {},
+    "legend": {
+      "position": "top-left"
+    },
+    "liquidStyle": {},
+    "outline": { },
+    "percent": 0.25,
+    "radius": 1,
+    "padding": "auto"
+  },
+  "subType": "default",
+  "useEmpty": true,
+  "emptyText": "暂无数据"
+}
