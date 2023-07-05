@@ -4,7 +4,7 @@ import { getEmptyEditor } from '../../utils/editor';
 
 export default {
   '@init'({ style }: EditorResult<Data>) {
-    style.height = 100;
+    style.height = 400;
     style.width = '100%';
   },
   '@resize': {

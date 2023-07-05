@@ -10,4 +10,6 @@ export const InputIds = {
   SetData: 'data'
 };
 
-export const MockData = [1, 2, 3, 4, 5];
+export const MockData: any = {
+  default: [274, 337, 81, 497, 666, 219, 269]
+}
