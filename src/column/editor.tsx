@@ -525,24 +525,6 @@ export default {
               }
             }
           ]
-        },
-        {
-          title: '缩略轴',
-          items: [
-            {
-              title: '显示',
-              type: 'switch',
-              value: {
-                get({ data }: EditorResult<Data>) {
-                  return data.config.slider;
-                },
-                set({ data }: EditorResult<Data>, use: boolean) {
-                  data.config.slider = use ? { start: 0.1, end: 0.9 } : void 0;
-                  reRender(data);
-                }
-              }
-            }
-          ]
         }
       ]);
   }

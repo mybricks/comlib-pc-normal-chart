@@ -28,6 +28,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         <Liquid
           style={{ width: style.width, height: style.height }}
           {...(env.edit ? MockData[data.subType] : dataSourceInRuntime)}
+          {...data.config}
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       </EmptyWrap>
