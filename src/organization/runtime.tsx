@@ -4,7 +4,7 @@ import { Data, InputIds, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
-  const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
+  const [dataSourceInRuntime, setRuntimeDataSource] = useState<any>({ id: 'root' });
 
   useEffect(() => {
     if (env.runtime) {

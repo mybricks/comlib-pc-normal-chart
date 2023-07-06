@@ -23,3 +23,15 @@ export interface Data {
       content: boolean;
   }
 }
+
+export const MockData: any = {
+  default: {
+    percent: 0.6,
+    color: [
+      '#58f',
+      '#ddd'
+    ],
+    innerRadius: 0.8,
+    radius: 1,
+  }
+}

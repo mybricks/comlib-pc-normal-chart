@@ -1,3 +1,5 @@
+import { Data } from "./const";
+
 export enum AxisPositionEnum {
   Start = 'start',
   Center = 'center',
@@ -60,7 +62,7 @@ export const initInput = (type: string) => {
 };
 
 
-export const reRender = (data) => (data.config = { ...data.config });
+export const reRender = (data: Data) => (data.config = { ...data.config });
 
 export const inputIdMap = {
   DATA: 'data', // 数据源

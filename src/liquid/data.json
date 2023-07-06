@@ -6,7 +6,10 @@
     "legend": {
       "position": "top-left"
     },
-    "liquidStyle": {},
+    "liquidStyle": {
+      "fill": "blue",
+      "stroke": "blue"
+    },
     "outline": { },
     "percent": 0.25,
     "radius": 1,

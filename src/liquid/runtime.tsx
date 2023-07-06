@@ -4,25 +4,25 @@ import { Data, InputIds, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
-  const [percent, setPercent] = useState(0);
+  const [dataSourceInRuntime, setRuntimeDataSource] = useState({});
 
   useEffect(() => {
     if (env.runtime) {
-      inputs[InputIds.SetData]((val: React.SetStateAction<any>) => {
-        data.config = {
-          ...data.config,
-          percent: val.percent
-        };
+      setRuntimeDataSource({
+        ...data.config,
+        ...inputs[InputIds.SetData]
       });
     }
   }, []);
 
   return (
-    <EmptyWrap isEmpty={data.useEmpty && env.runtime && !!percent} emptyText={data.emptyText}>
+    <EmptyWrap
+      isEmpty={data.useEmpty && env.runtime && !Object.keys(dataSourceInRuntime).length}
+      emptyText={data.emptyText}
+    >
       <Liquid
-        {...style}
-        {...data.config}
-        {...MockData['default']}
+        style={{ width: style.width, height: style.height }}
+        {...(env.edit ? MockData[data.subType] : dataSourceInRuntime)}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>

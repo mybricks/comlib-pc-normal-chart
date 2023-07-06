@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { RingProgress } from '@ant-design/charts';
-import { Data } from './constants';
+import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, inputs, env, title }) {
-  const [config, setConfig] = useState<Data>(data);
+  const [config, setConfig] = useState<Data | {}>({});
 
   useEffect(() => {
     if (env.runtime) {
       inputs.style((ds: any) => {
-        setConfig({ ...config, ...ds });
+        setConfig({ ...data, ...config, ...ds });
       });
 
       inputs.percent((ds: number) => {
@@ -32,11 +32,14 @@ export default function ({ data, inputs, env, title }) {
 
   return (
     <EmptyWrap
-      isEmpty={data.useEmpty && env.runtime && typeof config.percent !== 'number'}
+      isEmpty={data.useEmpty && env.runtime && !Object.keys(config).length}
       emptyText={data.emptyText}
       small
     >
-      <RingProgress {...config} />
+      <RingProgress
+        {...(env.edit ? MockData['default'] : config)}
+        key={env.edit ? JSON.stringify(data.config) : undefined}
+      />
     </EmptyWrap>
   );
 }

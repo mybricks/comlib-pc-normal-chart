@@ -14,12 +14,13 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({ data, input }: EditorResult<any>, cate: any) => {
+  ':root': ({ data, input, output }: EditorResult<any>, cate: any) => {
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
       if (!input.get(id)) {
         input.add(id, title, schema);
       }
     });
+    output.add('nodeClick', '节点点击', { type: 'any' });
     (cate.title = '常规'),
       (cate.items = [
         {
