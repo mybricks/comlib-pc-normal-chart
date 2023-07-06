@@ -27,7 +27,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         emptyText={data.emptyText}
       >
         <Radar
-          {...style}
+          {...{ ...style, width: undefined }}
           {...data.config}
           data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}

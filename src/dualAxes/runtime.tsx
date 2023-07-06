@@ -41,13 +41,12 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         }
         emptyText={data.emptyText}
       >
-        <div {...style}>
-          <DualAxes
-            {...data.config}
-            data={env.edit ? MockData : dataSourceInRuntime}
-            key={env.edit ? JSON.stringify(data.config) : undefined}
-          />
-        </div>
+        <DualAxes
+          {...{ ...style, width: undefined }}
+          {...data.config}
+          data={env.edit ? MockData : dataSourceInRuntime}
+          key={env.edit ? JSON.stringify(data.config) : undefined}
+        />
       </EmptyWrap>
     </Spin>
   );

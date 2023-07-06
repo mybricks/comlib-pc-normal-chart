@@ -26,13 +26,12 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         isEmpty={data.useEmpty && env.runtime && dataSourceInRuntime.length === 0}
         emptyText={data.emptyText}
       >
-        <div {...style}>
-          <Line
-            {...data.config}
-            data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
-            key={env.edit ? JSON.stringify(data.config) : undefined}
-          />
-        </div>
+        <Line
+          {...{ ...style, width: undefined }}
+          {...data.config}
+          data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
+          key={env.edit ? JSON.stringify(data.config) : undefined}
+        />
       </EmptyWrap>
     </Spin>
   );
