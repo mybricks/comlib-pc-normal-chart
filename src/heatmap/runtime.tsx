@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MockData } from './constants';
 import Heatmap from './heatmap';
 import EmptyWrap from '../components/emptyWrap';
+import { Spin } from 'antd';
 
 export default function ({ data, inputs, env }) {
   const [dataSource, setDataSource] = useState(env.edit ? MockData[data.subType].slice(0, 20) : []);
@@ -38,7 +39,7 @@ export default function ({ data, inputs, env }) {
       }
       setSubDataSource(dataSource);
     });
-    inputs.setMainConfig((config) => {
+    inputs.setMainConfig((config: { label: any; useSubHeatMap: any }) => {
       data.config = {
         ...data.config,
         ...config,
@@ -52,7 +53,7 @@ export default function ({ data, inputs, env }) {
         data.useSubHeatMap = config.useSubHeatMap;
       }
     });
-    inputs.setSubConfig((config) => {
+    inputs.setSubConfig((config: { label: any }) => {
       data.subConfig[0] = {
         ...data.subConfig[0],
         ...config,
@@ -63,26 +64,28 @@ export default function ({ data, inputs, env }) {
       };
       data.subConfig = [...data.subConfig];
     });
-    inputs.loading((ds) => {
+    inputs.loading((ds: React.SetStateAction<string>) => {
       if (typeof ds === 'string') setTip(ds);
       setLoading(!!ds);
     });
   }, []);
 
   return (
-    <EmptyWrap
-      isEmpty={data.useEmpty && env.runtime && dataSource.length === 0}
-      emptyText={data.emptyText}
-    >
-      <Heatmap
-        env={env}
-        inputs={inputs}
-        dataSource={dataSource}
-        subDataSource={subDataSource}
-        mainConfig={data.config}
-        subConfig={data.subConfig}
-        useSubHeatMap={data.useSubHeatMap}
-      />
-    </EmptyWrap>
+    <Spin spinning={loading} tip={tip}>
+      <EmptyWrap
+        isEmpty={data.useEmpty && env.runtime && dataSource.length === 0}
+        emptyText={data.emptyText}
+      >
+        <Heatmap
+          env={env}
+          inputs={inputs}
+          dataSource={dataSource}
+          subDataSource={subDataSource}
+          mainConfig={data.config}
+          subConfig={data.subConfig}
+          useSubHeatMap={data.useSubHeatMap}
+        />
+      </EmptyWrap>
+    </Spin>
   );
 }

@@ -32,13 +32,13 @@ export default function Heatmapa({
       .position([xField, yField])
       .color(colorField, colors)
       .label('', {
-        content: (data) => formatLabelContent(label.displayFields, data),
+        content: (data: any) => formatLabelContent(label.displayFields, data),
         style: label.style
       })
       .size(+size);
 
     view.tooltip({
-      title: (title, datum) => {
+      title: (title: any, datum: any) => {
         return formatLabelContent(label.displayFields, datum);
       },
       customItems: () => []
@@ -84,10 +84,7 @@ export default function Heatmapa({
 
     chart.render();
 
-    // chart.interaction('view-zoom');
-    // chart.interaction('drag-move');
-
-    chart.getCanvas().on('mousewheel', (ev) => {
+    chart.getCanvas().on('mousewheel', (ev: { preventDefault: () => void }) => {
       ev.preventDefault();
     });
 
@@ -125,11 +122,11 @@ export default function Heatmapa({
       min,
       max
     });
-    mainTimeIdRef.current.forEach((id) => clearInterval(id));
+    mainTimeIdRef.current.forEach((id: number) => clearInterval(id));
     renderMap(view, dataSourceRef.current, mainTimeIdRef.current, DataOrigin.main);
 
     return () => {
-      mainTimeIdRef.current.forEach((id) => clearInterval(id));
+      mainTimeIdRef.current.forEach((id: number) => clearInterval(id));
       mainTimeIdRef.current = [];
     };
   }, [mainConfig]);
@@ -149,7 +146,12 @@ export default function Heatmapa({
     };
   }, [subConfig]);
 
-  const renderMap = (view, dataSource, ids, origin) => {
+  const renderMap = (
+    view: { data: (arg0: any) => void; render: () => void },
+    dataSource: string | any[],
+    ids: any[],
+    origin: DataOrigin
+  ) => {
     const list = markLabel(
       dataSource,
       origin === DataOrigin.main ? mainConfig.label.pick : subConfig[0].label.pick
@@ -157,7 +159,7 @@ export default function Heatmapa({
     const chart = chartRef.current;
 
     if (!dataSource.length) return;
-    if (list.every((data) => Array.isArray(data))) {
+    if (list.every((data: any) => Array.isArray(data))) {
       let index = 0;
       const firstList = list.shift();
       view.data(firstList);
@@ -191,7 +193,7 @@ export default function Heatmapa({
   }, [dataSource, mainView]);
 
   useEffect(() => {
-    const { view, geometry } = subViews;
+    const { view } = subViews;
     subDataSourceRef.current = subDataSource;
     if (!view) return;
     if (!useSubHeatMap) {
@@ -209,11 +211,13 @@ export default function Heatmapa({
     inputs.downLoadImg((imageName: string) => {
       downloadImg(chartRef.current, { imageName });
     });
-    inputs.relToFile((fileName: string = '图片', relOutputs) => {
-      const base64 = downloadImg(chartRef.current, { base64: true });
-      const file = dataURLToFile(base64, fileName);
-      relOutputs.relToFile(file);
-    });
+    inputs.relToFile(
+      (fileName: string = '图片', relOutputs: { relToFile: (arg0: any) => void }) => {
+        const base64 = downloadImg(chartRef.current, { base64: true });
+        const file = dataURLToFile(base64, fileName);
+        relOutputs.relToFile(file);
+      }
+    );
   }, []);
   return <div style={{ height: 'inherit' }} ref={ctRef}></div>;
 }
