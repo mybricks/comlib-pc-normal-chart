@@ -26,12 +26,14 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         isEmpty={data.useEmpty && env.runtime && dataSourceInRuntime.length === 0}
         emptyText={data.emptyText}
       >
-        <Pie
-          {...style}
-          {...data.config}
-          data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
-          key={env.edit ? JSON.stringify(data.config) : undefined}
-        />
+        <div {...style}>
+          <Pie
+            style={{ width: style.width, height: style.height }}
+            {...data.config}
+            data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
+            key={env.edit ? JSON.stringify(data.config) : undefined}
+          />
+        </div>
       </EmptyWrap>
     </Spin>
   );

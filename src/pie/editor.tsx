@@ -1,7 +1,7 @@
 import { initInput, schemaPie, Data } from '../utils';
 
 export default {
-  '@init'({ style, input, output, data }) {
+  '@init'({ style, input, data }) {
     style.height = 400;
     style.width = '100%';
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
@@ -13,7 +13,7 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+  ':root': ({ data, input }: EditorResult<any>, cate0: any) => {
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
       if (!input.get(id)) {
         input.add(id, title, schema);
