@@ -1,59 +1,5 @@
 import { Annotation } from '@antv/g2plot';
 
-export const colors10 = [
-  '#5B8FF9',
-  '#5AD8A6',
-  '#5D7092',
-  '#F6BD16',
-  '#6F5EF9',
-  '#6DC8EC',
-  '#945FB9',
-  '#FF9845',
-  '#1E9493',
-  '#FF99C3',
-];
-
-export const colors20 = [
-  '#5B8FF9',
-  '#CDDDFD',
-  '#5AD8A6',
-  '#CDF3E4',
-  '#5D7092',
-  '#CED4DE',
-  '#F6BD16',
-  '#FCEBB9',
-  '#6F5EF9',
-  '#D3CEFD',
-  '#6DC8EC',
-  '#D3EEF9',
-  '#945FB9',
-  '#DECFEA',
-  '#FF9845',
-  '#FFE0C7',
-  '#1E9493',
-  '#BBDEDE',
-  '#FF99C3',
-  '#FFE0ED',
-];
-
-export enum ChartType {
-  'Area' = 'Area',
-  'Bar' = 'Bar',
-  'Line' = 'Line',
-  'Pie' = 'Pie',
-  'Column' = 'Column',
-  'Liquid' = 'Liquid',
-  'Radar' = 'Radar',
-  'Funnel' = 'Funnel',
-  'BidirectionalBar' = 'BidirectionalBar',
-  'Heatmap' = 'Heatmap',
-  'TinyColumn' = 'TinyColumn',
-  'TinyArea' = 'TinyArea',
-  'RingProgress' = 'RingProgress',
-  'DualAxes' = 'DualAxes',
-  'OrganizationGraph' = 'OrganizationGraph'
-}
-
 /**
  * @param label 标注的名称
  * @param yFieldIndex 图表为双轴图时，标注的y轴字段索引

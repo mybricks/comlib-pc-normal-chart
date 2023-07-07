@@ -23,8 +23,7 @@ export interface Data {
 export const MockData: any = {
     percent: 0.6,
     color: [
-      '#58f',
-      '#ddd'
+      '#5B8FF9', '#E8EDF3'
     ],
     innerRadius: 0.8,
     radius: 1,

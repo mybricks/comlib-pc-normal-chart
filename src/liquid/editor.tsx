@@ -34,7 +34,7 @@ export default {
                 return data.config.percent;
               },
               set({ data }: EditorResult<Data>, value: string) {
-                data.config.percent = value;
+                data.config.percent = Number(value);
               }
             }
           },

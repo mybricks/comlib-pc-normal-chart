@@ -4,12 +4,12 @@ import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, inputs, env, title }) {
-  const [config, setConfig] = useState<Data | {}>({});
+  const [config, setConfig] = useState<Data | {}>({ ...data });
 
   useEffect(() => {
     if (env.runtime) {
       inputs.style((ds: any) => {
-        setConfig({ ...data, ...config, ...ds });
+        setConfig({ ...config, ...ds });
       });
 
       inputs.percent((ds: number) => {
@@ -37,7 +37,7 @@ export default function ({ data, inputs, env, title }) {
       small
     >
       <RingProgress
-        {...(env.edit ? MockData : config)}
+        {...(env.edit ? { ...MockData, ...data } : config)}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>

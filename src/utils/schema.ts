@@ -1,4 +1,4 @@
-import { ChartType, Data } from './const';
+import { Data } from './const';
 
 const schemaDefault = (data: Data) => {
   return {
@@ -137,39 +137,6 @@ const schemaLiquid = () => {
   }
 }
 
-const setXField = (data:Data) => {
-  switch (data.type){
-    //1、条形图
-    case ChartType.Bar:
-      if(data.subType === 'group'){
-        return data.config.xField || 'year';
-      }else{
-        return data.config.xField || 'value';
-      }
-    //3、对称条形图
-    case ChartType.BidirectionalBar:
-      return data.config.xField || 'xField0';
-    //2、面积图 4、柱形图 5、双轴图 6、漏斗图 7、折线图 8、雷达图
-    default:
-      return data.config.xField || 'year'
-  }
-}
-
-const setYField = (data:Data) => {
-  switch(data.type){
-    //1、条形图
-    case ChartType.Bar:
-      if(data.subType === 'group'){
-        return data.config.yField || 'value';
-      }else{
-        return data.config.yField || 'year';
-      }
-    //2、面积图，3、柱状图，4、漏斗图，5、折线图，6、雷达图
-    default:
-      return data.config.yField || 'value';
-  }
-}
-
 const setSchema = (data:Data, input:any) => {
   if(data.subType === 'default'){
     input.get('data').setSchema(schemaDefault(data));
@@ -180,8 +147,6 @@ const setSchema = (data:Data, input:any) => {
 
 export {
   setSchema,
-  setXField,
-  setYField,
   schemaDefault,
   schemaDiff,
   schemaBidirectionalBar,

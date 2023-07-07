@@ -9,9 +9,4 @@ export interface Data extends ChartProps {
 
 export const MockData: any = {
     percent: 0.25,
-    radius: 1,
-    liquidStyle: {
-      fill: 'blue',
-      stroke: 'blue'
-    }
 };

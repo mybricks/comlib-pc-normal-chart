@@ -11,11 +11,12 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   useEffect(() => {
     if (env.runtime) {
       setLoading(true);
-      setRuntimeDataSource({
-        ...data.config,
-        ...inputs.data
+      inputs.data((val: React.SetStateAction<any>) => {
+        if (typeof val.percent === 'number') {
+          setRuntimeDataSource(val);
+        }
+        setLoading(false);
       });
-      setLoading(false);
     }
   }, []);
 
@@ -27,8 +28,9 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       >
         <Liquid
           style={{ width: style.width, height: style.height }}
-          {...(env.edit ? MockData : dataSourceInRuntime)}
-          {...data.config}
+          {...(env.edit
+            ? { ...MockData, ...data.config }
+            : { ...data.config, ...dataSourceInRuntime })}
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       </EmptyWrap>
