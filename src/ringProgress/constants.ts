@@ -1,7 +1,3 @@
-export const InputIds = {
-  SetData: 'data'
-};
-
 /**
  * 数据源
  * @param percent 百分比
@@ -25,7 +21,6 @@ export interface Data {
 }
 
 export const MockData: any = {
-  default: {
     percent: 0.6,
     color: [
       '#58f',
@@ -33,5 +28,4 @@ export const MockData: any = {
     ],
     innerRadius: 0.8,
     radius: 1,
-  }
 }

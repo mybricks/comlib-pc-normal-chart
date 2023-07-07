@@ -4,7 +4,6 @@
     "width": null,
     "behaviors": ["drag-canvas", "zoom-canvas"]
   },
-  "subType": "default",
   "useEmpty": true,
   "emptyText": "暂无数据"
 }

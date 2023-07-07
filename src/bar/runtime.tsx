@@ -5,7 +5,7 @@ import EmptyWrap from '../components/emptyWrap';
 import { Spin } from 'antd';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
-  const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
+  const [dataSourceInRuntime, setRuntimeDataSource] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

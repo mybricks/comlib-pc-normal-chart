@@ -1,23 +1,14 @@
 import { ChartConfigProps, ChartProps } from '../utils/constants';
 
-export enum SubTypeEnum {
-  Default = 'default',
-  Group = 'group'
-}
 export interface Data extends ChartProps {
   config: ChartConfigProps & {
     area?: boolean;
     seriesField?: string;
   };
-  subType?: SubTypeEnum;
 }
 
-export const InputIds = {
-  SetData: 'data'
-};
 
-export const MockData: any = {
-  default: [
+export const MockData: any = [
     {
       year: 'G2',
       value: 10371,
@@ -46,8 +37,7 @@ export const MockData: any = {
       year: 'G2Plot',
       value: 1626,
     },
-  ],
-};
+  ]
 
 export const Schemas = {
   DefaultDataSource: {

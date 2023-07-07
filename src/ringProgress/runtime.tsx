@@ -37,7 +37,7 @@ export default function ({ data, inputs, env, title }) {
       small
     >
       <RingProgress
-        {...(env.edit ? MockData['default'] : config)}
+        {...(env.edit ? MockData : config)}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>

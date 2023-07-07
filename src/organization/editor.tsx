@@ -1,12 +1,24 @@
+import { initInput } from '../utils';
+
 export default {
-  '@init'({ style }) {
+  '@init'({ style, input, data }) {
     style.height = 400;
     style.width = '100%';
+    initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
+      if (!input.get(id)) {
+        input.add(id, title, schema);
+      }
+    });
   },
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({ output }: EditorResult<any>, cate: any) => {
+  ':root': ({ data, input, output }: EditorResult<any>, cate: any) => {
+    initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
+      if (!input.get(id)) {
+        input.add(id, title, schema);
+      }
+    });
     output.add('nodeClick', '节点点击', { type: 'any' });
     (cate.title = '常规'),
       (cate.items = [

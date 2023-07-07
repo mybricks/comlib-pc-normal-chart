@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { OrganizationGraph } from '@ant-design/graphs';
-import { Data, InputIds, MockData } from './constants';
+import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 import { Spin } from 'antd';
 
@@ -10,11 +10,8 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
 
   useEffect(() => {
     if (env.runtime) {
-      setLoading(true);
-      inputs[InputIds.SetData]((val: React.SetStateAction<any[]>) => {
-        if (Array.isArray(val)) {
-          setRuntimeDataSource(val);
-        }
+      inputs.data((val: React.SetStateAction<any[]>) => {
+        setRuntimeDataSource(val);
         setLoading(false);
       });
     }
@@ -29,7 +26,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         <OrganizationGraph
           {...style}
           {...data.config}
-          data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
+          data={env.edit ? MockData : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       </EmptyWrap>

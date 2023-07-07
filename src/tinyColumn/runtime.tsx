@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TinyColumn } from '@ant-design/charts';
-import { Data, InputIds, MockData } from './constants';
+import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
@@ -8,7 +8,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
 
   useEffect(() => {
     if (env.runtime) {
-      inputs[InputIds.SetData]((val: React.SetStateAction<any[]>) => {
+      inputs.data((val: React.SetStateAction<any[]>) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
         }
@@ -25,7 +25,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       <TinyColumn
         {...style}
         {...data.config}
-        data={env.edit ? MockData['default'] : dataSourceInRuntime}
+        data={env.edit ? MockData : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </EmptyWrap>

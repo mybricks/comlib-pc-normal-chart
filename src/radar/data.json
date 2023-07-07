@@ -12,7 +12,6 @@
     "seriesField": "",
     "padding": "auto"
   },
-  "subType": "default",
   "useEmpty": true,
   "emptyText": "暂无数据"
 }

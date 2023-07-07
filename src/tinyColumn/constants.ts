@@ -6,10 +6,4 @@ export interface Data extends ChartProps {
   };
 }
 
-export const InputIds = {
-  SetData: 'data'
-};
-
-export const MockData: any = {
-  default: [274, 337, 81, 497, 666, 219, 269]
-}
+export const MockData: any = [274, 337, 81, 497, 666, 219, 269]

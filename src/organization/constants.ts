@@ -1,22 +1,13 @@
 import { ChartConfigProps, ChartProps } from '../utils/constants';
 
-export enum SubTypeEnum {
-  Default = 'default',
-  Stack = 'stack'
-}
 export interface Data extends ChartProps {
   config: ChartConfigProps & {
     seriesField?: string;
   };
-  subType?: SubTypeEnum;
 }
 
-export const InputIds = {
-  SetData: 'data'
-};
 
 export const MockData: any = {
-  default: {
     id: 'root',
     value: {
       name: '股东会',
@@ -83,5 +74,4 @@ export const MockData: any = {
         ],
       },
     ],
-  }
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Radar } from '@ant-design/charts';
-import { Data, InputIds, MockData } from './constants';
+import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 import { Spin } from 'antd';
 
@@ -11,7 +11,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   useEffect(() => {
     if (env.runtime) {
       setLoading(true);
-      inputs[InputIds.SetData]((val: React.SetStateAction<any[]>) => {
+      inputs.data((val: React.SetStateAction<any[]>) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
         }
@@ -29,7 +29,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         <Radar
           {...{ ...style, width: undefined }}
           {...data.config}
-          data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
+          data={env.edit ? MockData : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       </EmptyWrap>
