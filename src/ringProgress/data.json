@@ -3,6 +3,7 @@
   "color": [
     "#5B8FF9", "#E8EDF3"
   ],
+  "height": "100%",
   "innerRadius": 0.8,
   "radius": 1,
   "statistic": {

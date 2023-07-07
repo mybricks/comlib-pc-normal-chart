@@ -1,18 +1,20 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { TinyColumn } from '@ant-design/charts';
 import { Data, MockData } from './constants';
-import EmptyWrap from '../components/emptyWrap';
 import copy from 'copy-to-clipboard';
-import { message } from 'antd';
+import { Spin, message } from 'antd';
 
 export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (env.runtime) {
+      setLoading(true);
       inputs.data((val: React.SetStateAction<any[]>) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
+          setLoading(false);
         }
       });
     }
@@ -37,11 +39,7 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
   }, []);
 
   return (
-    <EmptyWrap
-      isEmpty={data.useEmpty && env.runtime && dataSourceInRuntime.length === 0}
-      emptyText={data.emptyText}
-      small
-    >
+    <Spin spinning={loading}>
       <TinyColumn
         {...style}
         onReady={onReady}
@@ -49,6 +47,6 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
         data={env.edit ? MockData : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
-    </EmptyWrap>
+    </Spin>
   );
 }

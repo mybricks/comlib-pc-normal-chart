@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Radar } from '@ant-design/charts';
 import { Data, MockData } from './constants';
-import EmptyWrap from '../components/emptyWrap';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 
@@ -41,18 +40,13 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
 
   return (
     <Spin spinning={loading}>
-      <EmptyWrap
-        isEmpty={data.useEmpty && env.runtime && dataSourceInRuntime.length === 0}
-        emptyText={data.emptyText}
-      >
-        <Radar
-          {...{ ...style, width: undefined }}
-          onReady={onReady}
-          {...data.config}
-          data={env.edit ? MockData : dataSourceInRuntime}
-          key={env.edit ? JSON.stringify(data.config) : undefined}
-        />
-      </EmptyWrap>
+      <Radar
+        {...{ ...style, width: undefined }}
+        onReady={onReady}
+        {...data.config}
+        data={env.edit ? MockData : dataSourceInRuntime}
+        key={env.edit ? JSON.stringify(data.config) : undefined}
+      />
     </Spin>
   );
 }

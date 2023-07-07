@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MockData } from './constants';
 import Heatmap from './heatmap';
-import EmptyWrap from '../components/emptyWrap';
 import { Spin } from 'antd';
 
 export default function ({ data, inputs, env }) {
@@ -70,20 +69,15 @@ export default function ({ data, inputs, env }) {
 
   return (
     <Spin spinning={loading} tip={tip}>
-      <EmptyWrap
-        isEmpty={data.useEmpty && env.runtime && dataSource.length === 0}
-        emptyText={data.emptyText}
-      >
-        <Heatmap
-          env={env}
-          inputs={inputs}
-          dataSource={dataSource}
-          subDataSource={subDataSource}
-          mainConfig={data.config}
-          subConfig={data.subConfig}
-          useSubHeatMap={data.useSubHeatMap}
-        />
-      </EmptyWrap>
+      <Heatmap
+        env={env}
+        inputs={inputs}
+        dataSource={dataSource}
+        subDataSource={subDataSource}
+        mainConfig={data.config}
+        subConfig={data.subConfig}
+        useSubHeatMap={data.useSubHeatMap}
+      />
     </Spin>
   );
 }
