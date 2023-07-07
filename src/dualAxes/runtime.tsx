@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState, useCallback } from 'react';
 import { DualAxes } from '@ant-design/charts';
-import { Data, InputIds, MockData } from './constants';
+import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
@@ -13,12 +13,12 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
   useEffect(() => {
     if (env.runtime) {
       setLoading(true);
-      inputs[InputIds.SetLeftData]((val: any) => {
+      inputs.data0((val: any) => {
         if (Array.isArray(val)) {
           setRuntimeLeftDataSource(val);
         }
       });
-      inputs[InputIds.SetRightData]((val: any) => {
+      inputs.data1((val: any) => {
         if (Array.isArray(val)) {
           setRuntimeRightDataSource(val);
         }

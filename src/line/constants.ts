@@ -14,10 +14,6 @@ export interface Data extends ChartProps {
   subType?: SubTypeEnum;
 }
 
-export const InputIds = {
-  SetData: 'data'
-};
-
 // 折线图
 export const MockData: any = {
   default: [

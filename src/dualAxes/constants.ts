@@ -18,11 +18,6 @@ export interface Data extends ChartProps {
   seriesField?: boolean[];
 }
 
-export const InputIds = {
-  SetLeftData: 'data0',
-  SetRightData: 'data1'
-};
-
 export const MockData: any = [
   [
     {

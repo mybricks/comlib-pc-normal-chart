@@ -14,10 +14,6 @@ export interface Data extends ChartProps {
   subType?: SubTypeEnum;
 }
 
-export const InputIds = {
-  SetData: 'data'
-};
-
 export const MockData: any = {
   default:[
     {
