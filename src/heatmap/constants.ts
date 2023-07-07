@@ -1,5 +1,4 @@
-export const MockData: any = {
-  default: [
+export const MockData: any = [
     {
       x: 541,
       y: 85,
@@ -430,8 +429,7 @@ export const MockData: any = {
       y: 461,
       density: 669,
     },
-  ],
-};
+  ]
 
 export const DISPLAY_LABEL = Symbol('display_label');
 

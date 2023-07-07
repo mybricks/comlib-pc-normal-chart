@@ -31,7 +31,7 @@ export default {
             description: '横轴映射对应的数据字段名',
             value: {
               get({ data }: EditorResult<Data>) {
-                return data.config.xField;
+                return data.config.xField || 'year';
               },
               set({ data, input }: EditorResult<Data>, value: string) {
                 data.config.xField = value;

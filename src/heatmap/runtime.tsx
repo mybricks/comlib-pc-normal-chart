@@ -5,10 +5,8 @@ import EmptyWrap from '../components/emptyWrap';
 import { Spin } from 'antd';
 
 export default function ({ data, inputs, env }) {
-  const [dataSource, setDataSource] = useState(env.edit ? MockData[data.subType].slice(0, 20) : []);
-  const [subDataSource, setSubDataSource] = useState(
-    env.edit ? MockData[data.subType].slice(20, 23) : []
-  );
+  const [dataSource, setDataSource] = useState(env.edit ? MockData.slice(0, 20) : []);
+  const [subDataSource, setSubDataSource] = useState(env.edit ? MockData.slice(20, 23) : []);
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
   useEffect(() => {

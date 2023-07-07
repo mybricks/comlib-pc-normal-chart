@@ -63,20 +63,3 @@ export const initInput = (type: string) => {
 
 
 export const reRender = (data: Data) => (data.config = { ...data.config });
-
-export const inputIdMap = {
-  DATA: 'data', // 数据源
-  CONFIG: 'config', // 图表配置
-  X_FIELD: 'xField', // x轴配置
-  Y_FIELD: 'yField', // y轴配置
-  COLOR_FIELD: 'colorField', // 维度字段名
-  ANGLE_FIELD: 'angleField', // 数据字段名
-  SERIES_FIELD: 'seriesField', // 分组字段名
-  LEGEND: 'legend',
-  LEGEND_SELECTED: 'legend.selected',
-  LEGEND_POSITION: 'legend.position',
-  SMOOTH: 'smooth', // 是否平滑
-  // TOOLTIP_FORMATTER: 'tooltip.formatter',
-  LABEL: 'label', // 数据标签
-  TOOLTIP: 'tooltip' // 悬浮提示
-}
