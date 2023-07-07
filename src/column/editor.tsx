@@ -2,7 +2,7 @@ import { initInput, reRender, Data, AnnotationItem, setSchema } from '../utils';
 import { set } from 'lodash-es';
 
 export default {
-  '@init'({ style, input, output, data }) {
+  '@init'({ style, input, data }) {
     style.height = 400;
     style.width = '100%';
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
@@ -142,7 +142,7 @@ export default {
             },
             value: {
               get({ data }: EditorResult<Data>) {
-                return data.copyLegendTextonClick;
+                return data.copyLegendTextOnClick;
               },
               set({ data }: EditorResult<Data>, value: boolean) {
                 data.copyLegendTextOnClick = value;

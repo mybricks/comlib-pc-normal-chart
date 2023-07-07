@@ -54,7 +54,7 @@ export default {
             },
             value: {
               get({ data }: EditorResult<Data>) {
-                return data.copyLegendTextonClick;
+                return data.copyLegendTextOnClick;
               },
               set({ data }: EditorResult<Data>, value: boolean) {
                 data.copyLegendTextOnClick = value;

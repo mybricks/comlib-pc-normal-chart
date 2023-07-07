@@ -41,6 +41,7 @@ export interface ChartProps {
   config: ChartConfigProps;
   useEmpty?: boolean;
   emptyText?: string;
+  [key: string]: any;
 }
 
 export const initInput = (type: string) => {
@@ -60,6 +61,5 @@ export const initInput = (type: string) => {
       ];
   }
 };
-
 
 export const reRender = (data: Data) => (data.config = { ...data.config });

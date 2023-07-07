@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { OrganizationGraph } from '@ant-design/graphs';
 import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
-import { Spin } from 'antd';
+import copy from 'copy-to-clipboard';
+import { Spin, message } from 'antd';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState<any>({ id: 'root' });
