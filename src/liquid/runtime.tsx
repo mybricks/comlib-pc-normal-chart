@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Liquid } from '@ant-design/charts';
-import { Data, InputIds, MockData } from './constants';
+import { Data, MockData } from './constants';
 import EmptyWrap from '../components/emptyWrap';
 import { Spin } from 'antd';
 
@@ -13,7 +13,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       setLoading(true);
       setRuntimeDataSource({
         ...data.config,
-        ...inputs[InputIds.SetData]
+        ...inputs.data
       });
       setLoading(false);
     }
@@ -27,7 +27,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       >
         <Liquid
           style={{ width: style.width, height: style.height }}
-          {...(env.edit ? MockData[data.subType] : dataSourceInRuntime)}
+          {...(env.edit ? MockData : dataSourceInRuntime)}
           {...data.config}
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />

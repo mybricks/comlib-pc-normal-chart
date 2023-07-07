@@ -2,7 +2,7 @@ import { initInput, reRender, schemaDefault, Data, AnnotationItem } from '../uti
 import { set } from 'lodash-es';
 
 export default {
-  '@init'({ style, input, output, data }) {
+  '@init'({ style, input, data }) {
     style.height = 400;
     style.width = '100%';
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
