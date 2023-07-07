@@ -28,6 +28,12 @@
           "./src/tinyProgress/com.json",
           "./src/ringProgress/com.json"
         ]
+      },
+      {
+        "title": "高级",
+        "comAry": [
+          "./src/charts/com.json"
+        ]
       }
     ],
     "publish": [
@@ -55,6 +61,12 @@
           "./src/tinyArea/com.json",
           "./src/tinyProgress/com.json",
           "./src/ringProgress/com.json"
+        ]
+      },
+      {
+        "title": "高级",
+        "comAry": [
+          "./src/charts/com.json"
         ]
       }
     ]
