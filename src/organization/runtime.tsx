@@ -20,7 +20,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   return (
     <Spin spinning={loading}>
       <OrganizationGraph
-        {...style}
+        style={{ width: style.width, height: style.height }}
         {...data.config}
         data={env.edit ? MockData : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}

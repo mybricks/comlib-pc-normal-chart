@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as Charts from '@ant-design/charts';
+import { Spin } from 'antd';
 
 import {
   Data,
@@ -145,6 +146,10 @@ export default function ({ data, env, inputs }: RuntimeParams<Data>) {
   return config.data?.length > 0 || config.percent > 0 ? (
     <Chart {...config} />
   ) : (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>暂无数据</div>
+    <div
+      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}
+    >
+      <Spin spinning={true} />
+    </div>
   );
 }

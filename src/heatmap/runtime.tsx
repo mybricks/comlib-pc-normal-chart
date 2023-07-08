@@ -3,7 +3,7 @@ import { MockData } from './constants';
 import Heatmap from './heatmap';
 import { Spin } from 'antd';
 
-export default function ({ data, inputs, env }) {
+export default function ({ data, style, inputs, env }) {
   const [dataSource, setDataSource] = useState(env.edit ? MockData.slice(0, 20) : []);
   const [subDataSource, setSubDataSource] = useState(env.edit ? MockData.slice(20, 23) : []);
   const [loading, setLoading] = useState(false);
@@ -71,6 +71,7 @@ export default function ({ data, inputs, env }) {
     <Spin spinning={loading} tip={tip}>
       <Heatmap
         env={env}
+        style={style}
         inputs={inputs}
         dataSource={dataSource}
         subDataSource={subDataSource}

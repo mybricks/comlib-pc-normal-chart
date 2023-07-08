@@ -41,7 +41,7 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
   return (
     <Spin spinning={loading}>
       <Bar
-        {...style}
+        style={{ width: style.width, height: style.height }}
         onReady={onReady}
         {...data.config}
         data={env.edit ? MockData[data.subType] : dataSourceInRuntime}

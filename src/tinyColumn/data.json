@@ -9,7 +9,5 @@
     "pattern": {},
     "color": "#5588FF",
     "padding": "auto"
-  },
-  "useEmpty": true,
-  "emptyText": "暂无数据"
+  }
 }

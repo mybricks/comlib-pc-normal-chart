@@ -35,8 +35,8 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   return (
     <Spin spinning={loading}>
       <TinyArea
-        {...style}
         {...config}
+        style={{ width: style.width, height: style.height }}
         data={env.edit ? MockData : dataSourceInRuntime}
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />

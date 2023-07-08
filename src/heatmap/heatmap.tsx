@@ -6,6 +6,7 @@ import { dataURLToFile, downloadImg } from '../utils';
 
 export default function Heatmapa({
   inputs,
+  style,
   dataSource,
   subDataSource,
   mainConfig,
@@ -219,5 +220,5 @@ export default function Heatmapa({
       }
     );
   }, []);
-  return <div style={{ height: 'inherit' }} ref={ctRef}></div>;
+  return <div style={{ width: style.width, height: style.height }} ref={ctRef}></div>;
 }

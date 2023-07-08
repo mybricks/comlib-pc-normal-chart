@@ -53,7 +53,5 @@
       }
     }
   ],
-  "subType": "default",
-  "useEmpty": true,
-  "emptyText": "暂无数据"
+  "subType": "default"
 }

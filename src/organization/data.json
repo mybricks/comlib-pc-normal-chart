@@ -3,7 +3,5 @@
   "config": {
     "width": null,
     "behaviors": ["drag-canvas", "zoom-canvas"]
-  },
-  "useEmpty": true,
-  "emptyText": "暂无数据"
+  }
 }

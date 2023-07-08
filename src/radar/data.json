@@ -11,7 +11,5 @@
     "area": {},
     "seriesField": "",
     "padding": "auto"
-  },
-  "useEmpty": true,
-  "emptyText": "暂无数据"
+  }
 }

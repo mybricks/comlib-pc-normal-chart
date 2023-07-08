@@ -22,7 +22,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   return (
     <Spin spinning={loading}>
       <Progress
-        {...style}
+        style={{ width: style.width, height: style.height }}
         {...data.config}
         percent={env.edit ? MockData : percent}
         key={env.edit ? JSON.stringify(data.config) : undefined}

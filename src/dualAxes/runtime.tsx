@@ -51,7 +51,7 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
   return (
     <Spin spinning={loading}>
       <DualAxes
-        {...{ ...style, width: undefined }}
+        style={{ width: style.width, height: style.height }}
         {...data.config}
         onReady={onReady}
         data={env.edit ? MockData : dataSourceInRuntime}
