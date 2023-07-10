@@ -11,5 +11,7 @@
       "content": ""
     },
     "content": false
-  }
+  },
+  "useEmpty": true,
+  "emptyText": "暂无数据"
 }

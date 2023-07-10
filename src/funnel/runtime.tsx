@@ -3,6 +3,7 @@ import { Funnel } from '@ant-design/charts';
 import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
+import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState<Array<any>>([]);
@@ -14,9 +15,9 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       inputs.data((val: React.SetStateAction<any[]>) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
-          setLoading(false);
         }
       });
+      setLoading(false);
     }
   }, []);
 
@@ -49,7 +50,11 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       ) : (
-        <div style={{ width: style.width, height: style.height }}></div>
+        <EmptyWrap
+          style={{ width: style.width, height: style.height }}
+          emptyText={data.emptyText}
+          useEmpty={data.useEmpty}
+        />
       )}
     </Spin>
   );

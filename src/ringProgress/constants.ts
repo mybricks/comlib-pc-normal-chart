@@ -11,20 +11,9 @@ export interface Data {
   color: [string, string];
   innerRadius: number;
   radius: number;
-  statistic: {
-      title: {
-          content: string;
-          [key: string]: any;
-      };
-      content: boolean;
-  }
+  statistic: any;
+  useEmpty: boolean;
+  emptyText: string;
 }
 
-export const MockData: any = {
-    percent: 0.6,
-    color: [
-      '#5B8FF9', '#E8EDF3'
-    ],
-    innerRadius: 0.8,
-    radius: 1,
-}
+export const MockData: any = 0.6;

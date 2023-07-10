@@ -4,7 +4,7 @@ import { Data, MockData } from './constants';
 import { Spin } from 'antd';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
-  const [percent, setPercent] = useState(0);
+  const [percent, setPercent] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -13,20 +13,24 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       inputs.data((val: React.SetStateAction<number>) => {
         if (typeof val === 'number') {
           setPercent(val);
-          setLoading(false);
         }
       });
+      setLoading(false);
     }
   }, []);
 
   return (
     <Spin spinning={loading}>
-      <Progress
-        style={{ width: style.width, height: style.height }}
-        {...data.config}
-        percent={env.edit ? MockData : percent}
-        key={env.edit ? JSON.stringify(data.config) : undefined}
-      />
+      {!env.runtime || percent !== null ? (
+        <Progress
+          style={{ width: style.width, height: style.height }}
+          {...data.config}
+          percent={env.edit ? MockData : percent}
+          key={env.edit ? JSON.stringify(data.config) : undefined}
+        />
+      ) : (
+        <div style={{ width: style.width, height: style.height }}></div>
+      )}
     </Spin>
   );
 }

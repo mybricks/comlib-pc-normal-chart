@@ -3,6 +3,7 @@ import { TinyColumn } from '@ant-design/charts';
 import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
+import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
@@ -14,9 +15,9 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       inputs.data((val: React.SetStateAction<any[]>) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
-          setLoading(false);
         }
       });
+      setLoading(false);
     }
   }, []);
 
@@ -40,13 +41,22 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
 
   return (
     <Spin spinning={loading}>
-      <TinyColumn
-        style={{ width: style.width, height: style.height }}
-        onReady={onReady}
-        {...data.config}
-        data={env.edit ? MockData : dataSourceInRuntime}
-        key={env.edit ? JSON.stringify(data.config) : undefined}
-      />
+      {!env.runtime || dataSourceInRuntime.length !== 0 ? (
+        <TinyColumn
+          style={{ width: style.width, height: style.height }}
+          onReady={onReady}
+          {...data.config}
+          data={env.edit ? MockData : dataSourceInRuntime}
+          key={env.edit ? JSON.stringify(data.config) : undefined}
+        />
+      ) : (
+        <EmptyWrap
+          style={{ width: style.width, height: style.height }}
+          emptyText={data.emptyText}
+          useEmpty={data.useEmpty}
+          small
+        />
+      )}
     </Spin>
   );
 }

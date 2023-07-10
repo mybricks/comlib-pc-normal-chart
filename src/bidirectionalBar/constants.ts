@@ -1,10 +1,5 @@
 import { ChartConfigProps, ChartProps } from '../utils/constants';
 
-export enum SubTypeEnum {
-  Default = 'default',
-  Stack = 'stack',
-  Group = 'group'
-}
 export interface Data extends ChartProps {
   config: ChartConfigProps & {
     isStack?: boolean;
@@ -13,11 +8,9 @@ export interface Data extends ChartProps {
     xField: [string, string];
     yField: [string, string];
   };
-  subType?: SubTypeEnum;
 }
 
-export const MockData: any = {
-  default: [
+export const MockData: any =[
     {
       xField: '乌拉圭',
       yField0: 13.4,
@@ -63,5 +56,4 @@ export const MockData: any = {
       yField0: 165.2,
       yField1: 72.9,
     },
-  ],
-};
+]
