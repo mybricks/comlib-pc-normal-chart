@@ -38,7 +38,7 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
     });
   }, []);
 
-  return (
+  return !env.runtime || dataSourceInRuntime.length !== 0 ? (
     <Spin spinning={loading}>
       <Funnel
         style={{ width: style.width, height: style.height }}
@@ -48,5 +48,5 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
         key={env.edit ? JSON.stringify(data.config) : undefined}
       />
     </Spin>
-  );
+  ) : null;
 }
