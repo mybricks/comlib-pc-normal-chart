@@ -14,8 +14,8 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       inputs.data((val: React.SetStateAction<any[]>) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
+          setLoading(false);
         }
-        setLoading(false);
       });
     }
   }, []);
@@ -38,15 +38,19 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
     });
   }, []);
 
-  return !env.runtime || dataSourceInRuntime.length !== 0 ? (
+  return (
     <Spin spinning={loading}>
-      <Funnel
-        style={{ width: style.width, height: style.height }}
-        {...data.config}
-        onReady={onReady}
-        data={env.edit ? MockData : dataSourceInRuntime}
-        key={env.edit ? JSON.stringify(data.config) : undefined}
-      />
+      {!env.runtime || dataSourceInRuntime.length !== 0 ? (
+        <Funnel
+          style={{ width: style.width, height: style.height }}
+          {...data.config}
+          onReady={onReady}
+          data={env.edit ? MockData : dataSourceInRuntime}
+          key={env.edit ? JSON.stringify(data.config) : undefined}
+        />
+      ) : (
+        <div style={{ width: style.width, height: style.height }}></div>
+      )}
     </Spin>
-  ) : null;
+  );
 }
