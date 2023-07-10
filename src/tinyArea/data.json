@@ -1,15 +1,10 @@
 {
-  "config": {
-    "smooth": false,
-    "line": {
-      "color": "#d6e3fd"
-    },
-    "areaStyle": {
-      "fill": "#d6e3fd",
-      "fillOpacity": 1
-    },
-    "padding": "auto"
+  "smooth": false,
+  "line": {
+    "color": "#d6e3fd"
   },
-  "useEmpty": true,
-  "emptyText": "暂无数据"
+  "areaStyle": {
+    "fill": "#d6e3fd",
+    "fillOpacity": 1
+  }
 }

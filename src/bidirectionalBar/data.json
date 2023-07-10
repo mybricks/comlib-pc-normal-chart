@@ -1,0 +1,15 @@
+{
+  "height": 400,
+  "config": {
+    "xAxis": {
+      "position": "bottom"
+    },
+    "layout": "horizontal",
+    "yAxis": {},
+    "legend": {},
+    "xField": "xField",
+    "yField": ["yField0", "yField1"],
+    "padding": "auto"
+  },
+  "subType": "default"
+}

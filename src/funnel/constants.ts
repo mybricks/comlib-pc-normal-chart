@@ -2,29 +2,25 @@ import { ChartProps } from '../utils/constants';
 
 export interface Data extends ChartProps {}
 
-export const InputIds = {
-  SetData: 'data'
-};
-
-export const MockData = [
-  {
-    xField: '1991',
-    yField: 3
-  },
-  {
-    xField: '1992',
-    yField: 4
-  },
-  {
-    xField: '1993',
-    yField: 5
-  },
-  {
-    xField: '1994',
-    yField: 6
-  },
-  {
-    xField: '1995',
-    yField: 7
-  }
-];
+export const MockData: any = [
+    {
+      year: '简历筛选',
+      value: 253,
+    },
+    {
+      year: '初试人数',
+      value: 151,
+    },
+    {
+      year: '复试人数',
+      value: 113,
+    },
+    {
+      year: '录取人数',
+      value: 87,
+    },
+    {
+      year: '入职人数',
+      value: 59,
+    },
+  ]

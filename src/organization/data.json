@@ -1,0 +1,7 @@
+{
+  "height": 400,
+  "config": {
+    "width": null,
+    "behaviors": ["drag-canvas", "zoom-canvas"]
+  }
+}

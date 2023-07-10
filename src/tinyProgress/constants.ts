@@ -8,8 +8,4 @@ export interface Data {
   };
 }
 
-export const InputIds = {
-  SetData: 'data'
-};
-
 export const MockData = 0.4;

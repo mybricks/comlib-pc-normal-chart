@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/mybricks/comlib-pc-normal-chart#readme",
   "dependencies": {
-    "@ant-design/charts": "^1.2.14"
+    "@ant-design/charts": "^1.2.14",
+    "antd": "^4.24.12"
   },
   "devDependencies": {
     "@types/react": "^17.0.8",

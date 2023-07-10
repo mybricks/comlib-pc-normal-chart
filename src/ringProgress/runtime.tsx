@@ -1,26 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { RingProgress } from '@ant-design/charts';
-import { Data, InputIds, MockData } from './constants';
+import { Data, MockData } from './constants';
+import { Spin } from 'antd';
 
-export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
-  const [percent, setPercent] = useState(0);
+export default function ({ data, inputs, style, env, title }) {
+  const [config, setConfig] = useState<Data | {}>({ ...data });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (env.runtime) {
-      inputs[InputIds.SetData]((val) => {
-        if (typeof val === 'number') {
-          setPercent(val);
+      setLoading(true);
+      inputs.style((ds: any) => {
+        setConfig({ ...config, ...ds });
+      });
+
+      inputs.percent((ds: number) => {
+        const dsNum = Number(ds);
+        if (isNaN(dsNum)) {
+          console.error(`${title}输入数据不合法！`);
+        } else {
+          setConfig({ ...config, percent: dsNum });
         }
       });
+
+      const ids = ['statistic', 'tooltip'];
+      ids.forEach((id) => {
+        inputs[id]((ds: Object) => {
+          setConfig({ ...config, [id]: { ...ds } });
+        });
+      });
+      setLoading(false);
     }
   }, []);
 
   return (
-    <RingProgress
-      {...style}
-      {...data.config}
-      percent={env.edit ? MockData : percent}
-      key={env.edit ? JSON.stringify(data.config) : undefined}
-    />
+    <Spin spinning={loading}>
+      <RingProgress
+        style={{ width: style.width, height: style.height }}
+        {...(env.edit ? { ...MockData, ...data } : config)}
+        key={env.edit ? JSON.stringify(data.config) : undefined}
+      />
+    </Spin>
   );
 }
