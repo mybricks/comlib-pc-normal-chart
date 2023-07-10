@@ -29,6 +29,7 @@ export default {
         input.add(id, title, schema);
       }
     });
+    setSchema(data, input);
 
     cate0.title = '常规';
     (cate0.items = [

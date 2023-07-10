@@ -23,6 +23,7 @@ export default function ({ data, inputs, style, env, title }) {
         } else {
           setRuntimeDataSource(ds);
         }
+        setLoading(false);
       });
 
       const ids = ['statistic', 'tooltip'];
@@ -31,7 +32,6 @@ export default function ({ data, inputs, style, env, title }) {
           setConfig({ ...config, [id]: { ...ds } });
         });
       });
-      setLoading(false);
     }
   }, []);
 

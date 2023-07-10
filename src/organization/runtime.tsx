@@ -12,9 +12,9 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
     if (env.runtime) {
       setLoading(true);
       inputs.data((val: React.SetStateAction<any[]>) => {
+        setLoading(false);
         setRuntimeDataSource(val);
       });
-      setLoading(false);
     }
   }, []);
 

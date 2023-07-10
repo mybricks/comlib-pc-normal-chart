@@ -15,15 +15,16 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       setLoading(true);
       inputs.data0((val: any) => {
         if (Array.isArray(val)) {
+          setLoading(false);
           setRuntimeLeftDataSource(val);
         }
       });
       inputs.data1((val: any) => {
         if (Array.isArray(val)) {
+          setLoading(false);
           setRuntimeRightDataSource(val);
         }
       });
-      setLoading(false);
     }
   }, []);
 
