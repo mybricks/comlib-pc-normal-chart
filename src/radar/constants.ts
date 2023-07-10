@@ -2,11 +2,10 @@ import { ChartConfigProps, ChartProps } from '../utils/constants';
 
 export interface Data extends ChartProps {
   config: ChartConfigProps & {
-    area?: boolean;
+    // area?: boolean;
     seriesField?: string;
   };
 }
-
 
 export const MockData: any = [
     {
@@ -37,4 +36,4 @@ export const MockData: any = [
       year: 'G2Plot',
       value: 1626,
     },
-  ]
+]

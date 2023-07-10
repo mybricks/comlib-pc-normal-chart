@@ -14,8 +14,8 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       inputs.data((val: React.SetStateAction<any>) => {
         if (typeof val.percent === 'number') {
           setRuntimeDataSource(val);
+          setLoading(false);
         }
-        setLoading(false);
       });
     }
   }, []);

@@ -19,28 +19,22 @@ export enum LegendPositionEnum {
   BottomRight = 'bottom-right'
 }
 
-interface AxisProps {
-  title: {
-    text?: string;
-    position?: AxisPositionEnum;
-  };
-}
-interface LegendProps {
-  position?: LegendPositionEnum;
-  offsetX?: number;
-  offsetY?: number;
+export interface Axis {
+  position: 'start' | 'center' | 'end',
+  title: string | Object,
+  value: string | Object
 }
 
 export interface ChartConfigProps {
-  yAxis?: AxisProps;
-  xAxis?: AxisProps;
-  padding?: string | number[];
-  legend?: LegendProps | boolean;
+  yAxis?: any;
+  xAxis?: any;
+  padding?: any;
+  legend?: any;
+  xField: string;
+  yField: string;
 }
 export interface ChartProps {
   config: ChartConfigProps;
-  useEmpty?: boolean;
-  emptyText?: string;
   [key: string]: any;
 }
 

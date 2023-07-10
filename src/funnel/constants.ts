@@ -2,7 +2,6 @@ import { ChartProps } from '../utils/constants';
 
 export interface Data extends ChartProps {}
 
-
 export const MockData: any = [
     {
       year: '简历筛选',

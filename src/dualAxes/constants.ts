@@ -14,6 +14,8 @@ export interface GeometryOptions {
 export interface Data extends ChartProps {
   config: ChartConfigProps & {
     geometryOptions?: GeometryOptions[];
+    xField: string[];
+    yField: string[];
   };
   seriesField?: boolean[];
 }

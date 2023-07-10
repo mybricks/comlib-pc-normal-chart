@@ -10,6 +10,8 @@ export interface Data extends ChartProps {
     isStack?: boolean;
     isGroup?: boolean;
     seriesField?: string;
+    xField: [string, string];
+    yField: [string, string];
   };
   subType?: SubTypeEnum;
 }

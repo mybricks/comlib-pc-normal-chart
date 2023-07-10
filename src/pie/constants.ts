@@ -6,8 +6,8 @@ export enum SubTypeEnum {
 }
 export interface Data extends ChartProps {
   config: ChartConfigProps & {
-    angleField?: string;
-    colorField?: string;
+    angleField: string;
+    colorField: string;
     radius?: number;
     innerRadius?: number;
   };

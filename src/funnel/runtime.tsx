@@ -5,7 +5,7 @@ import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 
 export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
-  const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
+  const [dataSourceInRuntime, setRuntimeDataSource] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
