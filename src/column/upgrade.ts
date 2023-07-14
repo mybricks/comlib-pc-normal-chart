@@ -16,5 +16,12 @@ export default function ({ data }) {
     data.config.padding = 'auto';
   }
 
+  if(!data.useEmpty){
+    data.useEmpty = true;
+  }
+  if(!data.emptyText){
+    data.emptyText = '暂无数据';
+  }
+
   return true;
 }
