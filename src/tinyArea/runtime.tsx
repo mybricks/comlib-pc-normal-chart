@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TinyArea } from '@ant-design/charts';
 import { Data, MockData } from './constants';
 import { Spin } from 'antd';
+import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
@@ -18,6 +19,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
           setRuntimeDataSource([]);
           console.error('迷你面积图输入数据必须是数字数组');
         }
+        setLoading(false);
       });
       inputs.style((ds: any) => {
         setConfig({ ...config, ...ds });
@@ -28,18 +30,26 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
           setConfig({ ...config, [id]: { ...ds } });
         });
       });
-      setLoading(false);
     }
   }, []);
 
   return (
     <Spin spinning={loading}>
-      <TinyArea
-        {...config}
-        style={{ width: style.width, height: style.height }}
-        data={env.edit ? MockData : dataSourceInRuntime}
-        key={env.edit ? JSON.stringify(data.config) : undefined}
-      />
+      {!env.runtime || dataSourceInRuntime.length !== 0 ? (
+        <TinyArea
+          {...config}
+          style={{ width: style.width, height: style.height }}
+          data={env.edit ? MockData : dataSourceInRuntime}
+          key={env.edit ? JSON.stringify(data.config) : undefined}
+        />
+      ) : (
+        <EmptyWrap
+          style={{ width: style.width, height: style.height }}
+          emptyText={data.emptyText}
+          useEmpty={data.useEmpty}
+          small
+        />
+      )}
     </Spin>
   );
 }

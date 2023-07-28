@@ -3,6 +3,7 @@ import { Liquid } from '@ant-design/charts';
 import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
+import EmptyWrap from '../components/emptyWrap';
 
 export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState({});
@@ -13,8 +14,8 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       setLoading(true);
       inputs.data((val: React.SetStateAction<any>) => {
         if (typeof val.percent === 'number') {
-          setRuntimeDataSource(val);
           setLoading(false);
+          setRuntimeDataSource(val);
         }
       });
     }
@@ -40,14 +41,22 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
 
   return (
     <Spin spinning={loading}>
-      <Liquid
-        style={{ width: style.width, height: style.height }}
-        onReady={onReady}
-        {...(env.edit
-          ? { ...MockData, ...data.config }
-          : { ...data.config, ...dataSourceInRuntime })}
-        key={env.edit ? JSON.stringify(data.config) : undefined}
-      />
+      {!env.runtime || Object.keys(dataSourceInRuntime).length !== 0 ? (
+        <Liquid
+          style={{ width: style.width, height: style.height }}
+          onReady={onReady}
+          {...(env.edit
+            ? { ...MockData, ...data.config }
+            : { ...data.config, ...dataSourceInRuntime })}
+          key={env.edit ? JSON.stringify(data.config) : undefined}
+        />
+      ) : (
+        <EmptyWrap
+          style={{ width: style.width, height: style.height }}
+          emptyText={data.emptyText}
+          useEmpty={data.useEmpty}
+        />
+      )}
     </Spin>
   );
 }

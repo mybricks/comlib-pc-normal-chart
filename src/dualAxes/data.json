@@ -23,5 +23,7 @@
     ],
     "padding": "auto",
     "smooth": false
-  }
+  },
+  "useEmpty": true,
+  "emptyText": "暂无数据"
 }

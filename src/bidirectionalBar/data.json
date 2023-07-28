@@ -11,5 +11,6 @@
     "yField": ["yField0", "yField1"],
     "padding": "auto"
   },
-  "subType": "default"
+  "useEmpty": true,
+  "emptyText": "暂无数据"
 }

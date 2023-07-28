@@ -9,6 +9,7 @@
   "data": "./data.json",
   "runtime": "./runtime.tsx",
   "editors": "./editor.tsx",
+  "upgrade": "./upgrade.ts",
   "inputs": [
     {
       "id": "percent",

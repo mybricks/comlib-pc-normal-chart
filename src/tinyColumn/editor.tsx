@@ -128,39 +128,80 @@ export default {
         ]
       },
       {
-        title: '自动内间距',
-        type: 'switch',
-        value: {
-          get({ data }: EditorResult<Data>) {
-            return data.config.padding === 'auto';
+        title: '内间距',
+        items: [
+          {
+            title: '自动内间距',
+            type: 'switch',
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data.config.padding === 'auto';
+              },
+              set({ data }: EditorResult<Data>, value: boolean) {
+                data.config = {
+                  ...data.config,
+                  padding: value ? 'auto' : [0, 0, 0, 0]
+                };
+              }
+            }
           },
-          set({ data }: EditorResult<Data>, value: boolean) {
-            data.config = {
-              ...data.config,
-              padding: value ? 'auto' : [0, 0, 0, 0]
-            };
+          {
+            title: '内间距',
+            type: 'inputNumber',
+            description: '默认自动计算, 当边界存在遮挡时可手动设置内边距',
+            options: [{ title: '上' }, { title: '右' }, { title: '下' }, { title: '左' }],
+            ifVisible({ data }: EditorResult<Data>) {
+              return data.config.padding !== 'auto';
+            },
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data.config.padding;
+              },
+              set({ data }: EditorResult<Data>, value: number[]) {
+                data.config = {
+                  ...data.config,
+                  padding: value
+                };
+              }
+            }
           }
-        }
+        ]
       },
       {
-        title: '内间距',
-        type: 'inputNumber',
-        description: '默认自动计算, 当边界存在遮挡时可手动设置内边距',
-        options: [{ title: '上' }, { title: '右' }, { title: '下' }, { title: '左' }],
-        ifVisible({ data }: EditorResult<Data>) {
-          return data.config.padding !== 'auto';
-        },
-        value: {
-          get({ data }: EditorResult<Data>) {
-            return data.config.padding;
+        title: '空状态',
+        items: [
+          {
+            title: '默认空状态',
+            description: '开启后，当数据为空时显示默认的空状态',
+            type: 'Switch',
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data.useEmpty;
+              },
+              set({ data }: EditorResult<Data>, value: boolean) {
+                data.useEmpty = value;
+              }
+            }
           },
-          set({ data }: EditorResult<Data>, value: number[]) {
-            data.config = {
-              ...data.config,
-              padding: value
-            };
+          {
+            title: '空状态文案',
+            type: 'Text',
+            options: {
+              placeholder: '空状态文案'
+            },
+            ifVisible({ data }: EditorResult<Data>) {
+              return data.useEmpty;
+            },
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data.emptyText;
+              },
+              set({ data }: EditorResult<Data>, value: string) {
+                data.emptyText = value;
+              }
+            }
           }
-        }
+        ]
       }
     ]),
       (cate1.title = '图表配置'),
