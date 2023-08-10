@@ -1,6 +1,9 @@
 {
   "debugger": "pc-spa",
   "componentType": "PC",
+  "fileId": 1047,
+  "commitInfo": "update",
+  "namespace": "mybricks.normal-pc-chart",
   "comAry": {
     "test": [
       {
