@@ -19,7 +19,6 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
           setRuntimeDataSource([]);
           console.error('迷你面积图输入数据必须是数字数组');
         }
-        setLoading(false);
       });
       inputs.style((ds: any) => {
         setConfig({ ...config, ...ds });
@@ -30,6 +29,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
           setConfig({ ...config, [id]: { ...ds } });
         });
       });
+      setLoading(false);
     }
   }, []);
 

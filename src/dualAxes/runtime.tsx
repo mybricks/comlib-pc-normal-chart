@@ -15,24 +15,19 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       setLoading(true);
       inputs.data0((val: any) => {
         if (Array.isArray(val)) {
-          setLoading(false);
           setRuntimeLeftDataSource(val);
         }
       });
       inputs.data1((val: any) => {
         if (Array.isArray(val)) {
-          setLoading(false);
           setRuntimeRightDataSource(val);
         }
       });
+      setLoading(false);
     }
   }, []);
 
   const onReady = useCallback((graph: any) => {
-    graph.on('node:click', ({ item }) => {
-      const { id, value } = item['_cfg'].model;
-      outputs['nodeClick']?.({ id, value });
-    });
     graph.on('legend-item-name:click', ({ target }) => {
       if (data.copyLegendTextOnClick) {
         const legendTitle = target?.attrs?.text;
