@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { OrganizationGraph } from '@ant-design/graphs';
 import { Data, MockData } from './constants';
 import { Spin } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
 
-export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
+export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState<any>({ id: 'root' });
   const [loading, setLoading] = useState(false);
 
@@ -12,10 +12,17 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
     if (env.runtime) {
       setLoading(true);
       inputs.data((val: React.SetStateAction<any[]>) => {
-        setLoading(false);
         setRuntimeDataSource(val);
       });
+      setLoading(false);
     }
+  }, []);
+
+  const onReady = useCallback((graph: any) => {
+    graph.on('node:click', ({ item }) => {
+      const { id, value } = item['_cfg'].model;
+      outputs['nodeClick']?.({ id, value });
+    });
   }, []);
 
   return (
@@ -24,6 +31,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
         <OrganizationGraph
           style={{ width: style.width, height: style.height }}
           {...data.config}
+          onReady={onReady}
           data={env.edit ? MockData : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />

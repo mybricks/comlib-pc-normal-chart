@@ -12,10 +12,10 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
       setLoading(true);
       inputs.data((val: React.SetStateAction<number>) => {
         if (typeof val === 'number') {
-          setLoading(false);
           setPercent(val);
         }
       });
+      setLoading(false);
     }
   }, []);
 
