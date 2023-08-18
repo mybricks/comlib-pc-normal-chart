@@ -8,6 +8,7 @@
     "legend": {
       "position": "top-left"
     },
+    "label": false,
     "padding": "auto"
   },
   "seriesField": "type",

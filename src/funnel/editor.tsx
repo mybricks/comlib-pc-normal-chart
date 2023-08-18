@@ -1,4 +1,5 @@
-import { initInput, schemaDefault, schemaDiff, Data } from '../utils';
+import { initInput, schemaDefault, schemaDiff } from '../utils';
+import { Data } from './constants';
 
 export default {
   '@init'({ style, input, data }) {
@@ -155,6 +156,95 @@ export default {
               set({ data }: EditorResult<Data>, value: string) {
                 data.config.legend.offsetY = Number(value);
                 data.config.legend = { ...data.config.legend };
+              }
+            }
+          }
+        ]
+      },
+      {
+        title: '数据标签配置',
+        items: [
+          {
+            title: '数据标签',
+            type: 'Switch',
+            value: {
+              get({ data }: EditorResult<Data>) {
+                if (typeof data.config.label === 'boolean') {
+                  return data.config.label;
+                } else {
+                  return true;
+                }
+              },
+              set({ data }: EditorResult<Data>, value: boolean) {
+                if (!value) {
+                  data.config.label = false;
+                } else {
+                  data.config.label = {};
+                }
+              }
+            }
+          },
+          {
+            title: '标签样式',
+            type: 'style',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.label;
+            },
+            options: {
+              plugins: ['Font'],
+              fontProps: {
+                fontFamily: false,
+                verticalAlign: false
+              }
+            },
+            value: {
+              get({ data }: EditorResult<Data>) {
+                if (data?.config?.label) {
+                  return {
+                    ...data?.config?.label?.style,
+                    color: data?.config?.label?.style?.fill || 'white',
+                    fontSize: `${data?.config?.label?.style?.fontSize || 12}px`,
+                    lineHeight: `${data?.config?.label?.style?.lineHeight || 12}px`
+                  };
+                }
+              },
+              set({ data }: EditorResult<Data>, value) {
+                if (data?.config?.label) {
+                  data.config.label = {
+                    style: {
+                      ...value,
+                      fill: value.color,
+                      fontSize: Number(value.fontSize.slice(0, -2)),
+                      lineHeight: Number(value.lineHeight.slice(0, -2))
+                    }
+                  };
+                }
+              }
+            }
+          },
+          {
+            title: '类型',
+            type: 'Select',
+            options: [
+              { label: 'Inner', value: 'inner' },
+              { label: 'Outer', value: 'outer' },
+              { label: 'Spider', value: 'spider' }
+            ],
+            value: {
+              get({ data }: EditorResult<Data>) {
+                if (typeof data.config.label !== 'boolean') {
+                  return data.config.label.type || 'outer';
+                }
+              },
+              set({ data }: EditorResult<Data>, value: string) {
+                if (typeof data.config.label !== 'boolean') {
+                  if (!data.config.label.type) {
+                    data.config.label['type'] = value;
+                  } else {
+                    data.config.label.type = value;
+                  }
+                  data.config.label = { ...data.config.label };
+                }
               }
             }
           }

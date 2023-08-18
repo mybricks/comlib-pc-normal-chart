@@ -276,6 +276,51 @@ export default {
             }
           },
           {
+            title: '标签样式',
+            type: 'style',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.label;
+            },
+            options: {
+              plugins: ['Font'],
+              fontProps: {
+                fontFamily: false,
+                verticalAlign: false
+              }
+            },
+            value: {
+              get({ data }: EditorResult<Data>) {
+                if (!!data.config.label) {
+                  return {
+                    ...data?.config?.label?.style,
+                    fill: data?.config?.label?.style?.fill || 'white',
+                    color: data?.config?.label?.style?.fill || 'white',
+                    fontSize: `${data?.config?.label?.style?.fontSize || 12}px`,
+                    lineHeight: `${data?.config?.label?.style?.lineHeight || 12}px`
+                  };
+                }
+                return {
+                  fill: 'white',
+                  color: 'white',
+                  fontSize: `12px`,
+                  lineHeight: `12px`
+                };
+              },
+              set({ data }: EditorResult<Data>, value) {
+                if (data?.config?.label) {
+                  data.config.label = {
+                    style: {
+                      ...value,
+                      fill: value.color,
+                      fontSize: Number(value.fontSize.slice(0, -2)),
+                      lineHeight: Number(value.lineHeight.slice(0, -2))
+                    }
+                  };
+                }
+              }
+            }
+          },
+          {
             title: '类型',
             type: 'Select',
             options: [

@@ -10,6 +10,7 @@
     },
     "area": {},
     "seriesField": "",
+    "label": false,
     "padding": "auto"
   },
   "useEmpty": true,

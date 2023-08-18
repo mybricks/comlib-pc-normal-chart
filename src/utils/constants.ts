@@ -1,4 +1,5 @@
 import { Data } from "./const";
+import { Label } from '@antv/g2plot/lib/types/label';
 
 export enum AxisPositionEnum {
   Start = 'start',
@@ -29,6 +30,7 @@ export interface ChartConfigProps {
   yAxis?: any;
   xAxis?: any;
   padding?: any;
+  label?: Label;
   legend?: any;
   xField: string;
   yField: string;

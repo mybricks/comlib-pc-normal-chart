@@ -9,6 +9,7 @@
     "angleField": "value",
     "colorField": "type",
     "radius": 1,
+    "label": {},
     "padding": "auto"
   },
   "subType": "default",
