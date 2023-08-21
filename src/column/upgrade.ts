@@ -23,5 +23,9 @@ export default function ({ data }) {
     data.emptyText = '暂无数据';
   }
 
+  if (data?.config?.label === undefined) {
+    data.config.label = false;
+  }
+
   return true;
 }

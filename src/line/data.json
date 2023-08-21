@@ -10,6 +10,7 @@
     },
     "seriesField": "",
     "padding": "auto",
+    "label": false,
     "smooth": false
   },
   "subType": "default",

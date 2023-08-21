@@ -241,6 +241,75 @@ export default {
         ]
       },
       {
+        title: '数据标签配置',
+        items: [
+          {
+            title: '数据标签',
+            type: 'Switch',
+            value: {
+              get({ data }: EditorResult<Data>) {
+                if (typeof data.config.label === 'boolean') {
+                  return data.config.label;
+                } else {
+                  return true;
+                }
+              },
+              set({ data }: EditorResult<Data>, value: boolean) {
+                if (!value) {
+                  data.config.label = false;
+                } else {
+                  data.config.label = {};
+                }
+              }
+            }
+          },
+          {
+            title: '标签样式',
+            type: 'style',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.label;
+            },
+            options: {
+              plugins: ['Font'],
+              fontProps: {
+                fontFamily: false,
+                verticalAlign: false
+              }
+            },
+            value: {
+              get({ data }: EditorResult<Data>) {
+                if (data?.config?.label) {
+                  return {
+                    ...data?.config?.label?.style,
+                    color: data?.config?.label?.style?.fill || 'black',
+                    fontSize: `${data?.config?.label?.style?.fontSize || 12}px`,
+                    lineHeight: `${data?.config?.label?.style?.lineHeight || 12}px`
+                  };
+                }
+                return {
+                  fill: 'black',
+                  color: 'black',
+                  fontSize: `12px`,
+                  lineHeight: `12px`
+                };
+              },
+              set({ data }: EditorResult<Data>, value) {
+                if (data?.config?.label) {
+                  data.config.label = {
+                    style: {
+                      ...value,
+                      fill: value.color,
+                      fontSize: Number(value.fontSize.slice(0, -2)),
+                      lineHeight: Number(value.lineHeight.slice(0, -2))
+                    }
+                  };
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
         title: '空状态',
         items: [
           {

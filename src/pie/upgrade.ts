@@ -12,5 +12,9 @@ export default function ({ data }: any): boolean {
     data.emptyText = '暂无数据';
   }
 
+  if (data?.config?.label === undefined) {
+    data.config.label = {};
+  }
+
   return true;
 }
