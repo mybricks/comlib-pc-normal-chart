@@ -1,4 +1,5 @@
 import { initInput, schemaPie, Data } from '../utils';
+import { OutputIds } from './constants';
 
 export default {
   '@init'({ style, input, data }) {
@@ -13,13 +14,13 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({ data, input }: EditorResult<any>, cate0: any) => {
+  ':root': ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any) => {
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
       if (!input.get(id)) {
         input.add(id, title, schema);
       }
     });
-    setSchema(data, input);
+    setSchema(data, input, output);
 
     cate0.title = '常规';
     cate0.items = [
@@ -56,9 +57,9 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.angleField;
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.angleField = value;
-                setSchema(data, input);
+                setSchema(data, input, output);
               }
             }
           },
@@ -70,9 +71,9 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.colorField;
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.colorField = value;
-                setSchema(data, input);
+                setSchema(data, input, output);
               }
             }
           },
@@ -383,9 +384,44 @@ export default {
         ]
       }
     ];
+
+    cate1.title = '交互';
+    cate1.items = [
+      {
+        title: '扇形区域点击事件',
+        type: 'Switch',
+        value: {
+          get({ data }: EditorResult<Data>) {
+            return data.useElementClick;
+          },
+          set({ data, output }: EditorResult<Data>, value: boolean) {
+            data.useElementClick = value;
+            if (value) {
+              output.add(OutputIds.Element_Click, '元素点击', {
+                type: 'object'
+              });
+              setSchema(data, input, output);
+            } else {
+              output.remove(OutputIds.Element_Click);
+            }
+          }
+        }
+      },
+      {
+        ifVisible({ data }: EditorResult<Data>) {
+          return data.useElementClick;
+        },
+        type: '_event',
+        options: {
+          outputId: OutputIds.Element_Click
+        }
+      }
+    ]
   }
 };
 
-const setSchema = (data: Data, input: any) => {
-  input.get('data').setSchema(schemaPie(data));
+const setSchema = (data: Data, input: any, output: any) => {
+  const dataSchema = schemaPie(data);
+  input.get('data').setSchema(dataSchema);
+  output.get(OutputIds.Element_Click)?.setSchema(dataSchema.items);
 };

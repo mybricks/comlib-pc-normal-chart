@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Pie } from '@ant-design/charts';
-import { Data, MockData } from './constants';
+import { Data, MockData, OutputIds } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
@@ -22,6 +22,11 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
   }, []);
 
   const onReady = useCallback((graph: any) => {
+    graph.on('element:click', (ele) => {
+      if (data.useElementClick) {
+        outputs[OutputIds.Element_Click](ele.data.data);
+      }
+    });
     graph.on('legend-item-name:click', ({ target }) => {
       if (data.copyLegendTextOnClick) {
         const legendTitle = target?.attrs?.text;
