@@ -14,8 +14,12 @@ export interface Data extends ChartProps {
   subType?: SubTypeEnum;
 }
 
+export const OutputIds = {
+  Element_Click: 'elementClick'
+};
+
 export const MockData: any = {
-  default:[
+  default: [
     {
       type: '分类一',
       value: 27,
@@ -40,5 +44,6 @@ export const MockData: any = {
       type: '其他',
       value: 5,
     },
-]};
+  ]
+};
 MockData.circel = MockData.default;
