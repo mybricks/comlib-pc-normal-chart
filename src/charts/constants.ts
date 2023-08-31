@@ -102,7 +102,9 @@ export const chartTypes = {
   FUNNEL: 'Funnel', // 漏斗图
   RADAR: 'Radar',
   BIDIRECTIONAL_BAR: 'BidirectionalBar', // 对称条形图
-  DUAL_AXES: 'DualAxes' // 双轴图
+  DUAL_AXES: 'DualAxes', // 双轴图
+  ORGANIZATION: 'Organization', //组织架构图
+  TINY_COLUMN: 'tinyColumn', //迷你柱形图
 }
 
 export const MOCK_DATA = {
@@ -110,17 +112,17 @@ export const MOCK_DATA = {
   Area: lineData,
   Pie: [
     { type: '分类一', value: 27.4 },
-    { type: '分类二', value: 24.6},
+    { type: '分类二', value: 24.6 },
     { type: '分类三', value: 18 },
     { type: '分类四', value: 15 },
     { type: '分类五', value: 10 },
-    { type: '其他',  value: 5 }
+    { type: '其他', value: 5 }
   ],
   Column: [
     { type: '类型1', label: 'Jan.', value: 18.9 },
     { type: '类型1', label: 'Feb.', value: 28.8 },
     { type: '类型1', label: 'Mar.', value: 39.3 },
-    { type: '类型1', label: 'Apr.',  value: 81.4 },
+    { type: '类型1', label: 'Apr.', value: 81.4 },
     { type: '类型1', label: 'May', value: 47 },
     { type: '类型1', label: 'Jun.', value: 20.3 },
     { type: '类型1', label: 'Jul.', value: 24 },
@@ -208,8 +210,10 @@ export const inputSchemaMap = {
   [inputIdMap.SERIES_FIELD]: { title: '分组字段名', schema: { type: 'string' } },
   [inputIdMap.COLOR_FIELD]: { title: '维度字段名', schema: { type: 'string' } },
   [inputIdMap.ANGLE_FIELD]: { title: '数据字段名', schema: { type: 'string' } },
-  [inputIdMap.LEGEND_SELECTED]: { title: '图例高亮状态', schema: {
-    type: 'object', properties: { value_key: { type: 'boolean' } } }
+  [inputIdMap.LEGEND_SELECTED]: {
+    title: '图例高亮状态', schema: {
+      type: 'object', properties: { value_key: { type: 'boolean' } }
+    }
   },
   [inputIdMap.LEGEND_POSITION]: { title: '图例位置', schema: { type: 'string' } },
   [inputIdMap.SMOOTH]: { title: '平滑曲线', schema: { type: 'boolean' } },
