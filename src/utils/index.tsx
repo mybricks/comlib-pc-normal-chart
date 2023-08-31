@@ -1,3 +1,5 @@
+import { initInput } from './constants';
+
 export * from './const';
 export * from './constants';
 export * from './schema';
@@ -65,6 +67,7 @@ function dataURLtoBlob(dataurl) {
   }
   return new Blob([u8arr], { type: mime });
 }
+
 // 将blob转换为file
 function blobToFile(theBlob, fileName) {
   theBlob.lastModifiedDate = new Date();
@@ -74,4 +77,60 @@ function blobToFile(theBlob, fileName) {
 export function dataURLToFile(dataURL: string, fileName: string) {
   const blob = dataURLtoBlob(dataURL);
   return blobToFile(blob, fileName);
+}
+
+const typeMap = {
+  'OBJECT': '[object Object]',
+  'ARRAY': '[object Array]',
+  'STRING': '[object String]',
+  'NUMBER': '[object Number]',
+  'FORMDATA': '[object FormData]',
+  'NULL': '[object Null]',
+  'UNDEFINED': '[object Undefined]',
+  'BOOLEAN': '[object Boolean]',
+  'FUNCTION': '[object Function]'
+}
+
+function typeCheck(variable, type) {
+  if (Array.isArray(type)) {
+    let bool = false
+    for (let i = 0; i < type.length; i++) {
+      if (typeCheck(variable, type[i])) {
+        bool = true
+        break
+      }
+    }
+    return bool
+  } else {
+    const checkType = /^\[.*\]$/.test(type) ? type : typeMap[type.toUpperCase()]
+    return Object.prototype.toString.call(variable) === checkType
+  }
+}
+
+export function callInputs(type: string, { data, env, inputs }: RuntimeParams<{ config: any }>, cbs?) {
+  if (env.runtime) {
+    initInput(type).forEach(({ id }) => {
+      inputs[id]((ds: any) => {
+        if (id === 'loading') {
+          if (typeof ds === 'string') cbs?.setTip?.(ds);
+          cbs?.setLoading?.(!!ds);
+        } else if (typeCheck(ds, 'OBJECT')) {
+          if (id === 'style') {
+            data.config = { ...data.config, ...ds };
+          } else {
+            if (id === 'axis') id = 'xAxis';
+            if (id === 'yaxis') id = 'yAxis';
+            const oldConfig = data.config[id] || {};
+            data.config = {
+              ...data.config,
+              [id]: {
+                ...oldConfig,
+                ...ds
+              }
+            };
+          }
+        }
+      });
+    });
+  }
 }
