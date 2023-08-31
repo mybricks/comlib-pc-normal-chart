@@ -4,11 +4,16 @@ import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
+import { callInputs } from '../utils';
+import { chartTypes } from '../charts/constants';
 
-export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
+export default function (props: RuntimeParams<Data>) {
+  const { data, env, inputs, outputs, style } = props;
+
   const [leftDataSourceInRuntime, setRuntimeLeftDataSource] = useState([]);
   const [rightDataSourceInRuntime, setRuntimeRightDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [tip, setTip] = useState('');
 
   useEffect(() => {
     if (env.runtime) {
@@ -25,6 +30,13 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
       });
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    callInputs(chartTypes.DUAL_AXES, props, {
+      setLoading,
+      setTip
+    })
   }, []);
 
   const onReady = useCallback((graph: any) => {
@@ -46,10 +58,10 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
   }, [leftDataSourceInRuntime, rightDataSourceInRuntime]);
 
   return (
-    <Spin spinning={loading}>
+    <Spin spinning={loading} tip={tip}>
       {!env.runtime ||
-      leftDataSourceInRuntime.length !== 0 ||
-      rightDataSourceInRuntime.length !== 0 ? (
+        leftDataSourceInRuntime.length !== 0 ||
+        rightDataSourceInRuntime.length !== 0 ? (
         <DualAxes
           style={{ width: style.width, height: style.height }}
           {...data.config}
