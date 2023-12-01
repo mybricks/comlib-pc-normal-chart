@@ -68,10 +68,12 @@ export default {
                 return data.config.yField || 'value';
               },
               set({ data, input }: EditorResult<Data>, value: string) {
-                if (Array.isArray(data.config.yField)) {
-                  data.config.yField = value.split(',').map((v) => v.trim());
+                const valueAry = value.split(',').map(v => v.trim()).filter(v => !!v);
+                if (valueAry.length < 1) return;
+                if (valueAry.length === 1) {
+                  data.config.yField = [...valueAry, ...valueAry];
                 } else {
-                  data.config.yField = value;
+                  data.config.yField = [valueAry[0], valueAry[1]];
                 }
                 setSchema(data, input);
               }
@@ -589,8 +591,37 @@ const geometryItem = (index: number) => [
     }
   },
   {
+    title: '分组字段名',
+    type: 'Text',
+    description: '图形为多折线图/分组柱状图/堆积柱状图时，数据源的拆分字段',
+    value: {
+      get({ data }: EditorResult<Data>) {
+        return data.config.geometryOptions[index].seriesField;
+      },
+      set({ data, input }: EditorResult<Data>, value: string) {
+        setGeometryOptions(data, 'seriesField', value, index);
+        const dsInput = input.get(`${InputIds.DataSource}${index}`);
+        const dsInputSchema = dsInput.schema;
+        if (value) {
+          dsInputSchema.items.properties['seriesField'] = {
+            title: '分组轴字段名',
+            type: 'string'
+          };
+        } else {
+          dsInputSchema?.items?.properties?.seriesField &&
+            delete dsInputSchema.items.properties.seriesField;
+        }
+        dsInput?.setSchema(dsInputSchema);
+      }
+    }
+  },
+  {
     title: '颜色',
     type: 'colorPicker',
+    description: '图线或柱子的颜色配置，仅对单折线图或单柱状图生效',
+    ifVisible({ data }: EditorResult<Data>) {
+      return !data.config.geometryOptions[index].seriesField;
+    },
     value: {
       get({ data }: EditorResult<Data>) {
         return data.config.geometryOptions[index].color;
@@ -615,31 +646,6 @@ const geometryItem = (index: number) => [
       }
     }
   },
-  {
-    title: '分组字段名',
-    type: 'Text',
-    description: '图形为多折线图/分组柱状图/堆积柱状图时，数据源的拆分字段',
-    value: {
-      get({ data }: EditorResult<Data>) {
-        return data.config.geometryOptions[index].seriesField;
-      },
-      set({ data, input }: EditorResult<Data>, value: string) {
-        setGeometryOptions(data, 'seriesField', value, index);
-        const dsInput = input.get(`${InputIds.DataSource}${index}`);
-        const dsInputSchema = dsInput.schema;
-        if (value) {
-          dsInputSchema.items.properties['seriesField'] = {
-            title: '分组轴字段名',
-            type: 'string'
-          };
-        } else {
-          dsInputSchema?.items?.properties?.seriesField &&
-            delete dsInputSchema.items.properties.seriesField;
-        }
-        dsInput?.setSchema(dsInputSchema);
-      }
-    }
-  }
 ];
 
 let addAnnotation: (option: AnnotationItem) => void, delAnnotation: (index: number) => void;

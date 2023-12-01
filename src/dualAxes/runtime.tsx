@@ -57,6 +57,12 @@ export default function (props: RuntimeParams<Data>) {
     return [leftDataSourceInRuntime, rightDataSourceInRuntime];
   }, [leftDataSourceInRuntime, rightDataSourceInRuntime]);
 
+  data.config.geometryOptions.forEach(item => {
+    if (item.seriesField) {
+      item.color = undefined;
+    }
+  });
+
   return (
     <Spin spinning={loading} tip={tip}>
       {!env.runtime ||
