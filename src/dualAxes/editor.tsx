@@ -68,10 +68,12 @@ export default {
                 return data.config.yField || 'value';
               },
               set({ data, input }: EditorResult<Data>, value: string) {
-                if (Array.isArray(data.config.yField)) {
-                  data.config.yField = value.split(',').map((v) => v.trim());
+                const valueAry = value.split(',').map(v => v.trim()).filter(v => !!v);
+                if (valueAry.length < 1) return;
+                if (valueAry.length === 1) {
+                  data.config.yField = [...valueAry, ...valueAry];
                 } else {
-                  data.config.yField = value;
+                  data.config.yField = [valueAry[0], valueAry[1]];
                 }
                 setSchema(data, input);
               }
