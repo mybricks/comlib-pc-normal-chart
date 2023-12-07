@@ -9,6 +9,11 @@ export interface GeometryOptions {
   seriesField?: string;
   geometry?: TypeEnum;
   smooth?: boolean;
+  color?: string | string []
+}
+
+export const InputId = {
+  GeometryOptions: 'geometryOptions'
 }
 
 export interface Data extends ChartProps {
