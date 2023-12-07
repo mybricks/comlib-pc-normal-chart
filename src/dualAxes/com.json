@@ -1,7 +1,7 @@
 {
   "title": "双轴图",
   "namespace": "mybricks.normal-pc-chart.dual-axes",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "双轴图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -48,6 +48,26 @@
             "count": {
               "title": "y轴字段名",
               "type": "number"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "geometryOptions",
+      "title": "轴配置",
+      "schema": {
+        "title": "配置",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "title": "颜色",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }

@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState, useCallback } from 'react';
 import { DualAxes } from '@ant-design/charts';
-import { Data, MockData } from './constants';
+import { Data, MockData, InputId } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
@@ -36,7 +36,25 @@ export default function (props: RuntimeParams<Data>) {
     callInputs(chartTypes.DUAL_AXES, props, {
       setLoading,
       setTip
-    })
+    });
+    data.config.geometryOptions.forEach((item) => {
+      if (item.seriesField) {
+        item.color = undefined;
+      }
+    });
+    inputs[InputId.GeometryOptions] &&
+      inputs[InputId.GeometryOptions]((val: Array<any>) => {
+        if (!Array.isArray(val)) {
+          return;
+        }
+
+        data.config.geometryOptions = data.config.geometryOptions.map((option, index) => {
+          return {
+            ...option,
+            ...(val[index] || {})
+          };
+        });
+      });
   }, []);
 
   const onReady = useCallback((graph: any) => {
@@ -57,17 +75,11 @@ export default function (props: RuntimeParams<Data>) {
     return [leftDataSourceInRuntime, rightDataSourceInRuntime];
   }, [leftDataSourceInRuntime, rightDataSourceInRuntime]);
 
-  data.config.geometryOptions.forEach(item => {
-    if (item.seriesField) {
-      item.color = undefined;
-    }
-  });
-
   return (
     <Spin spinning={loading} tip={tip}>
       {!env.runtime ||
-        leftDataSourceInRuntime.length !== 0 ||
-        rightDataSourceInRuntime.length !== 0 ? (
+      leftDataSourceInRuntime.length !== 0 ||
+      rightDataSourceInRuntime.length !== 0 ? (
         <DualAxes
           style={{ width: style.width, height: style.height }}
           {...data.config}
