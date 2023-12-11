@@ -1,6 +1,6 @@
 {
   "name": "@mybricks/comlib-pc-normal-chart",
-  "version": "1.0.9",
+  "version": "1.0.14",
   "description": "通用图表组件库",
   "scripts": {
     "start": "mybricks dev",
