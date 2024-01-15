@@ -1,5 +1,6 @@
 import { initInput, reRender, schemaDiff, schemaDefault, Data, AnnotationItem } from '../utils';
 import { set } from 'lodash-es';
+import { OutputIds } from './constants';
 
 export default {
   '@init'({ style, input, data }) {
@@ -14,13 +15,13 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+  ':root': ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any) => {
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
       if (!input.get(id)) {
         input.add(id, title, schema);
       }
     });
-    setSchema(data, input);
+    setSchema(data, input, output);
 
     cate0.title = '常规';
     (cate0.items = [
@@ -36,7 +37,7 @@ export default {
           get({ data }: EditorResult<Data>) {
             return data.subType;
           },
-          set({ data, input }: EditorResult<Data>, value: string) {
+          set({ data, input, output }: EditorResult<Data>, value: string) {
             data.subType = value;
             if (value === 'step') {
               data.config = {
@@ -57,7 +58,7 @@ export default {
                 seriesField: ''
               };
             }
-            setSchema(data, input);
+            setSchema(data, input, output);
           }
         }
       },
@@ -87,9 +88,9 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.xField || 'year';
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.xField = value;
-                setSchema(data, input);
+                setSchema(data, input, output);
               }
             }
           },
@@ -101,9 +102,9 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.yField;
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.yField = value;
-                setSchema(data, input);
+                setSchema(data, input, output);
               }
             }
           },
@@ -118,9 +119,9 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.seriesField || 'type';
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.seriesField = value;
-                setSchema(data, input);
+                setSchema(data, input, output);
               }
             }
           }
@@ -371,6 +372,18 @@ export default {
               set({ data }: EditorResult<Data>, value: string) {
                 data.emptyText = value;
               }
+            }
+          }
+        ]
+      },
+      {
+        title: '事件',
+        items: [
+          {
+            title: '查看节点变化事件',
+            type: '_event',
+            options: {
+              outputId: OutputIds.TooltipChange
             }
           }
         ]
@@ -688,10 +701,23 @@ const initParams = (data: Data) => {
   };
 };
 
-const setSchema = (data: Data, input: any) => {
-  if (data.subType === 'more') {
-    input.get('data').setSchema(schemaDiff(data));
-  } else {
-    input.get('data').setSchema(schemaDefault(data));
-  }
+export const setSchema = (data: Data, input: any, output: any) => {
+  const schema = data.subType === 'more' ? schemaDiff(data) : schemaDefault(data);
+
+  const setTooltipShowSchema = (schema: Record<string, any>) => {
+    if (output?.get(OutputIds.TooltipChange)) {
+      output.get(OutputIds.TooltipChange).setSchema({
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            data: schema.items
+          }
+        }
+      });
+    }
+  };
+
+  input.get('data').setSchema(schema);
+  setTooltipShowSchema(schema);
 };

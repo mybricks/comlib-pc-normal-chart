@@ -6,6 +6,7 @@ import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
 import { callInputs } from '../utils';
 import { chartTypes } from '../charts/constants';
+import { OutputIds } from './constants';
 
 export default function (props: RuntimeParams<Data>) {
   const { data, env, inputs, outputs, style } = props;
@@ -30,7 +31,7 @@ export default function (props: RuntimeParams<Data>) {
     callInputs(chartTypes.LINE, props, {
       setLoading,
       setTip
-    })
+    });
   }, []);
 
   const onReady = useCallback((graph: any) => {
@@ -44,6 +45,10 @@ export default function (props: RuntimeParams<Data>) {
           message.error('复制失败! 请稍后重试');
         }
       }
+    });
+
+    graph.on('tooltip:change', ({ data }) => {
+      outputs[OutputIds.TooltipChange] && outputs[OutputIds.TooltipChange](data.items);
     });
   }, []);
 
