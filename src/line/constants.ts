@@ -14,6 +14,10 @@ export interface Data extends ChartProps {
   subType?: SubTypeEnum;
 }
 
+export enum OutputIds  {
+  TooltipChange = 'tooltipChange'
+}
+
 // 折线图
 export const MockData: any = {
   default: [

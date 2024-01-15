@@ -1,7 +1,7 @@
 {
   "title": "折线图",
   "namespace": "mybricks.normal-pc-chart.line",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "折线图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -32,5 +32,13 @@
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "tooltipChange",
+      "title": "查看节点变化事件",
+      "schema": {
+        "type": "any"
+      }
+    }
+  ]
 }
