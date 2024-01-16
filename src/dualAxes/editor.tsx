@@ -68,7 +68,10 @@ export default {
                 return data.config.yField || 'value';
               },
               set({ data, input }: EditorResult<Data>, value: string) {
-                const valueAry = value.split(',').map(v => v.trim()).filter(v => !!v);
+                const valueAry = value
+                  .split(',')
+                  .map((v) => v.trim())
+                  .filter((v) => !!v);
                 if (valueAry.length < 1) return;
                 if (valueAry.length === 1) {
                   data.config.yField = [...valueAry, ...valueAry];
@@ -603,13 +606,12 @@ const geometryItem = (index: number) => [
         const dsInput = input.get(`${InputIds.DataSource}${index}`);
         const dsInputSchema = dsInput.schema;
         if (value) {
-          dsInputSchema.items.properties['seriesField'] = {
+          dsInputSchema.items.properties[value] = {
             title: '分组轴字段名',
             type: 'string'
           };
         } else {
-          dsInputSchema?.items?.properties?.seriesField &&
-            delete dsInputSchema.items.properties.seriesField;
+          dsInputSchema?.items?.properties?.[value] && delete dsInputSchema.items.properties[value];
         }
         dsInput?.setSchema(dsInputSchema);
       }
@@ -645,7 +647,7 @@ const geometryItem = (index: number) => [
         setGeometryOptions(data, 'smooth', value, index);
       }
     }
-  },
+  }
 ];
 
 let addAnnotation: (option: AnnotationItem) => void, delAnnotation: (index: number) => void;
