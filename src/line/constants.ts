@@ -15,7 +15,9 @@ export interface Data extends ChartProps {
 }
 
 export enum OutputIds  {
-  TooltipChange = 'tooltipChange'
+  TooltipChange = 'tooltipChange',
+  LabelClick = 'labelClick',
+  PlotClick = 'plotClick'
 }
 
 // 折线图

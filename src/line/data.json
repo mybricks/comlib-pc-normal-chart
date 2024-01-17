@@ -15,5 +15,7 @@
   },
   "subType": "default",
   "useEmpty": true,
-  "emptyText": "暂无数据"
+  "emptyText": "暂无数据",
+  "showPlotClick": false,
+  "showTooltipChange": false
 }

@@ -288,10 +288,27 @@ export default {
               set({ data }: EditorResult<Data>, value: boolean) {
                 if (!value) {
                   data.config.label = false;
+                  output.remove(OutputIds.LabelClick);
                 } else {
                   data.config.label = {};
+                  !output?.get(OutputIds.LabelClick) &&
+                    output.add(OutputIds.LabelClick, '数据标签点击事件', {
+                      type: 'any'
+                    });
+
+                  setSchema(data, input, output);
                 }
               }
+            }
+          },
+          {
+            title: '数据标签点击事件',
+            type: '_event',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.label;
+            },
+            options: {
+              outputId: OutputIds.LabelClick
             }
           },
           {
@@ -381,9 +398,64 @@ export default {
         items: [
           {
             title: '查看节点变化事件',
+            type: 'switch',
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data?.showTooltipChange || false;
+              },
+              set({ data }: EditorResult<Data>, value: boolean) {
+                data.showTooltipChange = value;
+                if (value) {
+                  !output?.get(OutputIds.TooltipChange) &&
+                    output.add(OutputIds.TooltipChange, '查看节点变化事件', {
+                      type: 'any'
+                    });
+                  setSchema(data, input, output);
+                } else {
+                  output.remove(OutputIds.TooltipChange);
+                }
+              }
+            }
+          },
+          {
+            title: '查看节点变化事件',
             type: '_event',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data?.showTooltipChange;
+            },
             options: {
               outputId: OutputIds.TooltipChange
+            }
+          },
+          {
+            title: '查看节点点击事件',
+            type: 'switch',
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data?.showPlotClick || false;
+              },
+              set({ data }: EditorResult<Data>, value: boolean) {
+                data.showPlotClick = value;
+                if (value) {
+                  !output?.get(OutputIds.PlotClick) &&
+                    output.add(OutputIds.PlotClick, '查看节点点击事件', {
+                      type: 'any'
+                    });
+                  setSchema(data, input, output);
+                } else {
+                  output.remove(OutputIds.PlotClick);
+                }
+              }
+            }
+          },
+          {
+            title: '查看节点点击事件',
+            type: '_event',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data?.showPlotClick;
+            },
+            options: {
+              outputId: OutputIds.PlotClick
             }
           }
         ]
@@ -397,7 +469,6 @@ export default {
             {
               title: '标题',
               type: 'Text',
-
               value: {
                 get({ data }: EditorResult<Data>) {
                   return data.config.xAxis.title?.text;
@@ -719,5 +790,12 @@ export const setSchema = (data: Data, input: any, output: any) => {
   };
 
   input.get('data').setSchema(schema);
+  if (output && output.get(OutputIds.LabelClick) && !!data.config.label) {
+    output.get(OutputIds.LabelClick)?.setSchema(schema);
+  }
+  if (output && output.get(OutputIds.PlotClick) && data?.showPlotClick) {
+    output.get(OutputIds.PlotClick)?.setSchema(schema);
+  }
+
   setTooltipShowSchema(schema);
 };
