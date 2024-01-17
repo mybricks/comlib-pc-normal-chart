@@ -25,6 +25,12 @@ export default function ({ data, output, input }: any): boolean {
     });
   }
 
+  if (!!data.config.label && !output?.get(OutputIds.LabelClick)) {
+    output.add(OutputIds.LabelClick, '数据标签点击事件', {
+      type: 'any'
+    });
+  }
+
   setSchema(data, input, output);
 
   return true;

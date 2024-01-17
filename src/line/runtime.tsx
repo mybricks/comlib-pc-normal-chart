@@ -50,6 +50,10 @@ export default function (props: RuntimeParams<Data>) {
     graph.on('tooltip:change', ({ data }) => {
       outputs[OutputIds.TooltipChange] && outputs[OutputIds.TooltipChange](data.items);
     });
+
+    graph.on('label:click', ({ data }) => {
+      outputs[OutputIds.LabelClick] && outputs[OutputIds.LabelClick](data.data);
+    });
   }, []);
 
   return (

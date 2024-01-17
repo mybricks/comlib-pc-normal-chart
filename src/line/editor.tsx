@@ -288,10 +288,27 @@ export default {
               set({ data }: EditorResult<Data>, value: boolean) {
                 if (!value) {
                   data.config.label = false;
+                  output.remove(OutputIds.LabelClick);
                 } else {
                   data.config.label = {};
+                  !output?.get(OutputIds.LabelClick) &&
+                    output.add(OutputIds.LabelClick, '数据标签点击事件', {
+                      type: 'any'
+                    });
+
+                  setSchema(data, input, output);
                 }
               }
+            }
+          },
+          {
+            title: '数据标签点击事件',
+            type: '_event',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.config.label;
+            },
+            options: {
+              outputId: OutputIds.LabelClick
             }
           },
           {
@@ -719,5 +736,9 @@ export const setSchema = (data: Data, input: any, output: any) => {
   };
 
   input.get('data').setSchema(schema);
+  if (output && output.get(OutputIds.LabelClick) && !!data.config.label) {
+    output.get(OutputIds.LabelClick)?.setSchema(schema);
+  }
+
   setTooltipShowSchema(schema);
 };
