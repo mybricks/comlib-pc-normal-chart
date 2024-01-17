@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Line } from '@ant-design/charts';
 import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
@@ -14,6 +14,7 @@ export default function (props: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
+  const tooltipData = useRef<Array<Record<string, any>>>([]);
 
   useEffect(() => {
     if (env.runtime) {
@@ -48,11 +49,21 @@ export default function (props: RuntimeParams<Data>) {
     });
 
     graph.on('tooltip:change', ({ data }) => {
-      outputs[OutputIds.TooltipChange] && outputs[OutputIds.TooltipChange](data.items);
+      // 存储 plot:click 需要的数据
+      tooltipData.current = data.items?.map((item: Record<string, any>) => item?.data || {});
+      if (data?.showTooltipChange) {
+        outputs[OutputIds.TooltipChange] && outputs[OutputIds.TooltipChange](data.items);
+      }
     });
 
     graph.on('label:click', ({ data }) => {
       outputs[OutputIds.LabelClick] && outputs[OutputIds.LabelClick](data.data);
+    });
+
+    graph.on('plot:click', () => {
+      if (data?.showPlotClick) {
+        outputs[OutputIds.PlotClick] && outputs[OutputIds.PlotClick](tooltipData.current);
+      }
     });
   }, []);
 
