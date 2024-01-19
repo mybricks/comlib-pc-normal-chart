@@ -4,7 +4,7 @@ import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
-import { callInputs } from '../utils';
+import { callInputs, changeMockDataField } from '../utils';
 import { chartTypes } from '../charts/constants';
 import { OutputIds } from './constants';
 
@@ -74,7 +74,11 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           onReady={onReady}
           {...data.config}
-          data={env.edit ? MockData[data.subType] : dataSourceInRuntime}
+          data={
+            env.edit
+              ? changeMockDataField(MockData[data.subType], data.config)
+              : dataSourceInRuntime
+          }
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       ) : (
