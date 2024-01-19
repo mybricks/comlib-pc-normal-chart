@@ -71,7 +71,7 @@ export const changeMockDataField = (
   arr: Array<Record<string, any>>,
   Field: { xField: string; yField: string; seriesField?: string },
   defaultKey?: { x?: string; y?: string; category: string }
-) => {
+): Array<Record<string, any>> => {
   const { xField, yField, seriesField } = Field;
   const { x = 'year', y = 'value', category = 'category' } = defaultKey || {};
 
