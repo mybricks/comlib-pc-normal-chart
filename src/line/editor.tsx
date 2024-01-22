@@ -1,6 +1,6 @@
 import { initInput, reRender, schemaDiff, schemaDefault, Data, AnnotationItem } from '../utils';
 import { set } from 'lodash-es';
-import { OutputIds } from './constants';
+import { DefaultCode, OutputIds, Comments } from './constants';
 
 export default {
   '@init'({ style, input, data }) {
@@ -11,6 +11,7 @@ export default {
         input.add(id, title, schema);
       }
     });
+    data.componentCode = encodeURIComponent(DefaultCode);
   },
   '@resize': {
     options: ['height', 'width']
@@ -266,6 +267,57 @@ export default {
                   ...data.config,
                   padding: value
                 };
+              }
+            }
+          }
+        ]
+      },
+      {
+        title: '提示信息',
+        items: [
+          {
+            title: '自定义提示信息内容',
+            type: 'switch',
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data?.customizeTooltip;
+              },
+              set({ data }: EditorResult<Data>, value: boolean) {
+                data.customizeTooltip = value;
+              }
+            }
+          },
+          {
+            title: '渲染代码',
+            type: 'code',
+            ifVisible({ data }: EditorResult<Data>) {
+              return !!data.customizeTooltip;
+            },
+            options: {
+              title: '编辑自定义渲染代码',
+              language: 'typescript',
+              width: 600,
+              minimap: {
+                enabled: false
+              },
+              eslint: {
+                parserOptions: {
+                  ecmaVersion: '2020',
+                  sourceType: 'module'
+                }
+              },
+              babel: false,
+              autoSave: false,
+              immediatelySet: true,
+              comments: Comments,
+              extraLib: data.extraLib
+            },
+            value: {
+              get({ data }: EditorResult<Data>) {
+                return data?.componentCode;
+              },
+              set({ data }: EditorResult<Data>, val: string) {
+                data.componentCode = val;
               }
             }
           }

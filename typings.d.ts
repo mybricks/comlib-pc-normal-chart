@@ -58,3 +58,7 @@ type AnyMap = {
 }
 
 interface Env { preview?: {}, edit?: {}, runtime?: any, mock?: {} }
+
+declare interface Window {
+  Babel: any;
+}

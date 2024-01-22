@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Line } from '@ant-design/charts';
-import { Data, MockData } from './constants';
+import { Data, MockData, OutputIds } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
 import { callInputs, changeMockDataField } from '../utils';
 import { chartTypes } from '../charts/constants';
-import { OutputIds } from './constants';
+import { Component } from '../components/custom-render';
 
 export default function (props: RuntimeParams<Data>) {
   const { data, env, inputs, outputs, style } = props;
@@ -15,6 +15,8 @@ export default function (props: RuntimeParams<Data>) {
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
   const tooltipData = useRef<Array<Record<string, any>>>([]);
+
+  const { customizeTooltip, componentCode } = data;
 
   useEffect(() => {
     if (env.runtime) {
@@ -67,6 +69,17 @@ export default function (props: RuntimeParams<Data>) {
     });
   }, []);
 
+  const customContent = customizeTooltip
+    ? (title: string, data: any[]) => {
+        return (
+          <Component
+            code={decodeURIComponent(componentCode)}
+            scope={{ props: { title, data, dataSource: dataSourceInRuntime } }}
+          />
+        );
+      }
+    : void 0;
+
   return (
     <Spin spinning={loading} tip={tip}>
       {!env.runtime || dataSourceInRuntime.length !== 0 ? (
@@ -80,6 +93,9 @@ export default function (props: RuntimeParams<Data>) {
               : dataSourceInRuntime
           }
           key={env.edit ? JSON.stringify(data.config) : undefined}
+          tooltip={{
+            customContent
+          }}
         />
       ) : (
         <EmptyWrap

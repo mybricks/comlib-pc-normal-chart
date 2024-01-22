@@ -1,5 +1,5 @@
 import { setSchema } from './editor';
-import { OutputIds } from './constants';
+import { OutputIds, DefaultCode } from './constants';
 
 export default function ({ data, output, input }: any): boolean {
   if (!data.tempAnnotations) {
@@ -32,6 +32,10 @@ export default function ({ data, output, input }: any): boolean {
   }
 
   setSchema(data, input, output);
+
+  if (data?.componentCode === undefined) {
+    data.componentCode = encodeURIComponent(DefaultCode);
+  }
 
   return true;
 }

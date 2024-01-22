@@ -23,6 +23,60 @@ export enum OutputIds {
   PlotClick = 'plotClick'
 }
 
+export const Comments = `interface Inject {
+   //React
+   React: React;
+   // antd组件库
+   antd: antd;
+   //antd icons
+   icons: @ant-design/icons;
+ }
+ /**
+  * @param props 组件数据
+  * @param inject 注入对象（包含React，antd，icons等）
+  * @param events 事件输出
+  * @return 自定义渲染
+  */
+ ({ props, inject, events }: Params) => {
+    const { React, antd, icons } = inject;
+    const { Button } = antd
+    const { RightOutlined } = icons;
+    const [num, setNum] = React.useState(0)
+    const onClick = function () {
+      setNum(pre => pre + 1)
+      //  events['output0']()
+    }
+    return (
+       <div>
+        <Button type="primary" onClick={onClick}>按钮<RightOutlined /></Button>
+        <h3>按钮被点击了\{num}次</h3>
+        <h3>props</h3>
+        <div dangerouslySetInnerHTML={{__html: JSON.stringify(props??{}, null, 2)}}/>
+       </div>
+    );
+ }
+`;
+
+export const DefaultCode = `({ props, inject }) => {
+  // title:当前x轴值, data:当前y轴上所有点值集合数组, dataSource:输入数据
+  const { title, data, dataSource } = props;
+  if (data?.length < 1) {
+    return;
+  }
+  // 注:需要根据x, y轴字段修改
+  const curValue = data[0]?.data?.value;
+  const index = dataSource.findIndex(({ value }) => value === curValue);
+  const Compared = index > 0 ? ((dataSource[index]?.value - dataSource[index - 1]?.value) / dataSource[index - 1]?.value) * 100 : 0;
+
+  return (
+    <>
+      <div> title: {title} </div>
+      <div> value: {curValue} </div>
+      <div> year-on-year: {Compared}% </div>
+    </>
+  );
+};`;
+
 // 折线图
 export const MockData: any = {
   default: [
