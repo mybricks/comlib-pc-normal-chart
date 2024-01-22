@@ -17,5 +17,8 @@
   "useEmpty": true,
   "emptyText": "暂无数据",
   "showPlotClick": false,
-  "showTooltipChange": false
+  "showTooltipChange": false,
+  "customAreaStyle": false,
+  "customPointStyle": false,
+  "customLineStyle": false
 }

@@ -4,7 +4,7 @@ import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
-import { callInputs } from '../utils';
+import { callInputs, changeMockDataField } from '../utils';
 import { chartTypes } from '../charts/constants';
 
 export default function (props: RuntimeParams<Data>) {
@@ -30,7 +30,7 @@ export default function (props: RuntimeParams<Data>) {
     callInputs(chartTypes.FUNNEL, props, {
       setLoading,
       setTip
-    })
+    });
   }, []);
 
   const onReady = useCallback((graph: any) => {
@@ -54,7 +54,7 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           {...data.config}
           onReady={onReady}
-          data={env.edit ? MockData : dataSourceInRuntime}
+          data={env.edit ? changeMockDataField(MockData, data.config) : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       ) : (
