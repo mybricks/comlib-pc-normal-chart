@@ -87,7 +87,7 @@ module.exports = {
       moment: 'moment',
       antd: 'antd',
       '@ant-design/icons': 'icons',
-      '@ant-design/charts': 'charts',
+      '@ant-design/charts': 'Charts',
     }
   ]
 }
