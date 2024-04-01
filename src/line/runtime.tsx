@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { Line } from '@ant-design/charts';
 import { Data, MockData, OutputIds } from './constants';
 import copy from 'copy-to-clipboard';
@@ -69,8 +69,9 @@ export default function (props: RuntimeParams<Data>) {
     });
   }, []);
 
-  const customContent = customizeTooltip
-    ? (title: string, data: any[]) => {
+  useEffect(() => {
+    if (customizeTooltip) {
+      const customContent = (title: string, data: any[]) => {
         return (
           <Component
             code={decodeURIComponent(componentCode)}
@@ -78,7 +79,11 @@ export default function (props: RuntimeParams<Data>) {
           />
         );
       }
-    : void 0;
+      data.config.tooltip
+        ? data.config.tooltip.customContent = customContent
+        : data.config.tooltip = { customContent }
+    }
+  }, [data.config, customizeTooltip]);
 
   return (
     <Spin spinning={loading} tip={tip}>
@@ -93,9 +98,6 @@ export default function (props: RuntimeParams<Data>) {
               : dataSourceInRuntime
           }
           key={env.edit ? JSON.stringify(data.config) : undefined}
-          tooltip={{
-            customContent
-          }}
         />
       ) : (
         <EmptyWrap
