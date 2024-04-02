@@ -107,6 +107,7 @@ export default {
               data.config = {
                 ...data.config,
                 isStack: true,
+                isGroup: false,
                 seriesField: 'type'
               };
             } else if (value === 'group') {
