@@ -87,6 +87,48 @@ export default {
         }
       },
       {
+        title: '展示类型',
+        type: 'Select',
+        options: [
+          { label: '基础', value: 'default' },
+          { label: '堆叠', value: 'stack' },
+          { label: '分组', value: 'group' }
+        ],
+        ifVisible({ data }: EditorResult<Data>) {
+          return data.type === chartTypes.COLUMN;
+        },
+        value: {
+          get({ data }: EditorResult<Data>) {
+            return data.showType || 'group';
+          },
+          set({ data, input }: EditorResult<Data>, value: 'default' | 'stack' | 'group') {
+            data.showType = value;
+            if (value === 'stack') {
+              data.config = {
+                ...data.config,
+                isStack: true,
+                seriesField: 'type'
+              };
+            } else if (value === 'group') {
+              data.config = {
+                ...data.config,
+                isStack: false,
+                isGroup: true,
+                seriesField: 'type'
+              };
+            } else {
+              data.config = {
+                ...data.config,
+                isStack: false,
+                isGroup: false,
+                seriesField: ''
+              };
+            }
+            setDataSchema(data, input);
+          }
+        }
+      },
+      {
         title: '主题',
         type: 'Select',
         options: [
@@ -174,7 +216,11 @@ export default {
             type: 'text',
             description: '用于同时看一个维度中不同情况的指标需求',
             ifVisible({ data }: EditorResult<Data>) {
-              return data.type !== chartTypes.PIE && data.type !== chartTypes.BIDIRECTIONAL_BAR;
+              return (
+                data.type !== chartTypes.PIE &&
+                data.type !== chartTypes.BIDIRECTIONAL_BAR &&
+                !(data.type === chartTypes.COLUMN && data.showType === 'default')
+              );
             },
             value: {
               get({ data }: EditorResult<Data>) {
