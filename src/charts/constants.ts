@@ -27,20 +27,23 @@ export interface Config {
   statistic?: Statistic
   meta?: Meta
   theme: string
-  geometryOptions?: GeometryOption[]
+  geometryOptions?: GeometryOption[];
+  isStack: boolean;
+  isGroup: boolean;
 }
 
 export interface Data {
-  type: string
-  config: Config
+  type: string,
+  config: Config,
   tooltipFormatterFn: {
     visible: boolean
     content: string
-  }
+  },
   lineStyleFn: {
     visible: boolean
     content: string
-  }
+  },
+  showType: "default" | "stack" | "group"
 }
 
 const lineData = [

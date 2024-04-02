@@ -1,4 +1,8 @@
-export default function ({ data, input }) {
+import {
+  Data,
+} from './constants';
+
+export default function ({ data, input }: UpgradeParams<Data>) {
   // 1.0.8 -> 1.0.9
   if (data.type === 'line') {
     input.get('data').setSchema({
@@ -10,7 +14,7 @@ export default function ({ data, input }) {
             title: 'x横轴字段名',
             type: 'string'
           },
-          [data.config.yField]: {
+          [data.config.yField as string]: {
             title: 'y纵轴字段名',
             type: 'number'
           },
@@ -21,6 +25,10 @@ export default function ({ data, input }) {
         }
       }
     })
+  }
+
+  if (typeof data?.showType === 'undefined') {
+    data.showType = "group"
   }
 
   return true;
