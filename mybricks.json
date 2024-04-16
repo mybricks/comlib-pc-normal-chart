@@ -74,5 +74,14 @@
       }
     ]
   },
+  "externals": [
+    {
+      "name": "@ant-design/chart",
+      "library": "Charts",
+      "urls": [
+        "/mfs/mybricks_material_externals/ant-design-charts@1.3.5.min.js"
+      ]
+    }
+  ],
   "tags": "react"
 }
