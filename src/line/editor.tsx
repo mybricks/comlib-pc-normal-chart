@@ -17,7 +17,7 @@ export default {
     options: ['height', 'width']
   },
   ':root': ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any, cate2: any) => {
-    initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
+    initInput(data).forEach(({ id, title, schema = { type: 'object' } }) => {
       if (!input.get(id)) {
         input.add(id, title, schema);
       }

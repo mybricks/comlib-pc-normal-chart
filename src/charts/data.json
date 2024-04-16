@@ -21,5 +21,6 @@
   "lineStyleFn": {
     "visible": false,
     "content": ""
-  }
+  },
+  "showType": "group"
 }
