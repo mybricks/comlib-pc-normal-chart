@@ -26,6 +26,62 @@ export interface Axis {
   value: string | Object;
 }
 
+// TODO: 后续可拓展更多图表组件
+export const componentNameOptions = [
+  {
+    label: '画布',
+    value: 'plot'
+  },
+  {
+    label: '元素',
+    value: 'element'
+  },
+  {
+    label: '图例',
+    value: 'legend'
+  },
+  {
+    label: '悬浮提示',
+    value: 'tooltip'
+  },
+  {
+    label: '数据标签',
+    value: 'label'
+  },
+];
+
+// TODO: 后续可拓展更多图表事件
+export const eventNameOptions = [
+  {
+    label: '点击',
+    value: 'click'
+  },
+  {
+    label: '双击',
+    value: 'dblclick'
+  },
+  {
+    label: '右键',
+    value: 'contextmenu'
+  },
+  {
+    label: '悬浮',
+    value: 'hover'
+  },
+  {
+    label: '显示',
+    value: 'show'
+  },
+  {
+    label: '隐藏',
+    value: 'hide'
+  },
+  {
+    label: '更新',
+    value: 'change'
+  },
+]
+
 export interface ChartConfigProps {
   yAxis?: any;
   xAxis?: any;
@@ -37,6 +93,12 @@ export interface ChartConfigProps {
 }
 export interface ChartProps {
   config: ChartConfigProps;
+  events: {
+    title: string,
+    id: string,
+    componentName: string,
+    eventName: string
+  }[];
   [key: string]: any;
 }
 
