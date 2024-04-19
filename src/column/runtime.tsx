@@ -15,6 +15,10 @@ export default function (props: RuntimeParams<Data>) {
   const [tip, setTip] = useState('');
 
   useEffect(() => {
+    callInputs(chartTypes.COLUMN, props, {
+      setLoading,
+      setTip
+    });
     if (env.runtime) {
       setLoading(true);
       inputs.data((val: React.SetStateAction<any[]>) => {
@@ -24,13 +28,6 @@ export default function (props: RuntimeParams<Data>) {
       });
       setLoading(false);
     }
-  }, []);
-
-  useEffect(() => {
-    callInputs(chartTypes.COLUMN, props, {
-      setLoading,
-      setTip
-    });
   }, []);
 
   const onReady = useCallback((graph: any) => {
@@ -45,6 +42,13 @@ export default function (props: RuntimeParams<Data>) {
         }
       }
     });
+    data.events?.forEach(ev => {
+      const { id, componentName, eventName } = ev;
+      graph.on(`${componentName}:${eventName}`, (e) => {
+        // 引擎无法对部分字段defineProperty, 所以这里只输出数据字段
+        outputs[id](e.data);
+      })
+    })
   }, []);
 
   return (
@@ -57,8 +61,8 @@ export default function (props: RuntimeParams<Data>) {
           data={
             env.edit
               ? changeMockDataField(MockData[data.subType], data.config, {
-                  category: data.subType === 'stack' ? 'type' : 'name'
-                })
+                category: data.subType === 'stack' ? 'type' : 'name'
+              })
               : dataSourceInRuntime
           }
           key={env.edit ? JSON.stringify(data.config) : undefined}

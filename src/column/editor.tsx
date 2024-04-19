@@ -1,5 +1,6 @@
 import { initInput, reRender, Data, AnnotationItem, setSchema } from '../utils';
 import { set } from 'lodash-es';
+import getEventEditor from '../utils/editor/getEventEditor';
 
 export default {
   '@init'({ style, input, data }) {
@@ -14,7 +15,8 @@ export default {
   '@resize': {
     options: ['height', 'width']
   },
-  ':root': ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+  ':root': (props: EditorResult<any>, cate0: any, cate1: any) => {
+    const { data, input } = props;
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
       if (!input.get(id)) {
         input.add(id, title, schema);
@@ -637,7 +639,8 @@ export default {
               }
             }
           ]
-        }
+        },
+        ...(getEventEditor(props))
       ]);
   }
 };

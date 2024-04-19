@@ -19,7 +19,9 @@ interface RuntimeParams<T> {
     }
   }
   inputs: any
+  input: any
   outputs: any
+  output: any
   _inputs: any
   _outputs: any
   logger: any

@@ -1,4 +1,5 @@
 import { Annotation } from '@antv/g2plot';
+import { ChartConfigProps } from './constants';
 
 /**
  * @param label 标注的名称
@@ -36,4 +37,11 @@ export const DefaultDualGeometryOptions = [
 
 export interface Data {
   [key: string]: any;
+  config: ChartConfigProps;
+  events: {
+    title: string,
+    id: string,
+    componentName: string,
+    eventName: string
+  }[];
 }
