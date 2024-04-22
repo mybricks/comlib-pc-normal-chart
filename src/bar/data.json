@@ -14,5 +14,13 @@
   },
   "subType": "default",
   "useEmpty": true,
-  "emptyText": "暂无数据"
+  "emptyText": "暂无数据",
+  "events": [
+    {
+      "title": "元素点击",
+      "id": "eleClick",
+      "componentName": "element",
+      "eventName": "click"
+    }
+  ]
 }

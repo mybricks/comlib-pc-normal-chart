@@ -143,3 +143,21 @@ export function uuid(pre = 'u_', len = 6) {
   }
   return pre + rtn;
 }
+
+export function registerEvents({ events, graph, outputs }) {
+  events?.forEach(ev => {
+    const { id, componentName, eventName } = ev;
+    graph.on(`${componentName}:${eventName}`, (e) => {
+      // 引擎无法对部分数据类型defineProperty, 所以这里只输出数据字段
+      // 以及其他用户需求的字段
+      const element = e?.gEvent?.target?.cfg?.element;
+      outputs[id]({
+        element: {
+          data: element?.data,
+          states: element?.states
+        },
+        ...(e.data || {}),
+      });
+    })
+  })
+}

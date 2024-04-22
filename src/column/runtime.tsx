@@ -4,7 +4,7 @@ import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
-import { callInputs, changeMockDataField } from '../utils';
+import { callInputs, changeMockDataField, registerEvents } from '../utils';
 import { chartTypes } from '../charts/constants';
 
 export default function (props: RuntimeParams<Data>) {
@@ -42,20 +42,7 @@ export default function (props: RuntimeParams<Data>) {
         }
       }
     });
-    data.events?.forEach(ev => {
-      const { id, componentName, eventName } = ev;
-      graph.on(`${componentName}:${eventName}`, (e) => {
-        // 引擎无法对部分数据类型defineProperty, 所以这里只输出数据字段
-        const element = e?.gEvent?.target?.cfg?.element;
-        outputs[id]({
-          ...(e.data || {}),
-          element: {
-            data: element?.data,
-            states: element?.states
-          }
-        });
-      })
-    })
+    registerEvents({ events: data.events, graph, outputs });
   }, []);
 
   return (
