@@ -45,8 +45,15 @@ export default function (props: RuntimeParams<Data>) {
     data.events?.forEach(ev => {
       const { id, componentName, eventName } = ev;
       graph.on(`${componentName}:${eventName}`, (e) => {
-        // 引擎无法对部分字段defineProperty, 所以这里只输出数据字段
-        outputs[id](e.data);
+        // 引擎无法对部分数据类型defineProperty, 所以这里只输出数据字段
+        const element = e?.gEvent?.target?.cfg?.element;
+        outputs[id]({
+          ...(e.data || {}),
+          element: {
+            data: element?.data,
+            states: element?.states
+          }
+        });
       })
     })
   }, []);

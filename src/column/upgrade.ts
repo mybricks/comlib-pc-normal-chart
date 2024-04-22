@@ -49,6 +49,31 @@ export default function ({ data, output }: RuntimeParams<Data>) {
         "properties": {
           "data": {
             "type": "object"
+          },
+          "element": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "array",
+                "items": {
+                  "type": "enum",
+                  "items": [
+                    {
+                      "type": "string",
+                      "value": "active"
+                    },
+                    {
+                      "type": "string",
+                      "value": "selected"
+                    },
+                    {
+                      "type": "string",
+                      "value": "inactive"
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }
