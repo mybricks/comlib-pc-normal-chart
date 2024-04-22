@@ -1,4 +1,4 @@
-import { ChartProps, eventNameOptions, componentNameOptions } from '../constants';
+import { ChartProps, eventNameOptions, componentNameOptions, elementClickSchema } from '../constants';
 type Data = ChartProps;
 
 export default ({ data, output }: EditorResult<Data>) => [
@@ -22,14 +22,7 @@ export default ({ data, output }: EditorResult<Data>) => [
               {
                 id: defaultEvent.id,
                 title: defaultEvent.title,
-                schema: {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object"
-                    }
-                  }
-                }
+                schema: elementClickSchema
               }
             );
 
