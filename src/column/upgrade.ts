@@ -1,4 +1,4 @@
-import { Data } from "../utils";
+import { Data, elementClickSchema } from "../utils";
 
 export default function ({ data, output }: RuntimeParams<Data>) {
   // 1.0.1 -> 1.0.2
@@ -44,14 +44,7 @@ export default function ({ data, output }: RuntimeParams<Data>) {
     output.add({
       id: 'eleClick',
       title: '元素点击',
-      schema: {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object"
-          }
-        }
-      }
+      schema: elementClickSchema
     })
   }
   //=========== v1.0.6 end ===============

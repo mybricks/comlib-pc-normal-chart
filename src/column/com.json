@@ -1,7 +1,7 @@
 {
   "title": "柱状图",
   "namespace": "mybricks.normal-pc-chart.column",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "柱状图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -42,6 +42,31 @@
         "properties": {
           "data": {
             "type": "object"
+          },
+          "element": {
+            "type": "object",
+            "properties": {
+              "states": {
+                "type": "array",
+                "items": {
+                  "type": "enum",
+                  "items": [
+                    {
+                      "type": "string",
+                      "value": "active"
+                    },
+                    {
+                      "type": "string",
+                      "value": "selected"
+                    },
+                    {
+                      "type": "string",
+                      "value": "inactive"
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }

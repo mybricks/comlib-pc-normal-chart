@@ -4,7 +4,7 @@ import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
-import { callInputs, changeMockDataField } from '../utils';
+import { callInputs, changeMockDataField, registerEvents } from '../utils';
 import { chartTypes } from '../charts/constants';
 
 export default function (props: RuntimeParams<Data>) {
@@ -45,6 +45,7 @@ export default function (props: RuntimeParams<Data>) {
         }
       }
     });
+    registerEvents({ events: data.events, graph, outputs });
   }, []);
 
   return (
