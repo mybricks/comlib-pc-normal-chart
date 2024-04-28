@@ -13,11 +13,13 @@ import {
 } from './constants';
 import { runJs } from './util';
 import { useMemo } from 'react';
+import EmptyWrap from '../components/emptyWrap';
 
-export default function ({ data, env, inputs }: RuntimeParams<Data>) {
+export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   const { edit } = env;
   const [chartData, setChartData] = useState([]);
   const [percent, setPercent] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (edit) {
@@ -51,6 +53,7 @@ export default function ({ data, env, inputs }: RuntimeParams<Data>) {
   }, [data.type]);
 
   useEffect(() => {
+    setLoading(true);
     inputs[inputIdMap.DATA]((val: any) => {
       if (data.type === chartTypes.LIQUID) {
         setPercent(val);
@@ -58,6 +61,7 @@ export default function ({ data, env, inputs }: RuntimeParams<Data>) {
         setChartData(val);
       }
     });
+    setLoading(false);
 
     inputs[inputIdMap.CONFIG]((val: any) => {
       data.type = val.chartType || data.type;
@@ -143,13 +147,18 @@ export default function ({ data, env, inputs }: RuntimeParams<Data>) {
 
   const Chart = useMemo(() => Charts[data.type], [data.type, data.config, chartData]);
 
-  return config.data?.length > 0 || config.percent > 0 ? (
-    <Chart {...config} />
-  ) : (
-    <div
-      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}
-    >
-      <Spin spinning={true} />
-    </div>
+  return (
+    <Spin spinning={loading}>
+      {config.data?.length > 0 || config.percent > 0 ? (
+        <Chart {...config} />
+      ) : (
+        <EmptyWrap
+          style={{ width: style.width, height: style.height }}
+          emptyText={data?.emptyText || '暂无数据'}
+          useEmpty={data?.useEmpty}
+          emptyImage={data.emptyImage}
+        />
+      )}
+    </Spin>
   );
 }

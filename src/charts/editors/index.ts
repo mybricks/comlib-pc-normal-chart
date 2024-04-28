@@ -20,5 +20,6 @@ export default {
   },
   [chartTypes.DUAL_AXES]: {
     [CHART_STYLE]: dualAxes[CHART_STYLE]
-  }
+  },
+  
 }

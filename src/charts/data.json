@@ -22,5 +22,7 @@
     "visible": false,
     "content": ""
   },
-  "showType": "group"
+  "showType": "group",
+  "useEmpty": "true",
+  "emptyText": "暂无数据"
 }

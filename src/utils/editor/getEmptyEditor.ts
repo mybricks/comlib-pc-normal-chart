@@ -20,6 +20,21 @@ export default () => {
           }
         },
         {
+          title: '图片地址',
+          type: 'ImageSelector',
+          ifVisible({ data }: EditorResult<Data>) {
+            return !!data.useEmpty;
+          },
+          value: {
+            get({ data }: EditorResult<Data>) {
+              return data.emptyImage;
+            },
+            set({ data }: EditorResult<Data>, value: string) {
+              data.emptyImage = value;
+            }
+          }
+        },
+        {
           title: '空状态文案',
           type: 'Text',
           options: {

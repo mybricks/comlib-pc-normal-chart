@@ -43,7 +43,10 @@ export interface Data {
     visible: boolean
     content: string
   },
-  showType: "default" | "stack" | "group"
+  showType: "default" | "stack" | "group",
+  useEmpty: boolean,
+  emptyText: string,
+  emptyImage: string
 }
 
 const lineData = [

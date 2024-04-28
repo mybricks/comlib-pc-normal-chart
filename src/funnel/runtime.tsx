@@ -62,6 +62,7 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           emptyText={data.emptyText}
           useEmpty={data.useEmpty}
+          emptyImage={data.emptyImage}
         />
       )}
     </Spin>
