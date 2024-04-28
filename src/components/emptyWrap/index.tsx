@@ -13,7 +13,10 @@ interface Props {
 export default (props: Props) => {
   const { emptyText, small, style, useEmpty, emptyImage } = props;
   return (
-    <div className={css.emptyWrap} style={{ width: style.width, height: style.height }}>
+    <div
+      className={`${css.emptyWrap} emptyWrap`}
+      style={{ width: style.width, height: style.height }}
+    >
       {useEmpty ? (
         <Empty
           description={emptyText}

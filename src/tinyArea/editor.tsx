@@ -119,6 +119,19 @@ export default {
     },
     style: [
       {
+        title: '容器',
+        options: ['border', { type: 'background', config: { disableBackgroundImage: true } }],
+        target: '.ant-spin-container'
+      },
+      {
+        title: '空状态容器',
+        ifVisible({ data }: EditorResult<Data>) {
+          return !!data.useEmpty;
+        },
+        options: ['border', { type: 'background', config: { disableBackgroundImage: true } }],
+        target: '.ant-spin-container div.emptyWrap'
+      },
+      {
         title: '空状态图片',
         ifVisible({ data }: EditorResult<Data>) {
           return !!data.useEmpty;
