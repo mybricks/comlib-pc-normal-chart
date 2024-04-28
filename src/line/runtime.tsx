@@ -78,10 +78,10 @@ export default function (props: RuntimeParams<Data>) {
             scope={{ props: { title, data, dataSource: dataSourceInRuntime } }}
           />
         );
-      }
+      };
       data.config.tooltip
-        ? data.config.tooltip.customContent = customContent
-        : data.config.tooltip = { customContent }
+        ? (data.config.tooltip.customContent = customContent)
+        : (data.config.tooltip = { customContent });
     }
   }, [data.config, customizeTooltip]);
 
@@ -104,6 +104,7 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           emptyText={data.emptyText}
           useEmpty={data.useEmpty}
+          emptyImage={data.emptyImage}
         />
       )}
     </Spin>

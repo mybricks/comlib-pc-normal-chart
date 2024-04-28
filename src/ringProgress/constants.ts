@@ -14,6 +14,7 @@ export interface Data {
   statistic: any;
   useEmpty: boolean;
   emptyText: string;
+  emptyImage: any;
 }
 
 export const MockData: any = 0.6;

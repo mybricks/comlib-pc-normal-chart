@@ -55,8 +55,8 @@ export default function (props: RuntimeParams<Data>) {
           data={
             env.edit
               ? changeMockDataField(MockData[data.subType], data.config, {
-                category: data.subType === 'stack' ? 'type' : 'name'
-              })
+                  category: data.subType === 'stack' ? 'type' : 'name'
+                })
               : dataSourceInRuntime
           }
           key={env.edit ? JSON.stringify(data.config) : undefined}
@@ -66,6 +66,7 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           emptyText={data.emptyText}
           useEmpty={data.useEmpty}
+          emptyImage={data.emptyImage}
         />
       )}
     </Spin>

@@ -37,7 +37,7 @@ export default {
                             title: 'x轴字段名',
                             type: 'number'
                           },
-                          [data.config.yField]: {
+                          [data.config.yField as string]: {
                             title: 'y轴字段名',
                             type: 'number'
                           },
@@ -159,7 +159,7 @@ export default {
                             title: 'x轴字段名',
                             type: 'number'
                           },
-                          [data.config.yField]: {
+                          [data.config.yField as string]: {
                             title: 'y轴字段名',
                             type: 'number'
                           },

@@ -47,7 +47,7 @@ export const componentNameOptions = [
   {
     label: '数据标签',
     value: 'label'
-  },
+  }
 ];
 
 // TODO: 后续可拓展更多图表事件
@@ -79,8 +79,8 @@ export const eventNameOptions = [
   {
     label: '更新',
     value: 'change'
-  },
-]
+  }
+];
 
 export interface ChartConfigProps {
   yAxis?: any;
@@ -90,14 +90,15 @@ export interface ChartConfigProps {
   legend?: any;
   xField: string;
   yField: string;
+  [key: string]: any;
 }
 export interface ChartProps {
   config: ChartConfigProps;
   events: {
-    title: string,
-    id: string,
-    componentName: string,
-    eventName: string
+    title: string;
+    id: string;
+    componentName: string;
+    eventName: string;
   }[];
   [key: string]: any;
 }
@@ -115,7 +116,7 @@ export const initInput = (type: string) => {
             properties: {
               content: {
                 type: 'string'
-              },
+              }
             }
           },
           content: {
@@ -123,9 +124,9 @@ export const initInput = (type: string) => {
             properties: {
               content: {
                 type: 'string'
-              },
+              }
             }
-          },
+          }
         }
       },
       /** 交互配置 */
@@ -139,9 +140,9 @@ export const initInput = (type: string) => {
             }
           }
         }
-      },
+      }
     }
-  }
+  };
   const labelSchema = {
     type: 'object',
     properties: {
@@ -230,9 +231,9 @@ export const initInput = (type: string) => {
             type: 'any'
           }
         }
-      },
+      }
     }
-  }
+  };
   const tooltipSchema = {
     type: 'object',
     properties: {
@@ -298,32 +299,31 @@ export const changeMockDataField = (
   }));
 };
 
-
 export const elementClickSchema = {
-  "type": "object",
-  "properties": {
-    "data": {
-      "type": "object"
+  type: 'object',
+  properties: {
+    data: {
+      type: 'object'
     },
-    "element": {
-      "type": "object",
-      "properties": {
-        "states": {
-          "type": "array",
-          "items": {
-            "type": "enum",
-            "items": [
+    element: {
+      type: 'object',
+      properties: {
+        states: {
+          type: 'array',
+          items: {
+            type: 'enum',
+            items: [
               {
-                "type": "string",
-                "value": "active"
+                type: 'string',
+                value: 'active'
               },
               {
-                "type": "string",
-                "value": "selected"
+                type: 'string',
+                value: 'selected'
               },
               {
-                "type": "string",
-                "value": "inactive"
+                type: 'string',
+                value: 'inactive'
               }
             ]
           }
@@ -331,4 +331,4 @@ export const elementClickSchema = {
       }
     }
   }
-}
+};

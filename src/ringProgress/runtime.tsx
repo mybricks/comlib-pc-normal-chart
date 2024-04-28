@@ -50,6 +50,7 @@ export default function ({ data, inputs, style, env, title }) {
           style={{ width: style.width, height: style.height }}
           emptyText={data.emptyText}
           useEmpty={data.useEmpty}
+          emptyImage={data.emptyImage}
           small
         />
       )}

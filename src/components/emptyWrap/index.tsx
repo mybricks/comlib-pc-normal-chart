@@ -8,15 +8,25 @@ interface Props {
   emptyText?: string;
   small?: boolean;
   useEmpty?: boolean;
+  emptyImage?: React.ReactNode;
 }
 export default (props: Props) => {
-  const { emptyText, small, style, useEmpty } = props;
+  const { emptyText, small, style, useEmpty, emptyImage } = props;
   return (
-    <div className={css.emptyWrap} style={{ width: style.width, height: style.height }}>
+    <div
+      className={`${css.emptyWrap} emptyWrap`}
+      style={{ width: style.width, height: style.height }}
+    >
       {useEmpty ? (
         <Empty
           description={emptyText}
-          image={small ? Empty.PRESENTED_IMAGE_SIMPLE : Empty.PRESENTED_IMAGE_DEFAULT}
+          image={
+            emptyImage
+              ? emptyImage
+              : small
+              ? Empty.PRESENTED_IMAGE_SIMPLE
+              : Empty.PRESENTED_IMAGE_DEFAULT
+          }
         />
       ) : null}
     </div>

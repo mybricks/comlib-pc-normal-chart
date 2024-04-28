@@ -27,7 +27,7 @@ export default function (props: RuntimeParams<Data>) {
     callInputs(chartTypes.ORGANIZATION, props, {
       setLoading,
       setTip
-    })
+    });
   }, []);
 
   const onReady = useCallback((graph: any) => {
@@ -52,6 +52,7 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           emptyText={data.emptyText}
           useEmpty={data.useEmpty}
+          emptyImage={data.emptyImage}
         />
       )}
     </Spin>

@@ -31,5 +31,13 @@ export default function ({ data, input }: UpgradeParams<Data>) {
     data.showType = "group"
   }
 
+  if (typeof data?.emptyText === 'undefined') {
+    data.emptyText = "暂无数据"
+  }
+
+  if (typeof data?.useEmpty === 'undefined') {
+    data.useEmpty = true
+  }
+
   return true;
 }
