@@ -13,11 +13,13 @@ export default function (props: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
+  const [configData, setConfigData] = useState<Data['config']>(data.config);
 
   useEffect(() => {
     callInputs(chartTypes.COLUMN, props, {
       setLoading,
-      setTip
+      setTip,
+      setConfigData
     });
     if (env.runtime) {
       setLoading(true);
@@ -51,7 +53,7 @@ export default function (props: RuntimeParams<Data>) {
         <Column
           style={{ width: style.width, height: style.height }}
           onReady={onReady}
-          {...data.config}
+          {...configData}
           data={
             env.edit
               ? changeMockDataField(MockData[data.subType], data.config, {
