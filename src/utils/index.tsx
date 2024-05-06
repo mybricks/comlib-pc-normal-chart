@@ -80,34 +80,38 @@ export function dataURLToFile(dataURL: string, fileName: string) {
 }
 
 const typeMap = {
-  'OBJECT': '[object Object]',
-  'ARRAY': '[object Array]',
-  'STRING': '[object String]',
-  'NUMBER': '[object Number]',
-  'FORMDATA': '[object FormData]',
-  'NULL': '[object Null]',
-  'UNDEFINED': '[object Undefined]',
-  'BOOLEAN': '[object Boolean]',
-  'FUNCTION': '[object Function]'
-}
+  OBJECT: '[object Object]',
+  ARRAY: '[object Array]',
+  STRING: '[object String]',
+  NUMBER: '[object Number]',
+  FORMDATA: '[object FormData]',
+  NULL: '[object Null]',
+  UNDEFINED: '[object Undefined]',
+  BOOLEAN: '[object Boolean]',
+  FUNCTION: '[object Function]'
+};
 
 function typeCheck(variable, type) {
   if (Array.isArray(type)) {
-    let bool = false
+    let bool = false;
     for (let i = 0; i < type.length; i++) {
       if (typeCheck(variable, type[i])) {
-        bool = true
-        break
+        bool = true;
+        break;
       }
     }
-    return bool
+    return bool;
   } else {
-    const checkType = /^\[.*\]$/.test(type) ? type : typeMap[type.toUpperCase()]
-    return Object.prototype.toString.call(variable) === checkType
+    const checkType = /^\[.*\]$/.test(type) ? type : typeMap[type.toUpperCase()];
+    return Object.prototype.toString.call(variable) === checkType;
   }
 }
 
-export function callInputs(type: string, { data, env, inputs }: RuntimeParams<{ config: any }>, cbs?) {
+export function callInputs(
+  type: string,
+  { data, env, inputs }: RuntimeParams<{ config: any }>,
+  cbs?
+) {
   if (env.runtime) {
     initInput(type).forEach(({ id }) => {
       inputs[id]((ds: any) => {
@@ -116,18 +120,22 @@ export function callInputs(type: string, { data, env, inputs }: RuntimeParams<{ 
           cbs?.setLoading?.(!!ds);
         } else if (typeCheck(ds, 'OBJECT')) {
           if (id === 'style') {
-            data.config = { ...data.config, ...ds };
+            const newConfig = { ...data.config, ...ds };
+            data.config = newConfig;
+            cbs?.setConfigData(newConfig);
           } else {
             if (id === 'axis') id = 'xAxis';
             if (id === 'yaxis') id = 'yAxis';
             const oldConfig = data.config[id] || {};
-            data.config = {
+            const newConfig = {
               ...data.config,
               [id]: {
                 ...oldConfig,
                 ...ds
               }
             };
+            data.config = newConfig;
+            cbs?.setConfigData(newConfig);
           }
         }
       });
@@ -136,7 +144,8 @@ export function callInputs(type: string, { data, env, inputs }: RuntimeParams<{ 
 }
 
 export function uuid(pre = 'u_', len = 6) {
-  const seed = 'abcdefhijkmnprstwxyz0123456789', maxPos = seed.length;
+  const seed = 'abcdefhijkmnprstwxyz0123456789',
+    maxPos = seed.length;
   let rtn = '';
   for (let i = 0; i < len; i++) {
     rtn += seed.charAt(Math.floor(Math.random() * maxPos));
@@ -145,7 +154,7 @@ export function uuid(pre = 'u_', len = 6) {
 }
 
 export function registerEvents({ events, graph, outputs }) {
-  events?.forEach(ev => {
+  events?.forEach((ev) => {
     const { id, componentName, eventName } = ev;
     graph.on(`${componentName}:${eventName}`, (e) => {
       // 引擎无法对部分数据类型defineProperty, 所以这里只输出数据字段
@@ -156,8 +165,8 @@ export function registerEvents({ events, graph, outputs }) {
           data: element?.data,
           states: element?.states
         },
-        ...(e.data || {}),
+        ...(e.data || {})
       });
-    })
-  })
+    });
+  });
 }
