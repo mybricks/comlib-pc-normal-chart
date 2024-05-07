@@ -2,10 +2,11 @@
 
 ## 浏览器兼容性
 
+> [在线 Demo](https://lxfu1.github.io/browser-compatibility-of-antv)。
+
 ### G2
 
-> 由于条件限制，版本下限仅供参考，并不意味着不能支持更低版本，该测试在 CDN 模式下测试完成，
-[在线 Demo](https://lxfu1.github.io/browser-compatibility-of-antv)。——2021.3.25
+> 由于条件限制，版本下限仅供参考，并不意味着不能支持更低版本，该测试在 CDN 模式下测试完成。——2021.3.25
 
 |        | Chrome | Edge | Firefox | IE  | Opera | Safari | UC  | 360 极速浏览器 | 360 安全浏览器 |
 | ------ | :----: | :--: | :-----: | :-: | :---: | :----: | :-: | :------------: | :------------: |
@@ -13,8 +14,7 @@
 
 ### G2Plot
 
-> 由于条件限制，版本下限仅供参考，并不意味着不能支持更低版本，该测试在 CDN 模式下测试完成，
-[在线 Demo](https://lxfu1.github.io/browser-compatibility-of-antv)。 ——2022.7
+> 由于条件限制，版本下限仅供参考，并不意味着不能支持更低版本，该测试在 CDN 模式下测试完成。 ——2022.7
 
 
 |            | Chrome | Edge | Firefox | IE  | Opera | Safari | UC  | 360 极速浏览器 | 360 安全浏览器 |
