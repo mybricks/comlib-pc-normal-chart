@@ -20,7 +20,12 @@
           "./src/bar/com.json",
           "./src/bidirectionalBar/com.json",
           "./src/funnel/com.json",
-          "./src/organization/com.json"
+          "./src/organization/com.json",
+          "../comlib-basic/src/_type-change/com.json",
+          "../comlib-basic/src/popup/com.json",
+          "../comlib-basic/src/_muilt-inputJs/com.json",
+          "../comlib-basic/src/_schema-simulator/com.json",
+          "../comlib-basic/src/grid/com.json"
         ]
       },
       {
