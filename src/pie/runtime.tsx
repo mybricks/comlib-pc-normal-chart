@@ -13,8 +13,10 @@ export default function (props: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
-  const [configData, setConfigData] = useState<Data['config']>(data.config);
- 
+  const [configData, setConfigData] = useState<Data['config']>(
+    JSON.parse(JSON.stringify(data.config))
+  );
+
   useEffect(() => {
     if (env.runtime) {
       setLoading(true);
