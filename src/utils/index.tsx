@@ -121,10 +121,9 @@ export function callInputs(
         } else if (typeCheck(ds, 'OBJECT')) {
           if (id === 'style') {
             const newConfig = { ...data.config, ...ds };
+            data.config = newConfig;
             if (cbs?.setConfigData) {
               cbs?.setConfigData(JSON.parse(JSON.stringify(newConfig)));
-            } else {
-              data.config = newConfig;
             }
           } else {
             if (id === 'axis') id = 'xAxis';
