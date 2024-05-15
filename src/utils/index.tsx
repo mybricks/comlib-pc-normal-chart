@@ -107,11 +107,7 @@ function typeCheck(variable, type) {
   }
 }
 
-export function callInputs(
-  type: string,
-  { data, env, inputs }: RuntimeParams<{ config: any }>,
-  cbs?
-) {
+export function callInputs(type: string, { env, inputs }: RuntimeParams<{ config: any }>, cbs?) {
   if (env.runtime) {
     initInput(type).forEach(({ id }) => {
       inputs[id]((ds: any) => {
@@ -120,26 +116,30 @@ export function callInputs(
           cbs?.setLoading?.(!!ds);
         } else if (typeCheck(ds, 'OBJECT')) {
           if (id === 'style') {
-            const newConfig = { ...data.config, ...ds };
-            data.config = newConfig;
             if (cbs?.setConfigData) {
-              cbs?.setConfigData(JSON.parse(JSON.stringify(newConfig)));
+              cbs?.setConfigData((oldConfigs) => {
+                return {
+                  ...oldConfigs,
+                  ...ds
+                };
+              });
             }
           } else {
             if (id === 'axis') id = 'xAxis';
             if (id === 'yaxis') id = 'yAxis';
-            const oldConfig = data.config[id] || {};
-            const newConfig = {
-              ...data.config,
-              [id]: {
-                ...oldConfig,
-                ...ds
-              }
-            };
+
             if (cbs?.setConfigData) {
-              cbs?.setConfigData(JSON.parse(JSON.stringify(newConfig)));
-            } else {
-              data.config = newConfig;
+              cbs?.setConfigData((oldConfigs) => {
+                const oldConfig = oldConfigs[id] || {};
+                const newConfigs = {
+                  ...oldConfigs,
+                  [id]: {
+                    ...oldConfig,
+                    ...ds
+                  }
+                };
+                return newConfigs;
+              });
             }
           }
         }
