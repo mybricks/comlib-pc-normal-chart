@@ -12,6 +12,9 @@ export default function (props: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState<any>({ id: 'root' });
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
+  const [configData, setConfigData] = useState<Data['config']>(
+    JSON.parse(JSON.stringify(data.config))
+  );
 
   useEffect(() => {
     if (env.runtime) {
@@ -26,7 +29,8 @@ export default function (props: RuntimeParams<Data>) {
   useEffect(() => {
     callInputs(chartTypes.ORGANIZATION, props, {
       setLoading,
-      setTip
+      setTip,
+      setConfigData
     });
   }, []);
 
@@ -42,7 +46,8 @@ export default function (props: RuntimeParams<Data>) {
       {!env.runtime || Object.keys(dataSourceInRuntime).length > 1 ? (
         <OrganizationGraph
           style={{ width: style.width, height: style.height }}
-          {...data.config}
+          // {...data.config}
+          {...configData}
           onReady={onReady}
           data={env.edit ? MockData : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}

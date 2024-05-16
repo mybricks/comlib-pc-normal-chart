@@ -15,6 +15,9 @@ export default function (props: RuntimeParams<Data>) {
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
   const tooltipData = useRef<Array<Record<string, any>>>([]);
+  const [configData, setConfigData] = useState<Data['config']>(
+    JSON.parse(JSON.stringify(data.config))
+  );
 
   const { customizeTooltip, componentCode } = data;
 
@@ -33,7 +36,8 @@ export default function (props: RuntimeParams<Data>) {
   useEffect(() => {
     callInputs(chartTypes.LINE, props, {
       setLoading,
-      setTip
+      setTip,
+      setConfigData
     });
   }, []);
 
@@ -91,7 +95,8 @@ export default function (props: RuntimeParams<Data>) {
         <Line
           style={{ width: style.width, height: style.height }}
           onReady={onReady}
-          {...data.config}
+          // {...data.config}
+          {...configData}
           data={
             env.edit
               ? changeMockDataField(MockData[data.subType], data.config)
