@@ -14,6 +14,9 @@ export default function (props: RuntimeParams<Data>) {
   const [rightDataSourceInRuntime, setRuntimeRightDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
+  const [configData, setConfigData] = useState<Data['config']>(
+    JSON.parse(JSON.stringify(data.config))
+  );
 
   useEffect(() => {
     if (env.runtime) {
@@ -35,9 +38,13 @@ export default function (props: RuntimeParams<Data>) {
   useEffect(() => {
     callInputs(chartTypes.DUAL_AXES, props, {
       setLoading,
-      setTip
+      setTip,
+      setConfigData
     });
-    data.config.geometryOptions.forEach((item) => {
+  }, []);
+
+  useEffect(() => {
+    configData.geometryOptions.forEach((item) => {
       if (item.seriesField) {
         item.color = undefined;
       }
@@ -48,14 +55,15 @@ export default function (props: RuntimeParams<Data>) {
           return;
         }
 
-        data.config.geometryOptions = data.config.geometryOptions.map((option, index) => {
+        configData.geometryOptions = configData.geometryOptions.map((option, index) => {
           return {
             ...option,
             ...(val[index] || {})
           };
         });
+        setConfigData({...configData});
       });
-  }, []);
+  }, [configData]);
 
   const onReady = useCallback((graph: any) => {
     graph.on('legend-item-name:click', ({ target }) => {
@@ -82,7 +90,7 @@ export default function (props: RuntimeParams<Data>) {
       rightDataSourceInRuntime.length !== 0 ? (
         <DualAxes
           style={{ width: style.width, height: style.height }}
-          {...data.config}
+          {...configData}
           onReady={onReady}
           data={env.edit ? MockData : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}

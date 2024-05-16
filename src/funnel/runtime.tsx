@@ -13,6 +13,9 @@ export default function (props: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(false);
   const [tip, setTip] = useState('');
+  const [configData, setConfigData] = useState<Data['config']>(
+    JSON.parse(JSON.stringify(data.config))
+  );
 
   useEffect(() => {
     if (env.runtime) {
@@ -29,7 +32,8 @@ export default function (props: RuntimeParams<Data>) {
   useEffect(() => {
     callInputs(chartTypes.FUNNEL, props, {
       setLoading,
-      setTip
+      setTip,
+      setConfigData
     });
   }, []);
 
@@ -52,7 +56,7 @@ export default function (props: RuntimeParams<Data>) {
       {!env.runtime || dataSourceInRuntime.length !== 0 ? (
         <Funnel
           style={{ width: style.width, height: style.height }}
-          {...data.config}
+          {...configData}
           onReady={onReady}
           data={env.edit ? changeMockDataField(MockData, data.config) : dataSourceInRuntime}
           key={env.edit ? JSON.stringify(data.config) : undefined}
