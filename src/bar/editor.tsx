@@ -289,6 +289,7 @@ export default {
                   } else {
                     data.config.label = {};
                   }
+                  reRender(data)
                 }
               }
             },

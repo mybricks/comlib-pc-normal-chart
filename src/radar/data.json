@@ -9,7 +9,7 @@
       "position": "top-left"
     },
     "area": {},
-    "seriesField": "",
+    "seriesField": "category",
     "label": false,
     "padding": "auto"
   },

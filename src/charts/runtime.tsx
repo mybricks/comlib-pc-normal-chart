@@ -144,8 +144,35 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   } else {
     delete config.percent;
   }
+  console.log('config chart', config)
 
-  const Chart = useMemo(() => Charts[data.type], [data.type, data.config, chartData]);
+  // const config = useMemo(() => {
+  //   let configN = {
+  //     data: chartData,
+  //     percent,
+  //     ...data.config,
+  //     tooltip: getTooltip(),
+  //     lineStyle: getLineStyle(),
+  //     geometryOptions: getGeometryOptions()
+  //   };
+  //   if (!configN.tooltip) {
+  //     delete configN.tooltip;
+  //   }
+  
+  //   if (data.type === chartTypes.LIQUID) {
+  //     delete configN.data;
+  //     delete configN.label;
+  //   } else {
+  //     delete configN.percent;
+  //   }
+  //   setCount(count +1)
+  //   console.log('configN', configN)
+
+  //   return configN
+  // }, [data.config, data.type, chartData])
+
+
+  const Chart = useMemo(() => Charts[data.type], [data.type, data.config, chartData, config]);
 
   return (
     <Spin spinning={loading}>

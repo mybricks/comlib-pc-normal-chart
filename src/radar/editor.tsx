@@ -78,6 +78,24 @@ export default {
                   } else {
                     data.config.legend = { position: 'right' };
                   }
+                  reRender(data)
+                }
+              }
+            },
+            {
+              title: '分组字段名',
+              type: 'Text',
+              ifVisible({ data }: EditorResult<Data>) {
+                return !!data.config.legend;
+              },
+              description: '对雷达图进行分组的字段，一般对应一个分类字段，图例需要此字段 ',
+              value: {
+                get({ data }: EditorResult<Data>) {
+                  return data.config.seriesField;
+                },
+                set({ data, input }: EditorResult<Data>, value: string) {
+                  data.config.seriesField = value;
+                  setSchema(data, input);
                 }
               }
             },
@@ -125,6 +143,7 @@ export default {
                     data.config.legend.position = value;
                     data.config.legend = { ...data.config.legend };
                   }
+                  reRender(data)
                 }
               }
             },
@@ -141,6 +160,7 @@ export default {
                 set({ data }: EditorResult<Data>, value: string) {
                   data.config.legend.offsetX = Number(value);
                   data.config.legend = { ...data.config.legend };
+                  reRender(data)
                 }
               }
             },
@@ -157,6 +177,7 @@ export default {
                 set({ data }: EditorResult<Data>, value: string) {
                   data.config.legend.offsetY = Number(value);
                   data.config.legend = { ...data.config.legend };
+                  reRender(data)
                 }
               }
             }
@@ -222,6 +243,7 @@ export default {
                   } else {
                     data.config.label = {};
                   }
+                  reRender(data)
                 }
               }
             },
@@ -265,6 +287,7 @@ export default {
                         lineHeight: Number(value.lineHeight.slice(0, -2))
                       }
                     };
+                    reRender(data)
                   }
                 }
               }
