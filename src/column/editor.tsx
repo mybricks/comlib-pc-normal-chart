@@ -63,8 +63,6 @@ export default {
                 };
               }
               setSchema(data, input);
-              console.log('改变类型', value, data.config)
-              // reRender(data);
             }
           }
         },
