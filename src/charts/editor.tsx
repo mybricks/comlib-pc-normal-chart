@@ -7,6 +7,7 @@ import {
   defaultFormatterFn,
   defaultInputIds
 } from './constants';
+import { reRender } from '../utils';
 import editors from './editors';
 import { setDataSchema } from './schema';
 
@@ -167,6 +168,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.xField = value;
+                  reRender(data as any)
                   setDataSchema(data, input);
                 }
               }
@@ -188,6 +190,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.yField = value;
+                  reRender(data as any)
                   setDataSchema(data, input);
                 }
               }
@@ -209,6 +212,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.yField = value.split(',');
+                  reRender(data as any)
                   setDataSchema(data, input);
                 }
               }
@@ -230,6 +234,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.seriesField = value;
+                  reRender(data as any)
                   setDataSchema(data, input);
                 }
               }
@@ -260,6 +265,7 @@ export default {
                   } else {
                     data.config.legend = { position: 'right' };
                   }
+                  reRender(data as any)
                 }
               }
             },
@@ -422,6 +428,7 @@ export default {
                   } else {
                     data.config.tooltip = {};
                   }
+                  reRender(data as any)
                 }
               }
             },

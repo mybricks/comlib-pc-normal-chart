@@ -18,6 +18,12 @@ export default function (props: RuntimeParams<Data>) {
   );
 
   useEffect(() => {
+    if (env.edit) {
+      setConfigData(data.config);
+    }
+  }, [data.config, env.edit]);
+
+  useEffect(() => {
     callInputs(chartTypes.COLUMN, props, {
       setLoading,
       setTip,

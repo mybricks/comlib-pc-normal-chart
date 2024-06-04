@@ -145,7 +145,7 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
     delete config.percent;
   }
 
-  const Chart = useMemo(() => Charts[data.type], [data.type, data.config, chartData]);
+  const Chart = useMemo(() => Charts[data.type], [data.type, data.config, chartData, config]);
 
   return (
     <Spin spinning={loading}>
