@@ -1,5 +1,11 @@
 # 通用PC图表物料
 
+## 相关文档
+
+当前使用的是1.x版本
+[Ant Design Charts](https://ant-design-charts-v1.antgroup.com/examples)
+[AntV G2](https://g2-v4.antv.vision/zh/docs/api/general/chart)
+
 ## 浏览器兼容性
 
 > [在线 Demo](https://lxfu1.github.io/browser-compatibility-of-antv)。
