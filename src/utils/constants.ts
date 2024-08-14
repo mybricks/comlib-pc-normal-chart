@@ -199,6 +199,15 @@ export const initInput = (type: string) => {
             }
           }
         }
+      },
+      grid: {
+        type: 'object',
+        desc: '坐标轴网格线的配置项，null 表示不展示。',
+        properties: {
+          line: {
+            type: 'object'
+          }
+        }
       }
     }
   };
@@ -216,10 +225,25 @@ export const initInput = (type: string) => {
           }
         }
       },
+      itemWidth: {
+        type: 'number',
+        desc: '图例项的宽度, 默认为 null，自动计算，设置具体值后溢出省略，hover展示tooltip提示'
+      },
+      itemHeight: {
+        type: 'number',
+        desc: '图例项的高度, 默认为 null，自动计算'
+      },
       itemName: {
         type: 'object',
         properties: {
           style: {
+            type: 'any'
+          },
+          spacing: {
+            type: 'number'
+          },
+          // (text: string, item: ListItem, index: number) => any;
+          formatter: {
             type: 'any'
           }
         }
@@ -228,6 +252,13 @@ export const initInput = (type: string) => {
         type: 'object',
         properties: {
           style: {
+            type: 'any'
+          },
+          spacing: {
+            type: 'number'
+          },
+          // (text: string, item: ListItem, index: number) => any;
+          formatter: {
             type: 'any'
           }
         }
