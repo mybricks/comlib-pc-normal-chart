@@ -43,7 +43,7 @@ export default {
               } else {
                 data.config.seriesField = '';
               }
-              setSchema(data, input);
+              setSchema(data, input, output);
             }
           }
         },
@@ -60,7 +60,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.xField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             },
@@ -74,7 +74,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.yField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             },
@@ -91,7 +91,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.seriesField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             }

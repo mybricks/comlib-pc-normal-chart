@@ -1,4 +1,5 @@
-import { Data, elementClickSchema, addOutputAndRel, InputIds, OutputIds } from '../utils';
+import { elementClickSchema, addOutputAndRel, InputIds, OutputIds } from '../utils';
+import { Data } from './constants';
 
 export default function ({ data, output, input }: RuntimeParams<Data>) {
   // 1.0.1 -> 1.0.2
