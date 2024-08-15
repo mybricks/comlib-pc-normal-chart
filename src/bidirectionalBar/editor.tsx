@@ -19,6 +19,10 @@ export default {
         if (!input.get(id)) {
           input.add(id, title, schema);
         }
+        if (!output.get(id)) {
+          output.add(id, '完成', schema);
+          input.get(id)?.setRels([id]);
+        }
       });
       setSchema(data, input, output);
 

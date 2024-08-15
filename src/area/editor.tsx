@@ -2,7 +2,7 @@ import { initInput, reRender, Data, AnnotationItem, setSchema } from '../utils';
 import set from 'lodash-es/set';
 
 export default {
-  '@init'({ style, input, data }) {
+  '@init'({ style, input, output, data }) {
     style.height = 400;
     style.width = '100%';
     initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
@@ -19,6 +19,10 @@ export default {
       initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
         if (!input.get(id)) {
           input.add(id, title, schema);
+        }
+        if (!output.get(id)) {
+          output.add(id, '完成', schema);
+          input.get(id)?.setRels([id]);
         }
       });
       setSchema(data, input, output);

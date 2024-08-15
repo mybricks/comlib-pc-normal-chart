@@ -15,10 +15,14 @@ export default {
     options: ['height', 'width']
   },
   ':root': {
-    items: ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+    items: ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any) => {
       initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
         if (!input.get(id)) {
           input.add(id, title, schema);
+        }
+        if (!output.get(id)) {
+          output.add(id, '完成', schema);
+          input.get(id)?.setRels([id]);
         }
       });
 
