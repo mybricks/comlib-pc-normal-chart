@@ -13,10 +13,19 @@
     {
       "id": "data",
       "title": "输入数据",
+      "rels": ["data"],
       "schema": {
         "type": "number"
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "data",
+      "title": "输入数据",
+      "schema": {
+        "type": "number"
+      }
+    }
+  ]
 }
