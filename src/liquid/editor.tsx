@@ -14,13 +14,13 @@ export default {
     options: ['height', 'width']
   },
   ':root': {
-    items: ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+    items: ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any) => {
       initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
         if (!input.get(id)) {
           input.add(id, title, schema);
         }
       });
-      setSchema(data, input);
+      setSchema(data, input, output);
 
       cate0.title = '常规';
       cate0.items = [
@@ -319,6 +319,7 @@ export default {
   }
 };
 
-const setSchema = (data: Data, input: any) => {
+const setSchema = (data: Data, input: any, output: any) => {
   input.get('data').setSchema(schemaLiquid());
+  output && output.get('data')?.setSchema(schemaLiquid());
 };
