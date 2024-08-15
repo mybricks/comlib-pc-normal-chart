@@ -1,5 +1,6 @@
+import { addMultipleOutputsAndRels } from '../utils';
 
-export default function ({ input,data }: any): boolean {
+export default function ({ data, input, output }: UpgradeParams<any>): boolean {
   // 1.0.10->1.0.11
   if (!input.get('loading')) {
     const params = {
@@ -27,7 +28,7 @@ export default function ({ input,data }: any): boolean {
               type: 'number'
             },
             [data.config.type]: {
-              title: "颜色字段名",
+              title: '颜色字段名',
               type: 'number'
             }
           }
@@ -57,6 +58,18 @@ export default function ({ input,data }: any): boolean {
       }
     }
   });
+
+  const configs = [
+    'data',
+    'setMainConfig',
+    'setBgImg',
+    'downLoadImg',
+    'extraData0',
+    'setSubConfig',
+    'loading'
+  ];
+
+  addMultipleOutputsAndRels(configs, input, output);
 
   return true;
 }

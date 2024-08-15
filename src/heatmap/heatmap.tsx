@@ -2,10 +2,11 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { Chart } from '@antv/g2';
 import { formatLabelContent, markLabel, setConfig } from './utils';
 import { DataOrigin } from './constants';
-import { dataURLToFile, downloadImg } from '../utils';
+import { dataURLToFile, downloadImg, handleOutputFn } from '../utils';
 
 export default function Heatmapa({
   inputs,
+  outputs,
   style,
   dataSource,
   subDataSource,
@@ -209,8 +210,9 @@ export default function Heatmapa({
   }, [subDataSource, subConfig, subViews, useSubHeatMap]);
 
   useEffect(() => {
-    inputs.downLoadImg((imageName: string) => {
+    inputs.downLoadImg((imageName: string, relOutputs) => {
       downloadImg(chartRef.current, { imageName });
+      handleOutputFn(relOutputs, outputs, 'downLoadImg', imageName);
     });
     inputs.relToFile(
       (fileName: string = '图片', relOutputs: { relToFile: (arg0: any) => void }) => {

@@ -18,6 +18,7 @@ const addOutputAndRel = ({
     output.add(outputKey, title, schema || Input?.schema || { type: 'any' });
     if (Input) {
       Input?.setRels([outputKey]);
+      console.log(outputKey, 'outputKey');
     }
   }
 };
