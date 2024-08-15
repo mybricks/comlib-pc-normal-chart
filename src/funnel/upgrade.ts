@@ -1,6 +1,7 @@
 import { Data } from './constants';
+import { addOutputAndRel, InputIds, OutputIds } from '../utils';
 
-export default function ({ data }: UpgradeParams<Data>): boolean {
+export default function ({ data, input, output }: UpgradeParams<Data>): boolean {
   if (!data.tempAnnotations) {
     data.tempAnnotations = [];
   }
@@ -17,6 +18,14 @@ export default function ({ data }: UpgradeParams<Data>): boolean {
   if (data?.config?.label === undefined) {
     data.config.label = {};
   }
+
+  addOutputAndRel({
+    input,
+    output,
+    outputKey: OutputIds.DataSource,
+    title: '完成',
+    inputKey: InputIds.DataSource
+  });
 
   return true;
 }

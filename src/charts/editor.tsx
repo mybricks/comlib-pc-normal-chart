@@ -80,11 +80,11 @@ export default {
             get({ data }: EditorResult<Data>) {
               return data.type;
             },
-            set({ data, input }: EditorResult<Data>, value: string) {
+            set({ data, input, output }: EditorResult<Data>, value: string) {
               data.type = value;
               chartTypeChange(data);
               setChartInputs(value, input);
-              setDataSchema(data, input);
+              setDataSchema(data, input, output);
             }
           }
         },
@@ -103,7 +103,7 @@ export default {
             get({ data }: EditorResult<Data>) {
               return data.showType || 'group';
             },
-            set({ data, input }: EditorResult<Data>, value: 'default' | 'stack' | 'group') {
+            set({ data, input, output }: EditorResult<Data>, value: 'default' | 'stack' | 'group') {
               data.showType = value;
               if (value === 'stack') {
                 data.config = {
@@ -127,7 +127,7 @@ export default {
                   seriesField: ''
                 };
               }
-              setDataSchema(data, input);
+              setDataSchema(data, input, output);
             }
           }
         },
@@ -166,10 +166,10 @@ export default {
                 get({ data }: EditorResult<Data>) {
                   return data.config.xField;
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.xField = value;
-                  reRender(data as any)
-                  setDataSchema(data, input);
+                  reRender(data as any);
+                  setDataSchema(data, input, output);
                 }
               }
             },
@@ -188,10 +188,10 @@ export default {
                 get({ data }: EditorResult<Data>) {
                   return data.config.yField;
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.yField = value;
-                  reRender(data as any)
-                  setDataSchema(data, input);
+                  reRender(data as any);
+                  setDataSchema(data, input, output);
                 }
               }
             },
@@ -210,10 +210,10 @@ export default {
                     ? data.config.yField.join(',')
                     : data.config.yField;
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.yField = value.split(',');
-                  reRender(data as any)
-                  setDataSchema(data, input);
+                  reRender(data as any);
+                  setDataSchema(data, input, output);
                 }
               }
             },
@@ -232,10 +232,10 @@ export default {
                 get({ data }: EditorResult<Data>) {
                   return data.config.seriesField;
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.seriesField = value;
-                  reRender(data as any)
-                  setDataSchema(data, input);
+                  reRender(data as any);
+                  setDataSchema(data, input, output);
                 }
               }
             },
@@ -265,7 +265,7 @@ export default {
                   } else {
                     data.config.legend = { position: 'right' };
                   }
-                  reRender(data as any)
+                  reRender(data as any);
                 }
               }
             },
@@ -428,7 +428,7 @@ export default {
                   } else {
                     data.config.tooltip = {};
                   }
-                  reRender(data as any)
+                  reRender(data as any);
                 }
               }
             },

@@ -103,6 +103,24 @@ export interface ChartProps {
   [key: string]: any;
 }
 
+export const dataSchema = {
+  title: '数据',
+  type: 'array',
+  items: {
+    type: 'object',
+    properties: {
+      xField: {
+        title: 'x轴字段名',
+        type: 'string'
+      },
+      yField: {
+        title: 'y轴字段名',
+        type: 'number'
+      }
+    }
+  }
+};
+
 export const initInput = (type: string) => {
   const styleSchema = {
     type: 'object',

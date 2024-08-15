@@ -20,6 +20,10 @@ export default {
         if (!input.get(id)) {
           input.add(id, title, schema);
         }
+        if (!output.get(id)) {
+          output.add(id, '完成', schema);
+          input.get(id)?.setRels([id]);
+        }
       });
       setSchema(data, input, output);
 
@@ -475,5 +479,6 @@ export default {
 const setSchema = (data: Data, input: any, output: any) => {
   const dataSchema = schemaPie(data);
   input.get('data').setSchema(dataSchema);
+  output && output.get('data')?.setSchema(dataSchema);
   output.get(OutputIds.Element_Click)?.setSchema(dataSchema.items);
 };

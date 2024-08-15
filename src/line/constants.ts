@@ -20,7 +20,12 @@ export interface Data extends ChartProps {
 export enum OutputIds {
   TooltipChange = 'tooltipChange',
   LabelClick = 'labelClick',
-  PlotClick = 'plotClick'
+  PlotClick = 'plotClick',
+  DataSource = 'data'
+}
+
+export enum InputIds {
+  DataSource = 'data'
 }
 
 export const Comments = `interface Inject {

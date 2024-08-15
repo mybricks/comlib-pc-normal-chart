@@ -15,13 +15,17 @@ export default {
     options: ['height', 'width']
   },
   ':root': {
-    items: ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+    items: ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any) => {
       initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
         if (!input.get(id)) {
           input.add(id, title, schema);
         }
+        if (!output.get(id)) {
+          output.add(id, '完成', schema);
+          input.get(id)?.setRels([id]);
+        }
       });
-      setSchema(data, input);
+      setSchema(data, input, output);
 
       cate0.title = '常规';
       (cate0.items = [
@@ -36,9 +40,9 @@ export default {
                 get({ data }: EditorResult<Data>) {
                   return data.config.xField || 'year';
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.xField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             },
@@ -50,9 +54,9 @@ export default {
                 get({ data }: EditorResult<Data>) {
                   return data.config.yField;
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.yField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             }
@@ -78,7 +82,7 @@ export default {
                   } else {
                     data.config.legend = { position: 'right' };
                   }
-                  reRender(data)
+                  reRender(data);
                 }
               }
             },
@@ -93,9 +97,9 @@ export default {
                 get({ data }: EditorResult<Data>) {
                   return data.config.seriesField;
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.seriesField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             },
@@ -143,7 +147,7 @@ export default {
                     data.config.legend.position = value;
                     data.config.legend = { ...data.config.legend };
                   }
-                  reRender(data)
+                  reRender(data);
                 }
               }
             },
@@ -160,7 +164,7 @@ export default {
                 set({ data }: EditorResult<Data>, value: string) {
                   data.config.legend.offsetX = Number(value);
                   data.config.legend = { ...data.config.legend };
-                  reRender(data)
+                  reRender(data);
                 }
               }
             },
@@ -177,7 +181,7 @@ export default {
                 set({ data }: EditorResult<Data>, value: string) {
                   data.config.legend.offsetY = Number(value);
                   data.config.legend = { ...data.config.legend };
-                  reRender(data)
+                  reRender(data);
                 }
               }
             }
@@ -243,7 +247,7 @@ export default {
                   } else {
                     data.config.label = {};
                   }
-                  reRender(data)
+                  reRender(data);
                 }
               }
             },
@@ -287,7 +291,7 @@ export default {
                         lineHeight: Number(value.lineHeight.slice(0, -2))
                       }
                     };
-                    reRender(data)
+                    reRender(data);
                   }
                 }
               }
@@ -676,6 +680,7 @@ const initParams = (data: Data) => {
   };
 };
 
-const setSchema = (data: Data, input: any) => {
+const setSchema = (data: Data, input: any, output: any) => {
   input.get('data').setSchema(schemaDefault(data));
+  output && output.get('data')?.setSchema(schemaDefault(data));
 };

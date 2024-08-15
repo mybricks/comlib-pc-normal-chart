@@ -1,6 +1,7 @@
-import { elementClickSchema } from "../utils";
+import { elementClickSchema, addOutputAndRel, InputIds, OutputIds } from '../utils';
+import { Data } from './constants';
 
-export default function ({ data, output }: any): boolean {
+export default function ({ data, input, output }: UpgradeParams<Data>): boolean {
   if (!data.tempAnnotations) {
     data.tempAnnotations = [];
   }
@@ -19,10 +20,9 @@ export default function ({ data, output }: any): boolean {
     data.config.label = false;
   }
 
-
   /**
-  * @description v1.0.5 增加事件配置项
-  */
+   * @description v1.0.5 增加事件配置项
+   */
   if (!data.events) {
     data.events = [
       {
@@ -36,9 +36,17 @@ export default function ({ data, output }: any): boolean {
       id: 'eleClick',
       title: '元素点击',
       schema: elementClickSchema
-    })
+    });
   }
   //=========== v1.0.5 end ===============
+
+  addOutputAndRel({
+    input,
+    output,
+    outputKey: OutputIds.DataSource,
+    title: '完成',
+    inputKey: InputIds.DataSource
+  });
 
   return true;
 }

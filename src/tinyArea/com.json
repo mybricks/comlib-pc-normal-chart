@@ -1,7 +1,7 @@
 {
   "title": "迷你面积图",
   "namespace": "mybricks.normal-pc-chart.tinyArea",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "迷你面积图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -14,6 +14,7 @@
     {
       "id": "data",
       "title": "输入数据",
+      "rels": ["data"],
       "schema": {
         "type": "array",
         "items": {
@@ -22,5 +23,16 @@
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "data",
+      "title": "输入数据",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    }
+  ]
 }

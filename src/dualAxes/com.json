@@ -1,7 +1,7 @@
 {
   "title": "双轴图",
   "namespace": "mybricks.normal-pc-chart.dual-axes",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "双轴图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -14,6 +14,7 @@
     {
       "id": "data0",
       "title": "左轴输入数据",
+      "rels": ["data0"],
       "schema": {
         "title": "左轴输入数据",
         "type": "array",
@@ -35,6 +36,7 @@
     {
       "id": "data1",
       "title": "右轴输入数据",
+      "rels": ["data1"],
       "schema": {
         "title": "右轴输入数据",
         "type": "array",
@@ -55,6 +57,7 @@
     },
     {
       "id": "geometryOptions",
+      "rels": ["geometryOptions"],
       "title": "轴配置",
       "schema": {
         "title": "配置",
@@ -74,5 +77,68 @@
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "data0",
+      "title": "完成",
+      "schema": {
+        "title": "左轴输入数据",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "year": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "value": {
+              "title": "y轴字段名",
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "data1",
+      "title": "完成",
+      "schema": {
+        "title": "右轴输入数据",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "year": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "count": {
+              "title": "y轴字段名",
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "geometryOptions",
+      "title": "完成",
+      "schema": {
+        "title": "配置",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "title": "颜色",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

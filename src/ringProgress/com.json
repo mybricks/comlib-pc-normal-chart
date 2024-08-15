@@ -14,6 +14,7 @@
     {
       "id": "percent",
       "title": "百分比数据",
+      "rels": ["percent"],
       "schema": {
         "type": "number",
         "minimum": 0,
@@ -23,6 +24,7 @@
     {
       "id": "style",
       "title": "设置图形样式",
+      "rels": ["style"],
       "schema": {
         "type": "object",
         "properties": {
@@ -52,6 +54,7 @@
     {
       "id": "statistic",
       "title": "设置文案",
+      "rels": ["statistic"],
       "schema": {
         "type": "object",
         "properties": {
@@ -79,11 +82,86 @@
     {
       "id": "tooltip",
       "title": "设置提示信息",
+      "rels": ["tooltip"],
       "schema": {
         "type": "object",
         "properties": {}
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "percent",
+      "title": "完成",
+      "schema": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
+    },
+    {
+      "id": "style",
+      "title": "完成",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "title": "颜色数组",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 2
+          },
+          "radius": {
+            "type": "number",
+            "title": "外环半径(相对于画布宽高)",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "innerRadius": {
+            "type": "number",
+            "title": "内环半径(相对于外环半径)",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "statistic",
+      "title": "完成",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "title": "标题",
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string"
+              }
+            }
+          },
+          "content": {
+            "title": "内容",
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "tooltip",
+      "title": "完成",
+      "schema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
 }

@@ -23,7 +23,7 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.xField || 'x';
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.xField = value;
                 let newSchema = {
                   type: 'object',
@@ -73,6 +73,7 @@ export default {
                   }
                 };
                 input.get('data').setSchema(newSchema);
+                output.get('data')?.setSchema(newSchema);
               }
             }
           },
@@ -84,7 +85,7 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.yField || 'y';
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.yField = value;
                 let newSchema = {
                   type: 'object',
@@ -134,6 +135,7 @@ export default {
                   }
                 };
                 input.get('data').setSchema(newSchema);
+                output.get('data')?.setSchema(newSchema);
               }
             }
           },
@@ -145,7 +147,7 @@ export default {
               get({ data }: EditorResult<Data>) {
                 return data.config.colorField;
               },
-              set({ data, input }: EditorResult<Data>, value: string) {
+              set({ data, input, output }: EditorResult<Data>, value: string) {
                 data.config.colorField = value;
                 let newSchema = {
                   type: 'object',
@@ -195,6 +197,7 @@ export default {
                   }
                 };
                 input.get('data').setSchema(newSchema);
+                output.get('data')?.setSchema(newSchema);
               }
             }
           },

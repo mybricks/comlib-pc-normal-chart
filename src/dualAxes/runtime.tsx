@@ -1,10 +1,10 @@
 import React, { useMemo, useEffect, useState, useCallback } from 'react';
 import { DualAxes } from '@ant-design/charts';
-import { Data, MockData, InputId } from './constants';
+import { Data, MockData, InputId, OutputId } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
-import { callInputs } from '../utils';
+import { callInputs, handleOutputFn } from '../utils';
 import { chartTypes } from '../charts/constants';
 
 export default function (props: RuntimeParams<Data>) {
@@ -21,15 +21,17 @@ export default function (props: RuntimeParams<Data>) {
   useEffect(() => {
     if (env.runtime) {
       setLoading(true);
-      inputs.data0((val: any) => {
+      inputs[InputId.Data0]((val: any, relOutputs: any) => {
         if (Array.isArray(val)) {
           setRuntimeLeftDataSource(val);
         }
+        handleOutputFn(relOutputs, outputs, OutputId.Data0, val);
       });
-      inputs.data1((val: any) => {
+      inputs[InputId.Data1]((val: any, relOutputs: any) => {
         if (Array.isArray(val)) {
           setRuntimeRightDataSource(val);
         }
+        handleOutputFn(relOutputs, outputs, OutputId.Data1, val);
       });
       setLoading(false);
     }
@@ -50,7 +52,7 @@ export default function (props: RuntimeParams<Data>) {
       }
     });
     inputs[InputId.GeometryOptions] &&
-      inputs[InputId.GeometryOptions]((val: Array<any>) => {
+      inputs[InputId.GeometryOptions]((val: Array<any>, relOutputs: any) => {
         if (!Array.isArray(val)) {
           return;
         }
@@ -61,7 +63,8 @@ export default function (props: RuntimeParams<Data>) {
             ...(val[index] || {})
           };
         });
-        setConfigData({...configData});
+        handleOutputFn(relOutputs, outputs, OutputId.GeometryOptions, configData);
+        setConfigData({ ...configData });
       });
   }, [configData]);
 

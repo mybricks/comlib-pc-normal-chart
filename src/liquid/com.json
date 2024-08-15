@@ -1,7 +1,7 @@
 {
   "title": "水波图",
   "namespace": "mybricks.normal-pc-chart.liquid",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "水波图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -14,6 +14,7 @@
     {
       "id": "data",
       "title": "输入数据",
+      "rels": ["data"],
       "schema": {
         "type": "object",
         "properties": {
@@ -24,5 +25,18 @@
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "data",
+      "title": "完成",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "percent": {
+            "type":"number"
+          }
+        }
+      }
+    }
+  ]
 }

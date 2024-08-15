@@ -9,12 +9,20 @@ export interface GeometryOptions {
   seriesField?: string;
   geometry?: TypeEnum;
   smooth?: boolean;
-  color?: string | string []
+  color?: string | string[];
 }
 
 export const InputId = {
-  GeometryOptions: 'geometryOptions'
-}
+  GeometryOptions: 'geometryOptions',
+  Data0: 'data0',
+  Data1: 'data1'
+};
+
+export const OutputId = {
+  GeometryOptions: 'geometryOptions',
+  Data0: 'data0',
+  Data1: 'data1'
+};
 
 export interface Data extends ChartProps {
   config: ChartConfigProps & {
@@ -30,97 +38,98 @@ export const MockData: any = [
     {
       year: '1991',
       value: 3,
-      count: 10,
+      count: 10
     },
     {
       year: '1992',
       value: 4,
       count: 4,
-      flag: true,
+      flag: true
     },
     {
       year: '1993',
       value: 3.5,
-      count: 5,
+      count: 5
     },
     {
       year: '1994',
       value: 5,
-      count: 5,
+      count: 5
     },
     {
       year: '1995',
       value: 4.9,
-      count: 4.9,
+      count: 4.9
     },
     {
       year: '1996',
       value: 6,
-      count: 35,
+      count: 35
     },
     {
       year: '1997',
       value: 7,
       count: 7,
-      flag: true,
+      flag: true
     },
     {
       year: '1998',
       value: 9,
-      count: 1,
+      count: 1
     },
     {
       year: '1999',
       value: 13,
-      count: 20,
-    },
-  ], [
+      count: 20
+    }
+  ],
+  [
     {
       year: '1991',
       value: 3,
-      count: 10,
+      count: 10
     },
     {
       year: '1992',
       value: 4,
       count: 4,
-      flag: true,
+      flag: true
     },
     {
       year: '1993',
       value: 3.5,
-      count: 5,
+      count: 5
     },
     {
       year: '1994',
       value: 5,
-      count: 5,
+      count: 5
     },
     {
       year: '1995',
       value: 4.9,
-      count: 4.9,
+      count: 4.9
     },
     {
       year: '1996',
       value: 6,
-      count: 35,
+      count: 35
     },
     {
       year: '1997',
       value: 7,
       count: 7,
-      flag: true,
+      flag: true
     },
     {
       year: '1998',
       value: 9,
-      count: 1,
+      count: 1
     },
     {
       year: '1999',
       value: 13,
-      count: 20,
-    },
+      count: 20
+    }
   ]
-]
+];

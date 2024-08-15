@@ -1,7 +1,7 @@
 {
   "title": "条形图",
   "namespace": "mybricks.normal-pc-chart.bar",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "条形图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -34,10 +34,36 @@
             }
           }
         }
-      }
+      },
+      "rels": ["data"]
     }
   ],
   "outputs": [
+    {
+      "id": "data",
+      "title": "完成",
+      "schema": {
+        "title": "数据",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties":{
+            "xField": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "yField": {
+              "title": "y轴字段名",
+              "type": "number"
+            },
+            "seriesField": {
+              "title": "分组字段名",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     {
       "title": "元素点击",
       "id": "eleClick",

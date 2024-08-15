@@ -4,7 +4,7 @@ import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
-import { callInputs } from '../utils';
+import { callInputs, handleOutputFn } from '../utils';
 import { chartTypes } from '../charts/constants';
 
 export default function (props: RuntimeParams<Data>) {
@@ -20,10 +20,11 @@ export default function (props: RuntimeParams<Data>) {
   useEffect(() => {
     if (env.runtime) {
       setLoading(true);
-      inputs.data((val: React.SetStateAction<any>) => {
+      inputs.data((val: React.SetStateAction<any>, relOutputs: any) => {
         if (typeof val.percent === 'number') {
           setRuntimeDataSource(val);
         }
+        handleOutputFn(relOutputs, outputs, 'data', val);
       });
       setLoading(false);
     }

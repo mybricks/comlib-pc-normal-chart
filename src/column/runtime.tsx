@@ -4,7 +4,7 @@ import { Data, MockData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
-import { callInputs, changeMockDataField, registerEvents } from '../utils';
+import { callInputs, changeMockDataField, handleOutputFn, registerEvents } from '../utils';
 import { chartTypes } from '../charts/constants';
 
 export default function (props: RuntimeParams<Data>) {
@@ -31,10 +31,11 @@ export default function (props: RuntimeParams<Data>) {
     });
     if (env.runtime) {
       setLoading(true);
-      inputs.data((val: React.SetStateAction<any[]>) => {
+      inputs.data((val: React.SetStateAction<any[]>, relOutputs: any) => {
         if (Array.isArray(val)) {
           setRuntimeDataSource(val);
         }
+        handleOutputFn(relOutputs, outputs, 'data', val);
       });
       setLoading(false);
     }
