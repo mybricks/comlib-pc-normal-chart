@@ -3,7 +3,7 @@
   "namespace": "mybricks.chart-common-lib.heat-map",
   "author": "",
   "author_name": "",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "热力图",
   "icon": "./icon.svg",
   "runtime": "./runtime.tsx",
