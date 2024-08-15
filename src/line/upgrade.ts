@@ -1,7 +1,8 @@
 import { setSchema } from './editor';
-import { OutputIds, DefaultCode } from './constants';
+import { OutputIds, InputIds, DefaultCode, Data } from './constants';
+import { addOutputAndRel } from '../utils';
 
-export default function ({ data, output, input }: any): boolean {
+export default function ({ data, input, output }: UpgradeParams<Data>): boolean {
   if (!data.tempAnnotations) {
     data.tempAnnotations = [];
   }
@@ -36,6 +37,14 @@ export default function ({ data, output, input }: any): boolean {
   if (data?.componentCode === undefined) {
     data.componentCode = encodeURIComponent(DefaultCode);
   }
+
+  addOutputAndRel({
+    input,
+    output,
+    outputKey: OutputIds.DataSource,
+    title: '完成',
+    inputKey: InputIds.DataSource
+  });
 
   return true;
 }

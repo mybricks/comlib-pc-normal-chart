@@ -1,6 +1,6 @@
 import { initInput, reRender, schemaDiff, schemaDefault, Data, AnnotationItem } from '../utils';
 import set from 'lodash-es/set';
-import { DefaultCode, OutputIds, Comments } from './constants';
+import { DefaultCode, OutputIds, Comments, InputIds } from './constants';
 
 export default {
   '@init'({ style, input, data }) {
@@ -1110,7 +1110,8 @@ export const setSchema = (data: Data, input: any, output: any) => {
     }
   };
 
-  input.get('data').setSchema(schema);
+  input.get(InputIds.DataSource).setSchema(schema);
+  output && output.get(OutputIds.DataSource)?.setSchema(schema);
   if (output && output.get(OutputIds.LabelClick) && !!data.config.label) {
     output.get(OutputIds.LabelClick)?.setSchema(schema);
   }
