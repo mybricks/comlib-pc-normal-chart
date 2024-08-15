@@ -35,4 +35,16 @@ const handleOutputFn = (
   }
 };
 
-export { addOutputAndRel, handleOutputFn };
+function addMultipleOutputsAndRels(configs: string[], input: any, output: any) {
+  configs.forEach((key) => {
+    addOutputAndRel({
+      input,
+      output,
+      outputKey: key,
+      title: '完成',
+      inputKey: key
+    });
+  });
+}
+
+export { addOutputAndRel, handleOutputFn, addMultipleOutputsAndRels };
