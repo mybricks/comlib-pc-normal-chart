@@ -1,6 +1,7 @@
-import { InputId } from './constants';
+import { Data, InputId, OutputId } from './constants';
+import { addOutputAndRel } from '../utils';
 
-export default function ({ data, input }: any): boolean {
+export default function ({ data, output, input }: RuntimeParams<Data>): boolean {
   if (!data.tempAnnotations) {
     data.tempAnnotations = [];
   }
@@ -36,6 +37,30 @@ export default function ({ data, input }: any): boolean {
       }
     });
   }
+
+  addOutputAndRel({
+    input,
+    output,
+    outputKey: OutputId.Data0,
+    title: '完成',
+    inputKey: InputId.Data0
+  });
+
+  addOutputAndRel({
+    input,
+    output,
+    outputKey: OutputId.Data1,
+    title: '完成',
+    inputKey: InputId.Data1
+  });
+
+  addOutputAndRel({
+    input,
+    output,
+    outputKey: 'geometryOptions',
+    title: '完成',
+    inputKey: 'geometryOptions'
+  });
 
   return true;
 }

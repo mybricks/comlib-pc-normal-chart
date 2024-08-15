@@ -24,13 +24,13 @@ export default {
     options: ['height', 'width']
   },
   ':root': {
-    items: ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+    items: ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any) => {
       initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
         if (!input.get(id)) {
           input.add(id, title, schema);
         }
       });
-      setSchema(data, input);
+      setSchema(data, input, output);
 
       cate0.title = '常规';
       (cate0.items = [
@@ -53,9 +53,9 @@ export default {
                 get({ data }: EditorResult<Data>) {
                   return data.config.xField || 'year';
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   data.config.xField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             },
@@ -68,18 +68,20 @@ export default {
                   if (Array.isArray(data.config.yField)) return data.config.yField.join(',');
                   return data.config.yField || 'value';
                 },
-                set({ data, input }: EditorResult<Data>, value: string) {
+                set({ data, input, output }: EditorResult<Data>, value: string) {
                   const valueAry = value
                     .split(',')
                     .map((v) => v.trim())
                     .filter((v) => !!v);
                   if (valueAry.length < 1) return;
                   if (valueAry.length === 1) {
+                    // @ts-ignore
                     data.config.yField = [...valueAry, ...valueAry];
                   } else {
+                    // @ts-ignore
                     data.config.yField = [valueAry[0], valueAry[1]];
                   }
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             }
@@ -653,9 +655,10 @@ const geometryItem = (index: number) => [
       get({ data }: EditorResult<Data>) {
         return data.config.geometryOptions[index].seriesField;
       },
-      set({ data, input }: EditorResult<Data>, value: string) {
+      set({ data, input, output }: EditorResult<Data>, value: string) {
         setGeometryOptions(data, 'seriesField', value, index);
         const dsInput = input.get(`${InputIds.DataSource}${index}`);
+        const dsOutput = output.get(`${InputIds.DataSource}${index}`);
         const dsInputSchema = dsInput.schema;
         if (value) {
           dsInputSchema.items.properties[value] = {
@@ -666,6 +669,7 @@ const geometryItem = (index: number) => [
           dsInputSchema?.items?.properties?.[value] && delete dsInputSchema.items.properties[value];
         }
         dsInput?.setSchema(dsInputSchema);
+        dsOutput?.setSchema(dsInputSchema);
       }
     }
   },
@@ -704,9 +708,11 @@ const geometryItem = (index: number) => [
 
 let addAnnotation: (option: AnnotationItem) => void, delAnnotation: (index: number) => void;
 
-const setSchema = (data: Data, input: any) => {
+const setSchema = (data: Data, input: any, output?: any) => {
   input.get('data0').setSchema(schemaLeft(data));
   input.get('data1').setSchema(schemaRight(data));
+  output && output.get('data0')?.setSchema(schemaLeft(data));
+  output && output.get('data1')?.setSchema(schemaRight(data));
 };
 
 const initParams = (data: Data) => {
