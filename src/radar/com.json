@@ -1,7 +1,7 @@
 {
   "title": "雷达图",
   "namespace": "mybricks.normal-pc-chart.radar",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "雷达图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -14,6 +14,7 @@
     {
       "id": "data",
       "title": "输入数据",
+      "rels": ["data"],
       "schema": {
         "title": "输入数据",
         "type": "array",
@@ -33,5 +34,27 @@
       }
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "data",
+      "title": "完成",
+      "schema": {
+        "title": "输入数据",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties":{
+            "xField": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "yField": {
+              "title": "y轴字段名",
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  ]
 }
