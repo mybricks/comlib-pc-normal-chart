@@ -1,7 +1,7 @@
 {
   "title": "面积图",
   "namespace": "mybricks.normal-pc-chart.area",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "面积图",
   "author": "MyBricks",
   "author_name": "MyBricks",
@@ -30,8 +30,31 @@
             }
           }
         }
-      }
+      },
+      "rels": ["data"]
     }
   ],
-  "outputs": []
+  "outputs": [
+    {
+      "id": "data",
+      "title": "完成",
+      "schema": {
+        "title": "数据",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "xField": {
+              "title": "x轴字段名",
+              "type": "string"
+            },
+            "yField": {
+              "title": "y轴字段名",
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  ]
 }

@@ -3,7 +3,7 @@ import { Data } from './const';
 const schemaDefault = (data: Data) => {
   return {
     type: 'array',
-    items:{
+    items: {
       type: 'object',
       properties: {
         [data.config.xField]: {
@@ -16,15 +16,15 @@ const schemaDefault = (data: Data) => {
         }
       }
     }
-  }
-}
+  };
+};
 
 const schemaDiff = (data: Data) => {
   return {
     title: '输入数据',
     type: 'array',
-    items:{
-    type: 'object',
+    items: {
+      type: 'object',
       properties: {
         [data.config.xField]: {
           title: 'x轴字段名',
@@ -40,15 +40,15 @@ const schemaDiff = (data: Data) => {
         }
       }
     }
-  }
-}
+  };
+};
 
 const schemaBidirectionalBar = (data: Data) => {
   return {
     title: '输入数据',
     type: 'array',
-    items:{
-    type: 'object',
+    items: {
+      type: 'object',
       properties: {
         [data.config.xField]: {
           title: 'x轴字段名',
@@ -64,15 +64,15 @@ const schemaBidirectionalBar = (data: Data) => {
         }
       }
     }
-  }
-}
+  };
+};
 
 const schemaLeft = (data: Data) => {
   return {
     title: '左轴输入数据',
     type: 'array',
-    items:{
-    type: 'object',
+    items: {
+      type: 'object',
       properties: {
         [data.config.xField]: {
           title: 'x轴字段名',
@@ -84,15 +84,15 @@ const schemaLeft = (data: Data) => {
         }
       }
     }
-  }
-}
+  };
+};
 
 const schemaRight = (data: Data) => {
   return {
     title: '右轴输入数据',
     type: 'array',
-    items:{
-    type: 'object',
+    items: {
+      type: 'object',
       properties: {
         [data.config.xField]: {
           title: 'x轴字段名',
@@ -104,8 +104,8 @@ const schemaRight = (data: Data) => {
         }
       }
     }
-  }
-}
+  };
+};
 
 const schemaPie = (data: Data) => {
   return {
@@ -123,27 +123,29 @@ const schemaPie = (data: Data) => {
         }
       }
     }
-  }
-}
+  };
+};
 
 const schemaLiquid = () => {
   return {
-    type: "object",
+    type: 'object',
     properties: {
       percent: {
-        type:"number"
+        type: 'number'
       }
     }
-  }
-}
+  };
+};
 
-const setSchema = (data:Data, input:any) => {
-  if(data.subType === 'default'){
+const setSchema = (data: Data, input: any, output?: any) => {
+  if (data.subType === 'default') {
     input.get('data').setSchema(schemaDefault(data));
-  }else{
+    output && output.get('data') && output.get('data')?.setSchema(schemaDefault(data));
+  } else {
     input.get('data').setSchema(schemaDiff(data));
+    output && output.get('data') && output.get('data')?.setSchema(schemaDiff(data));
   }
-}
+};
 
 export {
   setSchema,
@@ -154,4 +156,4 @@ export {
   schemaRight,
   schemaPie,
   schemaLiquid
-}
+};

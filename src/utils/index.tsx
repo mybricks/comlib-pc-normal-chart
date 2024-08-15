@@ -3,6 +3,7 @@ import { initInput } from './constants';
 export * from './const';
 export * from './constants';
 export * from './schema';
+export * from './upgrade';
 
 export const download = (base64: string, imageName: string) => {
   let a: HTMLAnchorElement | null = document.createElement('a');

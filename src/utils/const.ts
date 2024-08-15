@@ -24,6 +24,11 @@ export const InputIds = {
   DataSource: 'data',
 }
 
+export enum OutputIds {
+  DataSource = 'data'
+}
+
+
 export const DefaultDualGeometryOptions = [
   {
     geometry: 'line',
