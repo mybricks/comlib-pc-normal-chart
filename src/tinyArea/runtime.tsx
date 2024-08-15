@@ -3,8 +3,9 @@ import { TinyArea } from '@ant-design/charts';
 import { Data, MockData } from './constants';
 import { Spin } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
+import { handleOutputFn } from '../utils';
 
-export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
+export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
   const [dataSourceInRuntime, setRuntimeDataSource] = useState([]);
   const [config, setConfig] = useState(data);
   const [loading, setLoading] = useState(false);
@@ -12,21 +13,24 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
   useEffect(() => {
     if (env.runtime) {
       setLoading(true);
-      inputs.data((ds: any) => {
+      inputs.data((ds: any, relOutputs: any) => {
         if (Array.isArray(ds)) {
           setRuntimeDataSource(ds);
         } else {
           setRuntimeDataSource([]);
           console.error('迷你面积图输入数据必须是数字数组');
         }
+        handleOutputFn(relOutputs, outputs, 'data', ds);
       });
-      inputs.style((ds: any) => {
+      inputs.style((ds: any, relOutputs: any) => {
+        handleOutputFn(relOutputs, outputs, 'data', ds);
         setConfig({ ...config, ...ds });
       });
       const ids = ['xAxis', 'yAxis', 'tooltip'];
       ids.forEach((id) => {
-        inputs[id]((ds: Object) => {
+        inputs[id]((ds: Object, relOutputs: any) => {
           setConfig({ ...config, [id]: { ...ds } });
+          handleOutputFn(relOutputs, outputs, id, ds);
         });
       });
       setLoading(false);
