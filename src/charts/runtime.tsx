@@ -14,8 +14,9 @@ import {
 import { runJs } from './util';
 import { useMemo } from 'react';
 import EmptyWrap from '../components/emptyWrap';
+import { handleOutputFn } from '../utils';
 
-export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
+export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Data>) {
   const { edit } = env;
   const [chartData, setChartData] = useState([]);
   const [percent, setPercent] = useState(0);
@@ -54,19 +55,21 @@ export default function ({ data, env, inputs, style }: RuntimeParams<Data>) {
 
   useEffect(() => {
     setLoading(true);
-    inputs[inputIdMap.DATA]((val: any) => {
+    inputs[inputIdMap.DATA]((val: any, relOutputs: any) => {
       if (data.type === chartTypes.LIQUID) {
         setPercent(val);
       } else {
         setChartData(val);
       }
+      handleOutputFn(relOutputs, outputs, 'data', val);
     });
     setLoading(false);
 
-    inputs[inputIdMap.CONFIG]((val: any) => {
+    inputs[inputIdMap.CONFIG]((val: any, relOutputs: any) => {
       data.type = val.chartType || data.type;
       delete val.chartType;
       data.config = { ...val };
+      handleOutputFn(relOutputs, outputs, 'config', val);
     });
 
     Object.keys(inputIdMap).map((key) => {
