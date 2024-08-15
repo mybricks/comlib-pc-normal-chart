@@ -475,5 +475,6 @@ export default {
 const setSchema = (data: Data, input: any, output: any) => {
   const dataSchema = schemaPie(data);
   input.get('data').setSchema(dataSchema);
+  output && output.get('data')?.setSchema(dataSchema);
   output.get(OutputIds.Element_Click)?.setSchema(dataSchema.items);
 };
