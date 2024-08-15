@@ -14,13 +14,13 @@ export default {
     options: ['height', 'width']
   },
   ':root': {
-    items: ({ data, input }: EditorResult<any>, cate0: any, cate1: any) => {
+    items: ({ data, input, output }: EditorResult<any>, cate0: any, cate1: any) => {
       initInput(data).forEach(({ id, title, schema = { type: 'any' } }) => {
         if (!input.get(id)) {
           input.add(id, title, schema);
         }
       });
-      setSchema(data, input);
+      setSchema(data, input, output);
 
       cate0.title = '常规';
       cate0.items = [
@@ -53,7 +53,7 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   data.config.xField = value;
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             },
@@ -68,11 +68,12 @@ export default {
                 },
                 set({ data, input }: EditorResult<Data>, value: string) {
                   if (Array.isArray(data.config.yField)) {
+                    // @ts-ignore
                     data.config.yField = value.split(',').map((v) => v.trim());
                   } else {
                     data.config.yField = value;
                   }
-                  setSchema(data, input);
+                  setSchema(data, input, output);
                 }
               }
             }
@@ -382,6 +383,7 @@ export default {
   }
 };
 
-const setSchema = (data: Data, input: any) => {
+const setSchema = (data: Data, input: any, output: any) => {
   input.get('data').setSchema(schemaBidirectionalBar(data));
+  output && output?.get('data') && output.get('data')?.setSchema(schemaBidirectionalBar(data));
 };
