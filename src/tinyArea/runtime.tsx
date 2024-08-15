@@ -23,7 +23,7 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
         handleOutputFn(relOutputs, outputs, 'data', ds);
       });
       inputs.style((ds: any, relOutputs: any) => {
-        handleOutputFn(relOutputs, outputs, 'data', ds);
+        handleOutputFn(relOutputs, outputs, 'style', ds);
         setConfig({ ...config, ...ds });
       });
       const ids = ['xAxis', 'yAxis', 'tooltip'];
