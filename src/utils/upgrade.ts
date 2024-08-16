@@ -52,9 +52,10 @@ const addMultipleOutputsAndRels = (configs: string[], input: any, output: any) =
 
 const addMultipleInitInputOutputsAndRels = (input: any, output: any) => {
   initInput('default').forEach(({ id, title, schema = { type: 'any' } }) => {
-    if (input.get(id) && !output.get(id)) {
+    if (!output.get(id)) {
       output.add(id, '完成', schema);
-      input.get(id) && input.get(id)?.setRels([id]);
+    } else if (input.get(id)) {
+      input.get(id)?.setRels([id]);
     }
   });
 };
