@@ -1,3 +1,5 @@
+import { initInput } from './constants';
+
 const addOutputAndRel = ({
   input,
   output,
@@ -36,7 +38,7 @@ const handleOutputFn = (
   }
 };
 
-function addMultipleOutputsAndRels(configs: string[], input: any, output: any) {
+const addMultipleOutputsAndRels = (configs: string[], input: any, output: any) => {
   configs.forEach((key) => {
     addOutputAndRel({
       input,
@@ -46,6 +48,20 @@ function addMultipleOutputsAndRels(configs: string[], input: any, output: any) {
       inputKey: key
     });
   });
-}
+};
 
-export { addOutputAndRel, handleOutputFn, addMultipleOutputsAndRels };
+const addMultipleInitInputOutputsAndRels = (input: any, output: any) => {
+  initInput('default').forEach(({ id, title, schema = { type: 'any' } }) => {
+    if (input.get(id) && !output.get(id)) {
+      output.add(id, '完成', schema);
+      input.get(id) && input.get(id)?.setRels([id]);
+    }
+  });
+};
+
+export {
+  addOutputAndRel,
+  handleOutputFn,
+  addMultipleOutputsAndRels,
+  addMultipleInitInputOutputsAndRels
+};

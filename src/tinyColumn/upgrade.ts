@@ -1,4 +1,4 @@
-import { addOutputAndRel, InputIds, OutputIds } from '../utils';
+import { addMultipleInitInputOutputsAndRels, addOutputAndRel, InputIds, OutputIds } from '../utils';
 import { Data } from './constants';
 
 export default function ({ data, input, output }: UpgradeParams<Data>): boolean {
@@ -26,6 +26,8 @@ export default function ({ data, input, output }: UpgradeParams<Data>): boolean 
     title: '完成',
     inputKey: InputIds.DataSource
   });
+
+  addMultipleInitInputOutputsAndRels(input, output);
 
   return true;
 }

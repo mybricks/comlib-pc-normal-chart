@@ -1,5 +1,5 @@
 import { Data } from './constants';
-import { addOutputAndRel, InputIds, OutputIds } from '../utils';
+import { addMultipleInitInputOutputsAndRels, addOutputAndRel, InputIds, OutputIds } from '../utils';
 
 export default function ({ data, input, output }: UpgradeParams<Data>): boolean {
   if (!data.tempAnnotations) {
@@ -26,6 +26,8 @@ export default function ({ data, input, output }: UpgradeParams<Data>): boolean 
     title: '完成',
     inputKey: InputIds.DataSource
   });
+
+  addMultipleInitInputOutputsAndRels(input, output);
 
   return true;
 }

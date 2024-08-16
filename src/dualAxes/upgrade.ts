@@ -1,5 +1,5 @@
 import { Data, InputId, OutputId } from './constants';
-import { addOutputAndRel } from '../utils';
+import { addMultipleInitInputOutputsAndRels, addOutputAndRel } from '../utils';
 
 export default function ({ data, output, input }: RuntimeParams<Data>): boolean {
   if (!data.tempAnnotations) {
@@ -61,6 +61,8 @@ export default function ({ data, output, input }: RuntimeParams<Data>): boolean 
     title: '完成',
     inputKey: 'geometryOptions'
   });
+
+  addMultipleInitInputOutputsAndRels(input, output);
 
   return true;
 }
