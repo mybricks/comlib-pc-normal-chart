@@ -153,7 +153,7 @@ export default function ({ data, env, inputs, outputs, style }: RuntimeParams<Da
   return (
     <Spin spinning={loading}>
       {config.data?.length > 0 || config.percent > 0 ? (
-        <Chart {...config} />
+        <Chart style={{ width: style.width, height: style.height }} {...config} />
       ) : (
         <EmptyWrap
           style={{ width: style.width, height: style.height }}
