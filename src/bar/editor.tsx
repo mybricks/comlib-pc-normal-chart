@@ -200,6 +200,32 @@ export default {
               }
             },
             {
+              title: '布局方式',
+              type: 'Select',
+              ifVisible({ data }: EditorResult<Data>) {
+                return !!data.config.legend;
+              },
+              options: [
+                { label: '横向布局', value: 'horizontal' },
+                { label: '纵向布局', value: 'vertical' }
+              ],
+              value: {
+                get({ data }: EditorResult<Data>) {
+                  if (typeof data.config.legend === 'boolean') {
+                    return data.config.legend;
+                  }
+
+                  return data.config.legend?.layout || 'horizontal';
+                },
+                set({ data }: EditorResult<Data>, value: any) {
+                  if (typeof data.config.legend !== 'boolean') {
+                    data.config.legend.layout = value;
+                    data.config.legend = { ...data.config.legend };
+                  }
+                }
+              }
+            },
+            {
               title: 'x轴方向偏移',
               type: 'text',
               ifVisible({ data }: EditorResult<Data>) {
