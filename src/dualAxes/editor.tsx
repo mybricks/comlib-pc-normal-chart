@@ -358,12 +358,29 @@ export default {
               {
                 title: '标题',
                 type: 'Text',
+                description: '纵轴映射对应的标题名，参考y轴字段配置',
                 value: {
                   get({ data }: EditorResult<Data>) {
-                    return data.config.yAxis.title?.text;
+                    // @ts-ignore
+                    const titles = data.config.yField.map(
+                      (field: string | number) => data.config.yAxis?.[field]?.title?.text
+                    );
+                    return titles.filter((title: string) => title).join(', ');
                   },
                   set({ data }: EditorResult<Data>, value: string) {
-                    set(data.config.yAxis, ['title', 'text'], value);
+                    const valueAry = value
+                      .split(',')
+                      .map((v) => v.trim())
+                      .filter((v) => v);
+                    if (valueAry.length < 1) return;
+                    // @ts-ignore
+                    const fields = data.config.yField.map(
+                      (field: any) => field || (valueAry.length === 1 ? 'value' : field)
+                    );
+                    fields.forEach((field: string, index: string | number) => {
+                      set(data.config.yAxis, [field, 'title', 'text'], valueAry[index]);
+                    });
+
                     reRender(data);
                   }
                 }
@@ -378,10 +395,14 @@ export default {
                 ],
                 value: {
                   get({ data }: EditorResult<Data>) {
-                    return data.config.yAxis.title?.position || 'center';
+                    return data.config.yAxis?.[data.config.yField[0]]?.title?.position || 'center';
                   },
                   set({ data }: EditorResult<Data>, value: 'start' | 'center' | 'end') {
-                    set(data.config.yAxis, ['title', 'position'], value);
+                    // @ts-ignore
+                    const fields = data.config.yField.map((field: string) => field || 'value');
+                    fields.forEach((field: string) => {
+                      set(data.config.yAxis, [field, 'title', 'position'], value);
+                    });
                     reRender(data);
                   }
                 }
