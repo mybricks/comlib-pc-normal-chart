@@ -358,7 +358,7 @@ export default {
               {
                 title: '标题',
                 type: 'Text',
-                description: '纵轴映射对应的标题名，参考y轴字段配置',
+                description: '纵轴映射对应的标题名，参考y轴字段配置，修改y轴字段配置后需要重新设置',
                 value: {
                   get({ data }: EditorResult<Data>) {
                     // @ts-ignore
@@ -378,7 +378,11 @@ export default {
                       (field: any) => field || (valueAry.length === 1 ? 'value' : field)
                     );
                     fields.forEach((field: string, index: string | number) => {
-                      set(data.config.yAxis, [field, 'title', 'text'], valueAry[index]);
+                      set(
+                        data.config.yAxis,
+                        [field, 'title', 'text'],
+                        valueAry.length === 1 ? valueAry[0] : valueAry[index]
+                      );
                     });
 
                     reRender(data);

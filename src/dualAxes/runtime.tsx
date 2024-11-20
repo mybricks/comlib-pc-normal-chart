@@ -19,6 +19,12 @@ export default function (props: RuntimeParams<Data>) {
   );
 
   useEffect(() => {
+    if (env.edit) {
+      setConfigData(data.config);
+    }
+  }, [data.config, env.edit]);
+
+  useEffect(() => {
     if (env.runtime) {
       setLoading(true);
       inputs[InputId.Data0]((val: any, relOutputs: any) => {
