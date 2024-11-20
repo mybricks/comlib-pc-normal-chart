@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState, useCallback } from 'react';
 import { DualAxes } from '@ant-design/charts';
-import { Data, MockData, InputId, OutputId } from './constants';
+import { Data, transformData, InputId, OutputId } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
@@ -101,7 +101,15 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           {...configData}
           onReady={onReady}
-          data={env.edit ? MockData : dataSourceInRuntime}
+          data={
+            env.edit
+              ? transformData({
+                  year: data.config.xField,
+                  value: data.config.yField?.[0] || 'value',
+                  count: data.config.yField?.[1] || 'count'
+                })
+              : dataSourceInRuntime
+          }
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       ) : (

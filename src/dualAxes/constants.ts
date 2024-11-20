@@ -133,3 +133,22 @@ export const MockData: any = [
     }
   ]
 ];
+
+export const transformData = (fieldMap) => {
+  // 遍历数据数组
+  return MockData.map((series: any[]) => {
+    // 遍历每个数据点
+    return series.map((item) => {
+      // 创建一个新的对象来存储转换后的数据
+      let newItem = {};
+      // 遍历字段映射对象
+      for (let key in fieldMap) {
+        // 如果原始数据中有对应的字段，则使用映射后的字段名和值
+        if (item.hasOwnProperty(key)) {
+          newItem[fieldMap[key]] = item[key];
+        }
+      }
+      return newItem;
+    });
+  });
+};
