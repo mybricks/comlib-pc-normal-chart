@@ -365,7 +365,7 @@ export default {
                     const titles = data.config.yField.map(
                       (field: string | number) => data.config.yAxis?.[field]?.title?.text
                     );
-                    return titles.filter((title: string) => title).join(', ');
+                    return titles.filter((title: string) => title).join(',');
                   },
                   set({ data }: EditorResult<Data>, value: string) {
                     const valueAry = value
@@ -377,13 +377,15 @@ export default {
                     const fields = data.config.yField.map(
                       (field: any) => field || (valueAry.length === 1 ? 'value' : field)
                     );
+                    const newYAxis = {};
                     fields.forEach((field: string, index: string | number) => {
-                      set(
-                        data.config.yAxis,
-                        [field, 'title', 'text'],
-                        valueAry.length === 1 ? valueAry[0] : valueAry[index]
-                      );
+                      newYAxis[field] = {
+                        title: {
+                          text: valueAry.length === 1 ? valueAry[0] : valueAry[index]
+                        }
+                      };
                     });
+                    data.config.yAxis = newYAxis;
 
                     reRender(data);
                   }
