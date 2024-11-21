@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { BidirectionalBar } from '@ant-design/charts';
-import { Data, MockData } from './constants';
+import { Data, MockData, transformData } from './constants';
 import copy from 'copy-to-clipboard';
 import { Spin, message } from 'antd';
 import EmptyWrap from '../components/emptyWrap';
@@ -16,6 +16,12 @@ export default function (props: RuntimeParams<Data>) {
   const [configData, setConfigData] = useState<Data['config']>(
     JSON.parse(JSON.stringify(data.config))
   );
+
+  useEffect(() => {
+    if (env.edit) {
+      setConfigData(data.config);
+    }
+  }, [data.config, env.edit]);
 
   useEffect(() => {
     if (env.runtime) {
@@ -59,7 +65,15 @@ export default function (props: RuntimeParams<Data>) {
           style={{ width: style.width, height: style.height }}
           onReady={onReady}
           {...configData}
-          data={env.edit ? MockData : dataSourceInRuntime}
+          data={
+            env.edit
+              ? transformData({
+                  xField: data.config.xField,
+                  yField0: data.config.yField?.[0] || 'yField0',
+                  yField1: data.config.yField?.[1] || 'count'
+                })
+              : dataSourceInRuntime
+          }
           key={env.edit ? JSON.stringify(data.config) : undefined}
         />
       ) : (

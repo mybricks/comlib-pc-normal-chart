@@ -19,6 +19,12 @@ export default function (props: RuntimeParams<Data>) {
     JSON.parse(JSON.stringify(data.config))
   );
 
+  useEffect(() => {
+    if (env.edit) {
+      setConfigData(data.config);
+    }
+  }, [data.config, env.edit]);
+
   const { customizeTooltip, componentCode } = data;
 
   useEffect(() => {
