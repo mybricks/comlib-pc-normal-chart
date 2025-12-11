@@ -331,34 +331,40 @@ export default {
             },
             {
               title: '标签样式',
-              type: 'style',
+              type: 'styleNew',
               ifVisible({ data }: EditorResult<Data>) {
                 return !!data.config.label;
               },
               options: {
-                plugins: ['Font'],
-                fontProps: {
-                  fontFamily: false,
-                  verticalAlign: false
-                }
+                defaultOpen: true,
+                plugins: [
+                  {
+                    type: 'font',
+                    config: {
+                      disableTextAlign: true,
+                      disableFontFamily: true,
+                      disableLetterSpacing: true,
+                      disableLineHeight: true
+                    }
+                  }
+                ]
               },
               value: {
                 get({ data }: EditorResult<Data>) {
-                  if (!!data.config.label) {
+                  if (data?.config?.label) {
                     return {
                       ...data?.config?.label?.style,
-                      fill: data?.config?.label?.style?.fill || 'white',
-                      color: data?.config?.label?.style?.fill || 'white',
+                      color: data?.config?.label?.style?.fill || 'black',
                       fontSize: `${data?.config?.label?.style?.fontSize || 12}px`,
-                      lineHeight: `${data?.config?.label?.style?.lineHeight || 12}px`
+                      fontWeight: `${data?.config?.label?.style?.fontWeight || 400}`
+                    };
+                  } else {
+                    return {
+                      color: 'black',
+                      fontSize: '12px',
+                      fontWeight: '400'
                     };
                   }
-                  return {
-                    fill: 'white',
-                    color: 'white',
-                    fontSize: `12px`,
-                    lineHeight: `12px`
-                  };
                 },
                 set({ data }: EditorResult<Data>, value) {
                   if (data?.config?.label) {
@@ -366,8 +372,7 @@ export default {
                       style: {
                         ...value,
                         fill: value.color,
-                        fontSize: Number(value.fontSize.slice(0, -2)),
-                        lineHeight: Number(value.lineHeight.slice(0, -2))
+                        fontSize: Number(value.fontSize.slice(0, -2))
                       }
                     };
                   }
