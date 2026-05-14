@@ -124,6 +124,7 @@ export const dataSchema = {
 export const initInput = (type: string) => {
   const styleSchema = {
     type: 'object',
+
     properties: {
       /** 统计数据 */
       statistic: {
@@ -137,6 +138,7 @@ export const initInput = (type: string) => {
               }
             }
           },
+
           content: {
             type: 'object',
             properties: {
@@ -147,11 +149,64 @@ export const initInput = (type: string) => {
           }
         }
       },
+
+      /** 图形样式 */
+      style: {
+        type: 'object',
+
+        properties: {
+          fill: {
+            type: 'string'
+          },
+
+          stroke: {
+            type: 'string'
+          },
+
+          lineWidth: {
+            type: 'number'
+          },
+
+          radius: {
+            type: 'number'
+          },
+
+          shadowColor: {
+            type: 'string'
+          },
+
+          shadowBlur: {
+            type: 'number'
+          }
+        }
+      },
+
+      /** label文字样式 */
+      label: {
+        type: 'object',
+
+        properties: {
+          fill: {
+            type: 'string'
+          },
+
+          fontSize: {
+            type: 'number'
+          },
+
+          fontWeight: {
+            type: 'number'
+          }
+        }
+      },
+
       /** 交互配置 */
       interactions: {
         type: 'array',
+
         items: {
           type: 'object',
+
           properties: {
             type: {
               type: 'string'

@@ -117,11 +117,23 @@ export function callInputs(type: string, { env, inputs }: RuntimeParams<{ config
           cbs?.setLoading?.(!!ds);
         } else if (typeCheck(ds, 'OBJECT')) {
           if (id === 'style') {
+            const { style:nodeCfgStyle, label:nodeCfgLabel,...rest } = ds;
             if (cbs?.setConfigData) {
               cbs?.setConfigData((oldConfigs) => {
                 return {
                   ...oldConfigs,
-                  ...ds
+                  ...rest,
+                  nodeCfg: {
+                     ...oldConfigs.nodeCfg,
+                    style: {
+                      ...oldConfigs.nodeCfg?.style,
+                      ...nodeCfgStyle
+                    },
+                    label: {
+                      ...oldConfigs.nodeCfg?.label,
+                      ...nodeCfgLabel
+                    }
+                  }
                 };
               });
             }
