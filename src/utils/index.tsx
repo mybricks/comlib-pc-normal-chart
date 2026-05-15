@@ -117,14 +117,14 @@ export function callInputs(type: string, { env, inputs }: RuntimeParams<{ config
           cbs?.setLoading?.(!!ds);
         } else if (typeCheck(ds, 'OBJECT')) {
           if (id === 'style') {
-            const { style:nodeCfgStyle, label:nodeCfgLabel,...rest } = ds;
+            const { style: nodeCfgStyle, label: nodeCfgLabel, ...rest } = ds;
             if (cbs?.setConfigData) {
               cbs?.setConfigData((oldConfigs) => {
                 return {
                   ...oldConfigs,
                   ...rest,
                   nodeCfg: {
-                     ...oldConfigs.nodeCfg,
+                    ...oldConfigs.nodeCfg,
                     style: {
                       ...oldConfigs.nodeCfg?.style,
                       ...nodeCfgStyle
@@ -137,7 +137,54 @@ export function callInputs(type: string, { env, inputs }: RuntimeParams<{ config
                 };
               });
             }
-          } else {
+          } else if (id === 'edge') {
+            if (cbs?.setConfigData) {
+              cbs?.setConfigData((oldConfigs) => {
+                return {
+                  ...oldConfigs,
+                  edgeCfg: {
+                    type: ds.type || oldConfigs.edgeCfg?.type,
+                    style: {
+                      ...oldConfigs.edgeCfg?.style,
+                      ...ds.style
+                    },
+                    label: {
+                      ...oldConfigs.edgeCfg?.label,
+                      ...ds.label
+                    }
+                  }
+                };
+              });
+            }
+          } else if (id === 'expand') {
+            if (cbs?.setConfigData) {
+              cbs?.setConfigData((oldConfigs) => {
+                return {
+                  ...oldConfigs,
+                  defaultExpandLevel: ds.defaultExpandLevel || oldConfigs.defaultExpandLevel,
+                  transforms: (existingTransforms) => [
+                    ...existingTransforms,
+                    {
+                      type: 'collapse-expand-react-node',
+                      enable: true,
+                      trigger: 'icon',
+                      iconType: 'plus-minus',
+                      iconPlacement: 'bottom',
+                      refreshLayout: true,
+                      ...ds
+                    }
+                  ]
+                };
+              });
+            }
+          } else if(id==='custom') {
+             cbs?.setConfigData((oldConfigs) => {
+                return {
+                  ...oldConfigs,
+                  ...ds
+                };
+              });
+          }else{
             if (id === 'axis') id = 'xAxis';
             if (id === 'yaxis') id = 'yAxis';
 

@@ -22,10 +22,16 @@ export declare type AnnotationItem = {
 
 export const InputIds = {
   DataSource: 'data',
+  EdgeConfig: 'edgeConfig',
+  ExpandConfig: 'expandConfig',
+  CustomConfig: 'customConfig'
 }
 
 export enum OutputIds {
-  DataSource = 'data'
+  DataSource = 'data',
+  EdgeConfig = 'edgeConfig',
+  ExpandConfig ='expandConfig',
+  CustomConfig = 'customConfig'
 }
 
 
@@ -50,3 +56,4 @@ export interface Data {
     eventName: string
   }[];
 }
+
